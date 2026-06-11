@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Quizz do Nosso Amor 💘</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #6b2e5f 0%, #3a1c3a 100%);
+      font-family: 'Nunito Sans', 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background: rgba(255, 248, 245, 0.98);
+      border-radius: 2.5rem;
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+    }
+
+    header {
+      background: #9e3c6b;
+      padding: 1.8rem 2rem;
+      text-align: center;
+      border-bottom: 4px solid #ffbc6e;
+    }
+
+    header h1 {
+      color: white;
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      text-shadow: 2px 2px 0 #5a1e3e;
+    }
+
+    main {
+      padding: 2rem;
+    }
+
+    #question {
+      background: #fff0f0;
+      padding: 1.4rem 1.8rem;
+      border-radius: 2rem;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #4a1e3a;
+      margin-bottom: 2rem;
+      border-left: 8px solid #ffbc6e;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    #question-number {
+      background: #ffbc6e;
+      display: inline-block;
+      width: 2.2rem;
+      height: 2.2rem;
+      text-align: center;
+      line-height: 2.2rem;
+      border-radius: 60px;
+      color: #4a1e3a;
+      font-weight: 800;
+      margin-right: 0.7rem;
+    }
+
+    #answers-box {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    button {
+      background: white;
+      border: 2px solid #f0cfcf;
+      border-radius: 100px;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: inherit;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    button:hover:not(:disabled) {
+      background: #fff0f5;
+      border-color: #ff9f6e;
+      transform: scale(1.01);
+    }
+
+    .btn-letter {
+      background: #9e3c6b;
+      color: white;
+      font-weight: 800;
+      font-size: 1.2rem;
+      width: 2.4rem;
+      height: 2.4rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 60px;
+    }
+
+    .question-answer {
+      flex: 1;
+      color: #2d1a2a;
+    }
+
+    #score-container {
+      text-align: center;
+      padding: 1.5rem;
+      background: #fff8f5;
+      border-radius: 2rem;
+      animation: fadeSlide 0.4s ease;
+    }
+
+    #score-container h2 {
+      font-size: 2.2rem;
+      color: #9e3c6b;
+      margin-bottom: 0.5rem;
+    }
+
+    #display-score {
+      background: #ffbc6e;
+      display: inline-block;
+      padding: 0.6rem 2rem;
+      border-radius: 100px;
+      margin: 1rem auto;
+      font-weight: 800;
+      font-size: 2rem;
+      color: #3a1c3a;
+    }
+
+    #display-score span {
+      font-size: 2.6rem;
+    }
+
+    #restart {
+      background: #9e3c6b;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.8rem;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 40px;
+      margin-top: 1.5rem;
+      display: inline-flex;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    #restart:hover {
+      background: #ffbc6e;
+      color: #4a1e3a;
+    }
+
+    .hide {
+      display: none !important;
+    }
+
+    footer {
+      background: #f7e6e6;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.8rem;
+      color: #6b4a5a;
+    }
+
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 550px) {
+      main { padding: 1.2rem; }
+      #question { font-size: 1.2rem; }
+      .btn-letter { width: 2rem; height: 2rem; font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>💗 Quizz do Nosso Amor 💗</h1>
+  </header>
+  <main>
+    <div id="quizz-container">
+      <p id="question">
+        <span id="question-number">1</span> &#8212;
+        <span id="question-text"></span>
+      </p>
+      <div id="answers-box">
+        <button><span class="btn-letter">A</span> <span class="question-answer"></span></button>
+        <button><span class="btn-letter">B</span> <span class="question-answer"></span></button>
+        <button><span class="btn-letter">C</span> <span class="question-answer"></span></button>
+        <button><span class="btn-letter">D</span> <span class="question-answer"></span></button>
+      </div>
+    </div>
+
+    <div id="score-container" class="hide">
+      <h2>💖 Parabéns, amor! 💖</h2>
+      <p id="display-score"><span>0</span>%</p>
+      <p>Você acertou <span id="correct-answers">0</span> de <span id="questions-qty">8</span> perguntas</p>
+      <button id="restart">⟳ Refazer o quiz</button>
+    </div>
+  </main>
+  <footer>
+    <p>✨ Feito com carinho para você ✨</p>
+  </footer>
+</div>
+
+<script>
+  (function(){
+    // ========== PERGUNTAS PERSONALIZADAS (ATUALIZADAS) ==========
+    const QUESTIONS = [
+      {
+        text: "Onde foi o nosso primeiro beijo?",
+        answers: ["No show do Natiruts", "Na praia", "No cinema", "Na casa de um amigo"],
+        correct: "No show do Natiruts"
+      },
+      {
+        text: "Quantas vezes nós já fomos ao cinema juntos?",
+        answers: ["Zero", "Uma vez", "Duas vezes", "Mais de cinco"],
+        correct: "Zero"
+      },
+      {
+        text: "Qual o meu apelido carinhoso para você?",
+        answers: ["Lene", "Amor", "Vida", "Querida"],
+        correct: "Lene"
+      },
+      {
+        text: "Qual presente inesquecível eu já te dei?",
+        answers: ["Silicone", "Uma aliança", "Um celular", "Uma viagem"],
+        correct: "Silicone"
+      },
+      {
+        text: "Qual dia da semana a gente mais se encontra?",
+        answers: ["Sábado", "Domingo", "Sexta-feira", "Quarta-feira"],
+        correct: "Sábado"
+      },
+      {
+        text: "O que eu nunca esqueço de fazer por você?",
+        answers: ["dar bom dia", "dar boa noite", "fazer café", "mandar beijo"],
+        correct: "dar bom dia"
+      },
+      {
+        text: "Onde nos conhecemos pela primeira vez?",
+        answers: ["Praça da estação de Osasco", "No shopping", "Na escola", "Na igreja"],
+        correct: "Praça da estação de Osasco"
+      },
+      {
+        text: "Qual é a minha comida favorita que você prepara?",
+        answers: ["strogonoff de frango", "Lasanha", "Macarrão com brócolis", "Frango assado"],
+        correct: "strogonoff de frango"
+      }
+    ];
+
+    const totalQuestions = QUESTIONS.length;
+    let currentIndex = 0;
+    let score = 0;
+    let locked = false;
+    let timeoutId = null;
+
+    // DOM elements
+    const quizzContainer = document.getElementById("quizz-container");
+    const scoreContainer = document.getElementById("score-container");
+    const questionNumberSpan = document.getElementById("question-number");
+    const questionTextSpan = document.getElementById("question-text");
+    const answersBox = document.getElementById("answers-box");
+    const correctAnswersSpan = document.getElementById("correct-answers");
+    const questionsQtySpan = document.getElementById("questions-qty");
+    const displayScoreSpan = document.querySelector("#display-score span");
+    const restartBtn = document.getElementById("restart");
+
+    questionsQtySpan.textContent = totalQuestions;
+
+    function clearTimer() {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+        timeoutId = null;
+      }
+    }
+
+    function disableButtons(disabled = true) {
+      const btns = document.querySelectorAll("#answers-box button");
+      btns.forEach(btn => btn.disabled = disabled);
+    }
+
+    function resetButtonsStyle() {
+      const btns = document.querySelectorAll("#answers-box button");
+      btns.forEach(btn => {
+        btn.style.backgroundColor = "";
+        btn.disabled = false;
+      });
+    }
+
+    function loadQuestion() {
+      clearTimer();
+      locked = false;
+      const q = QUESTIONS[currentIndex];
+      questionNumberSpan.textContent = currentIndex + 1;
+      questionTextSpan.textContent = q.text;
+
+      const btns = document.querySelectorAll("#answers-box button");
+      q.answers.forEach((ans, idx) => {
+        if (btns[idx]) {
+          const letterSpan = btns[idx].querySelector(".btn-letter");
+          const answerSpan = btns[idx].querySelector(".question-answer");
+          if (letterSpan) letterSpan.textContent = String.fromCharCode(65 + idx);
+          if (answerSpan) answerSpan.textContent = ans;
+          btns[idx].style.backgroundColor = "";
+          btns[idx].disabled = false;
+        }
+      });
+    }
+
+    function finishQuiz() {
+      clearTimer();
+      const percent = Math.round((score / totalQuestions) * 100);
+      displayScoreSpan.textContent = percent;
+      correctAnswersSpan.textContent = score;
+      quizzContainer.classList.add("hide");
+      scoreContainer.classList.remove("hide");
+    }
+
+    function nextQuestion() {
+      if (currentIndex + 1 >= totalQuestions) {
+        finishQuiz();
+      } else {
+        currentIndex++;
+        loadQuestion();
+      }
+    }
+
+    function handleAnswer(clickedBtn, selectedAnswer) {
+      if (locked) return;
+      const currentQ = QUESTIONS[currentIndex];
+      const isCorrect = (selectedAnswer === currentQ.correct);
+      if (isCorrect) score++;
+
+      locked = true;
+      disableButtons(true);
+
+      clickedBtn.style.backgroundColor = isCorrect ? "#c8e6d9" : "#ffe0db";
+      clearTimer();
+      timeoutId = setTimeout(() => {
+        clickedBtn.style.backgroundColor = "";
+        resetButtonsStyle();
+        locked = false;
+        clearTimer();
+        nextQuestion();
+      }, 600);
+    }
+
+    function attachEvents() {
+      const btns = document.querySelectorAll("#answers-box button");
+      btns.forEach(btn => {
+        btn.removeEventListener("click", btn._listener);
+        const handler = (e) => {
+          const answerSpan = btn.querySelector(".question-answer");
+          if (!answerSpan) return;
+          const answerText = answerSpan.textContent;
+          handleAnswer(btn, answerText);
+        };
+        btn.addEventListener("click", handler);
+        btn._listener = handler;
+      });
+    }
+
+    function restartQuiz() {
+      clearTimer();
+      currentIndex = 0;
+      score = 0;
+      locked = false;
+      resetButtonsStyle();
+      scoreContainer.classList.add("hide");
+      quizzContainer.classList.remove("hide");
+      loadQuestion();
+      attachEvents();
+    }
+
+    function init() {
+      loadQuestion();
+      attachEvents();
+      restartBtn.addEventListener("click", restartQuiz);
+    }
+
+    init();
+  })();
+</script>
+</body>
+</html>
