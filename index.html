@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulados TEAP – Treino de Inglês Instrumental</title>
+<style>
+:root{
+  --blue-900:#14295c; --blue-700:#1e429f; --blue-600:#2557c9; --blue-100:#dbe7fb; --blue-50:#eef4fe;
+  --bg:#f1f5f9; --card:#ffffff; --ink:#1f2937; --muted:#64748b; --line:#dde3ec;
+  --green:#15803d; --green-bg:#dcfce7; --green-line:#86d9a2;
+  --red:#b91c1c; --red-bg:#fee2e2; --red-line:#f3a5a5;
+  --amber:#92400e; --amber-bg:#fef3c7; --amber-line:#f5d27a;
+  --radius:14px;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --serif:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.55;font-size:16px}
+a{color:var(--blue-600)}
+.topbar{background:var(--blue-900);color:#fff;position:sticky;top:0;z-index:20;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.topbar .in{max-width:900px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap}
+.brand{font-weight:700;letter-spacing:.2px;cursor:pointer;display:flex;align-items:center;gap:8px}
+.brand small{font-weight:400;opacity:.75}
+.tb-right{display:flex;gap:14px;align-items:center;font-size:.9rem}
+.pill{background:rgba(255,255,255,.14);padding:3px 10px;border-radius:999px;white-space:nowrap}
+main{max-width:900px;margin:0 auto;padding:20px 16px 80px}
+h1,h2,h3{line-height:1.25;margin:0 0 .5em}
+.hero{background:linear-gradient(135deg,var(--blue-700),var(--blue-900));color:#fff;border-radius:var(--radius);padding:28px 24px;margin-bottom:20px}
+.hero h1{font-size:1.8rem}
+.hero p{margin:.3em 0 0;opacity:.92;max-width:62ch}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-bottom:20px;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.tips{border-left:6px solid #f59e0b;background:#fffbeb}
+.tips h2{color:var(--amber);font-size:1.2rem}
+.tips ul{margin:.4em 0 0;padding-left:1.2em}
+.tips li{margin:.55em 0}
+.tips code,.kbd{background:#fde68a;border-radius:4px;padding:0 5px;font-style:italic}
+table.pts{width:100%;border-collapse:collapse;font-size:.93rem}
+table.pts th,table.pts td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
+table.pts td:last-child,table.pts th:last-child{text-align:right;white-space:nowrap}
+table.pts tfoot td{font-weight:700;border-bottom:none}
+.row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}
+.seg button{border:0;background:transparent;padding:7px 14px;cursor:pointer;font:inherit;font-size:.9rem;color:var(--muted)}
+.seg button.on{background:var(--blue-600);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.tcard{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px;cursor:pointer;display:flex;flex-direction:column;gap:6px;transition:.15s;text-align:left;font:inherit;color:inherit}
+.tcard:hover,.tcard:focus-visible{border-color:var(--blue-600);box-shadow:0 4px 14px rgba(37,87,201,.15);transform:translateY(-2px);outline:none}
+.tcard .n{font-size:.78rem;font-weight:700;color:var(--blue-600);text-transform:uppercase;letter-spacing:.06em}
+.tcard .t{font-weight:700;font-size:1.05rem}
+.tcard .d{color:var(--muted);font-size:.9rem}
+.badge{align-self:flex-start;font-size:.8rem;padding:2px 10px;border-radius:999px;background:var(--blue-50);color:var(--blue-700)}
+.badge.done{background:var(--green-bg);color:var(--green)}
+.btn{display:inline-block;border:0;border-radius:10px;padding:12px 22px;font:inherit;font-weight:600;cursor:pointer;background:var(--blue-600);color:#fff;transition:.15s}
+.btn:hover{background:var(--blue-700)}
+.btn.ghost{background:#fff;color:var(--blue-700);border:1px solid var(--blue-600)}
+.btn.ghost:hover{background:var(--blue-50)}
+.btn.big{padding:15px 30px;font-size:1.05rem}
+.back{background:none;border:0;color:var(--blue-700);cursor:pointer;font:inherit;padding:0;margin-bottom:12px}
+.textcard h2{font-size:1.25rem;color:var(--blue-900)}
+.reading{font-family:var(--serif);font-size:1.1rem;line-height:1.75}
+.reading p{margin:0 0 .9em;display:flex;gap:10px}
+.pn{flex:none;font-family:var(--sans);font-size:.75rem;font-weight:700;color:var(--blue-600);background:var(--blue-50);border-radius:6px;height:1.7em;min-width:1.7em;display:inline-flex;align-items:center;justify-content:center;margin-top:.25em}
+.gloss{background:var(--blue-50);border-radius:10px;padding:12px 16px;font-size:.93rem;margin-top:8px}
+.gloss b{color:var(--blue-900)}
+.gloss ul{margin:.3em 0 0;padding-left:1.1em}
+.q{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin-bottom:16px}
+.q-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap;margin-bottom:8px}
+.q-num{font-weight:700;color:var(--blue-900)}
+.q-meta{font-size:.78rem;color:var(--muted);background:var(--bg);border-radius:999px;padding:2px 10px}
+.stem{font-weight:600;margin:6px 0 10px}
+blockquote.ex{margin:0 0 12px;padding:12px 14px;border-left:4px solid var(--blue-100);background:#f8fafc;border-radius:0 10px 10px 0;font-family:var(--serif);font-size:1.02rem;line-height:1.7;display:flex;gap:10px}
+mark{background:#fde047;color:#111;padding:0 3px;border-radius:3px;font-weight:700}
+.opts{display:grid;gap:8px}
+.opt{display:flex;gap:12px;align-items:flex-start;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;transition:.12s;background:#fff}
+.opt:hover{border-color:var(--blue-600);background:var(--blue-50)}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt .lt{flex:none;width:28px;height:28px;border-radius:50%;border:2px solid #b8c2d3;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;color:var(--muted);background:#fff}
+.opt.sel{border-color:var(--blue-600);background:var(--blue-50)}
+.opt.sel .lt{background:var(--blue-600);border-color:var(--blue-600);color:#fff}
+.opt:focus-within{outline:3px solid rgba(37,87,201,.35)}
+.rv .opt{cursor:default}
+.rv .opt:hover{background:#fff;border-color:var(--line)}
+.rv .opt.ok{border-color:var(--green-line);background:var(--green-bg)}
+.rv .opt.ok .lt{background:var(--green);border-color:var(--green);color:#fff}
+.rv .opt.bad{border-color:var(--red-line);background:var(--red-bg)}
+.rv .opt.bad .lt{background:var(--red);border-color:var(--red);color:#fff}
+.tag{margin-left:auto;font-size:.75rem;font-weight:700;white-space:nowrap;align-self:center;padding-left:8px}
+.ok .tag{color:var(--green)} .bad .tag{color:var(--red)}
+.expl{margin-top:12px;border-radius:10px;padding:12px 14px;font-size:.95rem}
+.expl.good{background:var(--green-bg);border:1px solid var(--green-line)}
+.expl.miss{background:var(--amber-bg);border:1px solid var(--amber-line)}
+.expl b{display:block;margin-bottom:2px}
+.sticky-submit{position:sticky;bottom:0;background:linear-gradient(transparent,var(--bg) 35%);padding:26px 0 14px;text-align:center}
+.result{border:2px solid var(--blue-600)}
+.score{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.ring{width:132px;height:132px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--blue-600) calc(var(--p)*1%),var(--blue-100) 0)}
+.ring div{width:104px;height:104px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring b{font-size:1.9rem;line-height:1;color:var(--blue-900)} .ring span{font-size:.8rem;color:var(--muted)}
+.bars{display:grid;gap:10px;margin-top:16px}
+.bar .lbl{display:flex;justify-content:space-between;font-size:.88rem;gap:8px}
+.bar .tr{height:10px;background:var(--blue-100);border-radius:999px;overflow:hidden;margin-top:3px}
+.bar .fl{height:100%;background:var(--green);border-radius:999px}
+.bar.low .fl{background:#ef4444}
+.bar.mid .fl{background:#f59e0b}
+.note{font-size:.85rem;color:var(--muted)}
+footer{max-width:900px;margin:0 auto;padding:0 16px 40px;color:var(--muted);font-size:.82rem}
+@media (max-width:600px){
+  .hero h1{font-size:1.45rem} .reading{font-size:1.04rem} .card{padding:16px} .q{padding:14px}
+  .tb-right .pill.hide-m{display:none}
+}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="in">
+  <div class="brand" id="brand" role="button" tabindex="0">📘 Simulados TEAP <small>· Inglês Instrumental</small></div>
+  <div class="tb-right" id="tbRight"></div>
+</div></header>
+<main id="app"></main>
+<footer>Textos e questões originais, elaborados para treino no estilo do TEAP (leitura, referência pronominal, vocabulário e interpretação). Não são provas oficiais; confira sempre o edital do seu programa.</footer>
+
+<script>
+/* ============ DADOS ============ */
+const TYPES = {
+  info:  {pts:7, name:"Localização de informação",          tip:"Compare cada alternativa com o texto: a certa está dita (ou parafraseada) no texto. Desconfie de 'always', 'only', 'all', 'never'."},
+  pron:  {pts:4, name:"Referência pronominal",              tip:"Substitua o pronome pelo candidato e releia. Não escolha só o substantivo vizinho: pergunte quem pratica a ação e se o número (singular/plural) combina."},
+  vocab: {pts:3, name:"Compreensão do vocabulário",         tip:"Use o contexto da frase. Cuidado com falsos cognatos (impose, preserve, admit) e verbos frasais (outperform, stem from)."},
+  sent:  {pts:5, name:"Compreensão detalhada de sentença",  tip:"Identifique sujeito, verbo e conectivos (however, unless, rather than). A paráfrase certa mantém a relação lógica da frase original."},
+  para:  {pts:6, name:"Compreensão detalhada de parágrafo", tip:"Leia só o parágrafo indicado. A alternativa certa resume ou reflete o que ele diz, sem acrescentar informação nova."},
+  main:  {pts:7, name:"Ideia central",                      tip:"A ideia central cobre o texto inteiro, não um detalhe. Evite alternativas absolutas ou que tratem de um único parágrafo."}
+};
+const ORDER = ["info","vocab","para","sent","vocab","pron","sent","pron","para","main"];
+
+/* Cada questão: [tipo, nº do parágrafo, trecho, palavra, correta, [4 erradas], comentário]
+   Parágrafo 0 = parágrafo 1 do texto, etc. A ordem das alternativas é embaralhada a cada tentativa. */
+const RAW = [
+/* ---------- 1 ---------- */
+{title:"Sleep and Memory", topic:"Neurociência · Educação",
+ gloss:[["Recall","to remember"],["Whereas","while; in contrast"],["Attendance","presence in class"],["To disturb","to interfere with"]],
+ paras:[
+ "Few people think of sleep as work, yet the brain is remarkably busy while the body rests. During the night, it replays the day's experiences and transfers the most important ones from short-term storage to long-term memory. Researchers call this process consolidation, and they believe it is essential for learning new skills as well as facts. Students who stay awake all night before an exam therefore risk losing the very material they have tried to master.",
+ "Evidence for this view comes from laboratory studies in which volunteers memorized lists of words and were then divided into two groups. One group slept for eight hours, while the other stayed awake for the same period. When tested the next day, the sleepers recalled significantly more words. The difference was even greater when the lists were emotionally charged, which suggests that sleep favors memories that matter to us.",
+ "Not all sleep is equal, however. Deep sleep seems to strengthen factual memories, whereas the dreaming phase appears to help people combine ideas in creative ways. Some scientists argue that cutting sleep short by only one or two hours can disturb both processes. Others warn that the data remain limited, since most experiments involve small groups of young adults and last only a few days.",
+ "Despite these limitations, the practical message is clear. Schools that begin classes later in the morning have reported better attendance and higher grades among teenagers, whose natural body clocks run late. Rather than treating sleep as a luxury, educators and parents should regard it as a basic part of effective study."],
+ q:[
+ ["info",null,null,null,"Lack of sleep before an exam may harm the memory of what was studied.",["Students who sleep eight hours always achieve higher grades than those who do not.","Dreaming is more important than deep sleep for remembering facts.","Later school start times have been proven to cure teenage sleep disorders.","Experiments on sleep have involved large groups of people of all ages."],"O 1º parágrafo diz que quem passa a noite acordado antes da prova arrisca perder o que estudou. 'Always' torna a primeira errada (absoluta); o sono profundo, e não o sonho, fortalece memórias factuais; horários tardios trouxeram melhorias, não 'cura'; e os experimentos usaram grupos pequenos."],
+ ["vocab",0,"have tried to master","master","Learn thoroughly",["Command","Organize","Delay","Copy"],"'To master' = dominar, aprender a fundo. 'Command' lembra 'comandar' e não combina com aprender conteúdo."],
+ ["para",1,null,null,"Volunteers who slept remembered more than those who stayed awake, especially with emotional material.",["Emotional lists were forgotten faster by volunteers who slept.","The volunteers who stayed awake were tested a week later.","Both groups recalled the same number of words.","Sleep helped only with neutral words."],"O parágrafo 2 relata que quem dormiu lembrou significativamente mais, e a diferença foi maior com listas emocionais. As demais contradizem ou inventam dados (uma semana depois, mesmo número de palavras, só palavras neutras)."],
+ ["sent",2,"Some scientists argue that cutting sleep short by only one or two hours can disturb both processes.",null,"Sleeping a little less than usual may interfere with both memory processes, according to some researchers.",["Scientists agree that one or two hours of sleep is enough for both processes.","Both processes are improved when people sleep one or two hours less.","Some scientists have cut sleep by one or two hours to study both processes.","Disturbing people for one or two hours helps scientists study sleep."],"'Cutting sleep short by one or two hours' = dormir uma ou duas horas a menos; 'can disturb' = pode atrapalhar. É apenas uma tese de 'alguns cientistas', não um consenso."],
+ ["vocab",3,"should regard it as","regard","Consider",["Look at","Reward","Avoid","Complain about"],"'Regard X as Y' = considerar X como Y. 'Look at' é o sentido literal de 'olhar', que não se encaixa aqui."],
+ ["pron",0,"and they believe it is essential","they","Researchers",["Experiences","Consolidation","Skills","Students"],"A frase é 'Researchers call this process consolidation, and they believe...'. O sujeito que acredita são os pesquisadores. 'Consolidation' está mais perto, mas é singular e não 'acredita' em nada."],
+ ["sent",3,"Rather than treating sleep as a luxury, educators and parents should regard it as a basic part of effective study.",null,"Sleep should be seen as a necessary element of studying well, not as something optional.",["Educators and parents should study more instead of sleeping.","Sleep is a luxury that only effective students can afford.","Parents should treat educators as a basic part of the study.","Effective study makes sleep a luxury for educators."],"'Rather than' = em vez de. Em vez de tratar o sono como luxo, deve-se vê-lo como parte básica do estudo eficaz."],
+ ["pron",1,"emotionally charged, which suggests","which","The fact that the difference was greater with emotional lists",["The lists","Sleep","The volunteers","The next day"],"'Which' após vírgula retoma a ideia inteira anterior: a diferença maior com listas emocionais é o que 'sugere' que o sono favorece memórias importantes. Não retoma um único substantivo."],
+ ["para",2,null,null,"Different kinds of sleep seem to support different memory functions, and the evidence is still limited.",["Deep sleep and dreaming are the same and equally harmful.","All scientists agree that cutting sleep is harmless.","The experiments involved elderly people during several years.","Dreaming helps people memorize facts better than deep sleep."],"O parágrafo 3 distingue sono profundo (fatos) e sonho (criatividade) e termina alertando que os dados são limitados (grupos pequenos, poucos dias)."],
+ ["main",null,null,null,"Sleep plays an important role in memory and learning, so it should be valued by students and schools.",["Young adults should avoid dreaming to improve their creativity.","Teenagers need to sleep more than any other age group.","Laboratory experiments about memory are useless because their samples are small.","Students should memorize word lists before going to sleep every night."],"O texto inteiro liga sono a memória e aprendizagem e conclui que deve ser tratado como parte do estudo. As outras tratam de detalhes ou exageram o que foi dito."]
+ ]},
+/* ---------- 2 ---------- */
+{title:"Green Spaces and Health", topic:"Saúde pública · Urbanismo",
+ gloss:[["Vegetation","plants in general"],["Occupants","people who live in a place"],["Ties","connections"],["Lots","pieces of land"]],
+ paras:[
+ "Cities are often described as concrete jungles, but a growing body of research shows that contact with plants and trees improves health. People who live near parks tend to exercise more, report lower stress, and recover faster from illness. Hospitals have even begun to design gardens where patients can spend time outdoors during treatment.",
+ "One large study followed more than 900,000 residents of a European capital for several years. Researchers compared the amount of vegetation around each home with the rate of mental illness among its occupants. Children who grew up surrounded by green areas developed psychiatric disorders far less often than those raised in neighborhoods with little vegetation, even after income and family history were taken into account.",
+ "Several mechanisms may explain these findings. Trees filter air pollution and reduce noise, while shaded areas lower summer temperatures, which can prevent heat-related deaths. Green spaces also encourage neighbors to meet, and strong social ties are known to protect people against loneliness. Nevertheless, scientists admit that it is difficult to separate the influence of nature from that of wealth, because richer districts usually have more parks.",
+ "City planners face a dilemma. Parks require land that developers would prefer to use for housing, and maintaining them is costly. Yet the benefits appear to outweigh the expenses, particularly when the savings in healthcare are considered. Small interventions, such as planting street trees or turning empty lots into community gardens, may offer an affordable starting point."],
+ q:[
+ ["info",null,null,null,"Contact with nature seems to be associated with better health, although wealth can complicate the evidence.",["Hospitals have replaced medical treatment with gardens.","Children raised in green areas never develop psychiatric disorders.","Rich districts have more parks because green areas create wealth.","Developers have agreed to build parks instead of housing."],"O texto associa áreas verdes a mais saúde e, no parágrafo 3, admite a dificuldade de separar natureza de riqueza. 'Never' e a inversão causal (parques criam riqueza) são erros típicos."],
+ ["vocab",1,"followed more than 900,000 residents","followed","Monitored",["Imitated","Chased","Obeyed","Came after"],"Em estudos, 'to follow' participantes = acompanhá-los ao longo do tempo. 'Imitated', 'obeyed' e 'chased' são outros sentidos de 'seguir'."],
+ ["para",1,null,null,"Children living in greener neighborhoods had fewer psychiatric problems, even after considering family income and history.",["Researchers followed 900,000 children for a single week.","Mental illness was more frequent among children surrounded by vegetation.","The study ignored the income of the families.","The study was carried out only in small villages."],"O parágrafo 2 diz que crianças em áreas verdes tiveram transtornos 'far less often', mesmo controlando renda e histórico familiar ('taken into account')."],
+ ["sent",2,"Nevertheless, scientists admit that it is difficult to separate the influence of nature from that of wealth, because richer districts usually have more parks.",null,"It is hard to know whether health results from nature or from wealth, since affluent areas tend to have more green spaces.",["Scientists admit that wealth is more influential than nature because parks are expensive.","Richer districts have fewer parks, so nature has no influence on health.","Nature and wealth are the same thing for scientists.","Scientists separated nature from wealth by building parks in richer districts."],"'That of wealth' = a influência da riqueza. A dificuldade vem de bairros ricos terem mais parques, o que mistura os dois fatores."],
+ ["vocab",3,"appear to outweigh the expenses","outweigh","Exceed in importance",["Weigh more physically than","Reduce","Pay for","Ignore"],"'Outweigh' = ter mais peso/importância do que. Os benefícios superam os custos."],
+ ["pron",1,"among its occupants","its","Each home",["Vegetation","Mental illness","The rate","The European capital"],"'Its occupants' = os ocupantes de cada casa. Os substantivos mais próximos (illness, rate) não têm 'ocupantes'."],
+ ["sent",3,"Small interventions, such as planting street trees or turning empty lots into community gardens, may offer an affordable starting point.",null,"Modest actions like planting trees or creating gardens in unused plots could be a low-cost way to begin.",["Empty lots should be sold to finance expensive interventions.","Planting street trees is the only affordable solution.","Community gardens are small interventions that start expensive projects.","Affordable starting points are empty lots without trees."],"'Such as' introduz exemplos de intervenções pequenas; 'affordable starting point' = ponto de partida acessível. 'Only' deixa a segunda alternativa errada."],
+ ["pron",2,"temperatures, which can prevent","which","The fact that shaded areas lower summer temperatures",["Air pollution","Noise","Trees","Several mechanisms"],"'Which' retoma a ideia inteira: áreas sombreadas reduzem as temperaturas, e isso pode evitar mortes por calor."],
+ ["para",0,null,null,"People who live close to parks tend to be healthier, and hospitals have started to use gardens.",["Cities have become concrete jungles because of hospitals.","People near parks exercise less but recover faster.","Hospitals forbid patients to go outdoors during treatment.","Research shows parks cause illness among residents."],"O parágrafo 1 diz que moradores perto de parques se exercitam mais, sentem menos estresse e se recuperam mais rápido; hospitais criam jardins."],
+ ["main",null,null,null,"Green spaces seem to benefit health, and cities should consider investing in them despite the costs.",["Wealthy districts are healthier because they have more parks.","Planting trees is the only way to reduce stress in cities.","Children should not live in cities because of pollution.","Hospitals are the best places to build gardens."],"O texto apresenta benefícios, explica mecanismos, reconhece limites e discute custos para o planejamento urbano. As outras são detalhes ou afirmações não sustentadas."]
+ ]},
+/* ---------- 3 ---------- */
+{title:"The Problem of Microplastics", topic:"Meio ambiente · Toxicologia",
+ gloss:[["Trenches","deep valleys on the seabed"],["Offspring","young animals"],["To leak","to escape slowly"],["Futile","useless"]],
+ paras:[
+ "Plastic does not simply disappear when it is thrown away. Sunlight, waves and friction gradually break large items into fragments smaller than five millimeters, known as microplastics. These particles have been found in the deepest ocean trenches, in Arctic ice and even in drinking water. Because they are so small, they are almost impossible to remove once they have spread.",
+ "Marine animals frequently mistake microplastics for food. Filter feeders such as mussels draw large volumes of water through their bodies, and in doing so they swallow thousands of particles. Laboratory tests show that some of these animals eat less, grow more slowly and produce fewer offspring after prolonged exposure. Whether the same effects occur in the wild, however, is still under debate.",
+ "Humans are not immune. Traces of plastic have been detected in seafood, salt and the blood of volunteers. Toxicologists are particularly concerned about chemicals added during manufacturing, which can leak out of the particles and enter tissues. Nevertheless, there is no consensus about the dose at which these substances become dangerous, and regulators are reluctant to set limits without firm evidence.",
+ "Solutions are emerging at several levels. Some countries have banned plastic microbeads from cosmetics, and washing machine manufacturers are testing filters that trap synthetic fibers. Experts stress, though, that cleaning the oceans will be futile unless the flow of new plastic is reduced at its source."],
+ q:[
+ ["info",null,null,null,"Microplastics have spread widely, and their effects on humans are not yet fully understood.",["Microplastics are dangerous to humans only when they exceed a known dose.","All marine animals eat less after exposure to microplastics in nature.","Washing machine filters have already solved the problem of synthetic fibers.","Microplastics are larger than five millimeters."],"O texto mostra a ampla dispersão e diz que não há consenso sobre a dose perigosa. Não existe 'dose conhecida'; os efeitos na natureza ainda são debatidos; os filtros estão em teste; e microplásticos têm menos de 5 mm."],
+ ["vocab",1,"frequently mistake microplastics","mistake","Confuse",["Hide","Break","Prefer","Remember"],"'Mistake X for Y' = tomar X por Y, confundir. Os animais confundem microplásticos com comida."],
+ ["para",1,null,null,"Experiments suggest that exposure to microplastics may harm some marine animals, but effects in the wild are still uncertain.",["Mussels avoid swallowing particles by filtering water.","Laboratory tests prove that wild animals reproduce more slowly.","Microplastics help marine animals grow faster.","The debate about microplastics ended after the laboratory tests."],"O parágrafo 2 cita efeitos em laboratório (comem menos, crescem devagar, menos filhotes) e diz que, na natureza, o tema 'is still under debate'."],
+ ["sent",2,"Nevertheless, there is no consensus about the dose at which these substances become dangerous, and regulators are reluctant to set limits without firm evidence.",null,"Experts do not agree on a harmful dose, and authorities hesitate to establish limits without solid proof.",["Regulators agree on a dangerous dose but refuse to set limits.","Firm evidence shows that all doses are harmless.","Substances become dangerous when regulators set limits.","Consensus exists about limits, but there is no evidence of the dose."],"'No consensus' = não há acordo; 'reluctant' = relutantes; 'firm evidence' = prova sólida."],
+ ["vocab",3,"filters that trap synthetic fibers","trap","Capture",["Deceive","Produce","Spread","Dissolve"],"Filtros que 'trap' fibras as retêm/capturam. 'Deceive' seria 'enganar' (armar uma armadilha para alguém)."],
+ ["pron",0,"Because they are so small","they","Microplastics",["Sunlight","Waves","Large items","Ocean trenches"],"O sujeito da frase anterior são as partículas (microplastics). Elas são tão pequenas que ficam quase impossíveis de remover. 'Large items' não são pequenos."],
+ ["sent",3,"Experts stress, though, that cleaning the oceans will be futile unless the flow of new plastic is reduced at its source.",null,"Cleaning the oceans will be useless if new plastic is not reduced where it originates, experts say.",["Experts say that reducing plastic at its source is futile without cleaning the oceans.","Oceans can only be cleaned after experts stop reducing plastic.","Experts stress that new plastic should flow into the oceans so they can be cleaned.","The source of plastic is the oceans, so cleaning them is futile."],"'Unless' = a menos que. Limpar os oceanos é inútil a menos que se reduza o plástico novo na origem. As alternativas invertem essa relação."],
+ ["pron",2,"manufacturing, which can leak","which","Chemicals",["Toxicologists","Manufacturing","Humans","Tissues"],"'Which can leak out of the particles' fala das substâncias químicas adicionadas na fabricação. 'Manufacturing' é o vizinho, mas o que vaza são os 'chemicals'."],
+ ["para",0,null,null,"Large plastic items break into tiny pieces that are found everywhere and are very hard to remove.",["Plastic disappears naturally under sunlight and waves.","Microplastics exist only in drinking water.","Microplastics are easy to remove from Arctic ice.","Microplastics are larger than five millimeters, so they sink."],"O parágrafo 1 abre dizendo que o plástico 'does not simply disappear' e que os fragmentos já estão em trincheiras, gelo e água potável."],
+ ["main",null,null,null,"Microplastics are a widespread problem with uncertain health effects, which requires reducing plastic at the source.",["Marine animals are the only victims of plastic pollution.","Washing machines are the main cause of microplastics.","Governments should ban all plastics immediately.","Microplastics are harmless to humans according to toxicologists."],"O texto percorre origem, impacto em animais, preocupação para humanos e soluções, terminando na redução na fonte. As outras generalizam ou contradizem o texto."]
+ ]},
+/* ---------- 4 ---------- */
+{title:"Working From Home", topic:"Economia · Trabalho",
+ gloss:[["Perk","extra benefit"],["Commuting","traveling to work"],["Recruits","new employees"],["Hybrid","mixed"]],
+ paras:[
+ "The pandemic turned remote work from an occasional perk into a daily reality for millions of employees. Many companies, initially skeptical, were surprised to find that output did not fall. Workers saved hours previously spent commuting, and several reported being able to concentrate better at home than in noisy open-plan offices.",
+ "Yet the picture is more complicated than early enthusiasm suggested. A study of 1,600 employees at a technology firm found that those assigned to work from home were more productive on routine tasks, but their chances of promotion dropped. Managers, it seems, tend to reward people they see in person, a bias that researchers call proximity bias.",
+ "Isolation is another concern. Without casual conversations in corridors, new recruits struggle to learn unwritten rules and to build networks that might help them later. Some firms have responded by organizing regular in-person days, whereas others have invested in virtual social events, although employees often find the latter forced and tiring.",
+ "Many economists now expect hybrid arrangements, combining office and home, to become the norm. Such models may preserve flexibility without sacrificing collaboration. The challenge for leaders will be to design rules that are fair, so that those who stay home are not quietly penalized for their choice."],
+ q:[
+ ["info",null,null,null,"Working from home may increase productivity while reducing chances of promotion.",["Remote workers receive more promotions because they are more productive.","Virtual social events are considered enjoyable by most employees.","Companies were certain from the start that output would remain stable.","Economists want to ban remote work after the pandemic."],"O estudo do parágrafo 2: mais produtividade em tarefas rotineiras, porém menos chances de promoção. Os empregados acham eventos virtuais 'forced and tiring', e as empresas eram céticas no início."],
+ ["vocab",0,"find that output did not fall","output","Production",["Exit","Opinion","Payment","Noise"],"'Output' = produção/rendimento, não 'saída' no sentido de porta. Falso amigo comum."],
+ ["para",1,null,null,"A study found that home workers did routine tasks better but were less likely to be promoted, perhaps due to managers' bias.",["Managers prefer promoting employees who work from home.","The technology firm reduced the number of employees by 1,600.","Routine tasks became harder for those working from home.","Proximity bias helps remote workers to get promoted."],"O parágrafo 2 diz que os remotos foram mais produtivos, mas tiveram menos promoções: gestores recompensam quem veem pessoalmente (proximity bias)."],
+ ["sent",2,"Without casual conversations in corridors, new recruits struggle to learn unwritten rules and to build networks that might help them later.",null,"When informal chats disappear, newcomers find it hard to learn implicit rules and make useful contacts.",["New recruits write the rules in corridors to help networks.","Casual conversations make new recruits struggle with unwritten rules.","Newcomers do not need networks because they learn rules later.","Corridors are built so recruits can struggle less."],"'Without casual conversations' = sem conversas informais; 'struggle to' = ter dificuldade para; 'unwritten rules' = regras implícitas."],
+ ["vocab",3,"may preserve flexibility","preserve","Maintain",["Prevent","Cook","Reduce","Discover"],"'Preserve' = manter/conservar, não 'prevenir' (falso cognato). Modelos híbridos mantêm a flexibilidade."],
+ ["pron",1,"but their chances of promotion","their","Employees working from home",["Routine tasks","Managers","The technology firm","Researchers"],"'Those assigned to work from home' são os que tiveram menos promoção. As chances são deles, não das tarefas nem dos gestores."],
+ ["sent",3,"The challenge for leaders will be to design rules that are fair, so that those who stay home are not quietly penalized for their choice.",null,"Leaders must create fair rules so remote workers are not silently disadvantaged.",["Leaders will have to choose who stays home, quietly.","Fair rules will penalize those who choose to stay home.","The challenge is that leaders stay home and design quiet rules.","People who stay home will be leaders because rules are fair."],"'So that' indica finalidade: regras justas para que quem fica em casa não seja prejudicado ('penalized') discretamente."],
+ ["pron",2,"might help them later","them","New recruits",["Networks","Unwritten rules","Casual conversations","Corridors"],"'Networks that might help them' = redes que podem ajudar os novos contratados. 'Networks' é o vizinho, mas é a redes que ajudam, não o objeto da ajuda."],
+ ["para",0,null,null,"Remote work became common during the pandemic and companies found that production stayed stable.",["Workers lost time commuting at home.","Open-plan offices improved concentration for most workers.","Companies were enthusiastic and expected output to rise.","Remote work was rare before and after the pandemic."],"O parágrafo 1 diz que a produção não caiu, que se economizou o tempo de deslocamento e que vários concentravam-se melhor em casa."],
+ ["main",null,null,null,"Remote work has benefits and drawbacks, so hybrid models with fair rules seem a promising solution.",["Remote work should replace offices completely.","Managers are the main obstacle to productivity.","Employees dislike hybrid arrangements because of isolation.","The pandemic proved that offices are unnecessary."],"O texto mostra vantagens, problemas (viés de proximidade, isolamento) e aponta o modelo híbrido com regras justas. As outras são exageros ou detalhes."]
+ ]},
+/* ---------- 5 ---------- */
+{title:"The Bilingual Brain", topic:"Linguística · Cognição",
+ gloss:[["Milestones","important stages"],["Onset","beginning"],["Mixed","inconsistent"],["Modest","small"]],
+ paras:[
+ "For much of the twentieth century, many educators believed that raising children with two languages would confuse them and delay their development. Parents were sometimes advised to speak only one language at home. Modern research has largely overturned this advice, showing that bilingual children reach language milestones at roughly the same age as monolingual peers.",
+ "More surprising is evidence that bilingualism may sharpen certain mental skills. Because speakers of two languages must constantly choose which one to use and suppress the other, their brains get regular practice in managing attention. In experiments, bilingual children often outperform monolinguals on tasks that require ignoring distractions and switching between rules.",
+ "Some studies even link lifelong bilingualism to a later onset of dementia symptoms, by around four years on average. Critics, however, caution that the results may reflect differences in education or immigration patterns rather than language itself. Replication attempts have produced mixed outcomes, and the debate shows no sign of ending soon.",
+ "None of this means that bilingualism makes anyone more intelligent in general. The advantages, where they exist, are modest and specific. Still, the findings offer reassurance to families who raise children in two languages, and they give schools a strong reason to value linguistic diversity rather than treat it as an obstacle."],
+ q:[
+ ["info",null,null,null,"Raising children bilingual does not delay language development, according to modern research.",["Bilingual people are more intelligent in general.","Parents are still advised to speak only one language at home.","Replication studies have confirmed that bilingualism prevents dementia.","Schools consider linguistic diversity an obstacle."],"O parágrafo 1 diz que a pesquisa moderna derrubou a ideia de atraso. O parágrafo 4 nega que o bilinguismo torne alguém 'more intelligent in general'; e as réplicas tiveram resultados mistos."],
+ ["vocab",0,"has largely overturned this advice","overturned","Reversed",["Repeated","Supported","Delayed","Ignored"],"'Overturn' = derrubar, reverter. A pesquisa moderna reverteu o conselho antigo."],
+ ["para",1,null,null,"Using two languages trains attention, and bilingual children can be better at ignoring distractions.",["Bilingual brains rest because one language is suppressed.","Monolinguals perform better when switching between rules.","Bilingual children cannot manage attention because they confuse languages.","Experiments show bilingual children are distracted more often."],"O parágrafo 2 explica que escolher e suprimir línguas dá prática de atenção; crianças bilíngues se saem melhor em ignorar distrações e alternar regras."],
+ ["sent",2,"Critics, however, caution that the results may reflect differences in education or immigration patterns rather than language itself.",null,"Some experts warn that the findings could be explained by other factors instead of bilingualism.",["Critics say that language itself explains education and immigration.","Critics prove that education and immigration are the same as language.","Results reflect critics' differences in education.","Immigration patterns make critics caution about language."],"'Rather than language itself' = e não a língua em si. Os críticos alertam que educação ou imigração podem explicar os resultados."],
+ ["vocab",1,"often outperform monolinguals","outperform","Do better than",["Perform outside","Perform again","Play worse than","Stop performing"],"'Outperform' = ter desempenho superior a. O prefixo 'out-' indica superar o outro."],
+ ["pron",1,"their brains get regular practice","their","Speakers of two languages",["Two languages","The other language","Mental skills","Bilingualism"],"Os cérebros pertencem aos falantes de duas línguas. 'The other' (a outra língua) é o vizinho, mas línguas não têm cérebros."],
+ ["sent",3,"The advantages, where they exist, are modest and specific.",null,"When benefits are found, they are small and limited to certain abilities.",["Advantages exist everywhere and are large and general.","Modest and specific advantages exist where bilingualism does not.","Specific advantages are modest because they do not exist.","Where advantages exist, they are modest because they are specific to bilinguals' families."],"'Where they exist' = quando/onde existem. 'Modest and specific' = pequenas e restritas."],
+ ["pron",3,"and they give schools","they","The findings",["Families","Schools","Languages","Advantages"],"'The findings offer reassurance..., and they give schools a strong reason': o sujeito é 'the findings'. 'Families' está logo antes, mas não dá razões às escolas."],
+ ["para",2,null,null,"Some research connects bilingualism to delayed dementia symptoms, but it is disputed.",["Studies prove bilingualism cures dementia.","Dementia appears four years earlier in bilinguals.","All attempts to replicate the results succeeded.","Critics have ended the debate about immigration."],"O parágrafo 3 relaciona bilinguismo a início mais tardio dos sintomas (cerca de quatro anos), mas críticos e réplicas com resultados mistos mantêm o debate."],
+ ["main",null,null,null,"Bilingualism does not harm children and may bring modest cognitive benefits, though evidence is debated.",["Bilingual education is the best way to prevent dementia.","Monolingual children are slower in all mental tasks.","Parents should choose one language to avoid confusion.","Bilingualism makes people more intelligent than others."],"O texto desmonta o mito dos prejuízos, apresenta benefícios modestos e debatidos. As outras são absolutas ('best way', 'all') ou contradizem o texto."]
+ ]},
+/* ---------- 6 ---------- */
+{title:"Storing Renewable Energy", topic:"Engenharia · Energia",
+ gloss:[["Surplus","excess"],["Grid","electricity network"],["Standby","ready for use"],["Uphill","toward a higher place"]],
+ paras:[
+ "Solar panels and wind turbines produce electricity only when the sun shines and the wind blows, which rarely matches the moments when people need it most. This mismatch is the central problem of renewable energy. Unless surplus power can be stored for later use, grid operators must keep fossil-fuel plants on standby, undermining the environmental gains.",
+ "Batteries are the most visible solution. The cost of lithium-ion packs has fallen by roughly ninety percent over the past decade, making large installations commercially viable. In several regions, giant battery farms now smooth out daily fluctuations by absorbing power at midday and releasing it in the evening. However, they typically store energy for only a few hours.",
+ "For longer periods, engineers are exploring alternatives. Pumped hydro stations use surplus electricity to push water uphill, then let it flow back through turbines when needed. Other projects convert power into hydrogen, which can be kept for months. Both approaches lose a considerable share of the original energy during conversion, so they are efficient only when cheaper options are unavailable.",
+ "No single technology is likely to solve the problem alone. Analysts expect future grids to combine batteries for short-term balancing with hydrogen or hydro for seasonal storage. Policymakers can accelerate this transition by rewarding flexibility, for instance by paying operators who can adjust their supply quickly."],
+ q:[
+ ["info",null,null,null,"Batteries help balance daily fluctuations but do not store energy for long periods.",["Hydrogen storage wastes no energy during conversion.","Fossil-fuel plants are no longer needed thanks to batteries.","Pumped hydro stations use fossil fuel to lift water.","The cost of batteries has risen by ninety percent."],"O parágrafo 2 diz que baterias suavizam oscilações diárias, mas armazenam por poucas horas. O custo caiu (não subiu) 90%; hidrogênio e hidrelétrica reversível perdem energia; usinas fósseis continuam em prontidão."],
+ ["vocab",0,"undermining the environmental gains","undermining","Weakening",["Digging under","Supporting","Hiding","Measuring"],"'Undermine' = enfraquecer, minar. Manter usinas fósseis de prontidão enfraquece os ganhos ambientais."],
+ ["para",1,null,null,"Cheaper batteries now smooth daily supply, but they cannot keep energy for long.",["Battery prices fell because they store energy for months.","Battery farms absorb power at night and release it at midday.","Lithium-ion packs are not commercially viable.","Battery farms increase daily fluctuations."],"O parágrafo 2: custo caiu ~90%, fazendas de baterias absorvem energia ao meio-dia e liberam à noite, mas guardam por poucas horas."],
+ ["sent",3,"Policymakers can accelerate this transition by rewarding flexibility, for instance by paying operators who can adjust their supply quickly.",null,"Governments can speed up the change by paying those who can quickly change how much power they supply.",["Operators can accelerate policymakers by adjusting their payment.","Policymakers should reward operators who supply energy slowly.","Flexibility is rewarded when policymakers stop the transition.","Operators who pay policymakers can supply the transition quickly."],"'By rewarding flexibility' = recompensando a flexibilidade; 'for instance' dá o exemplo: pagar operadores que ajustam a oferta rapidamente."],
+ ["vocab",2,"can be kept for months","kept","Stored",["Delivered","Burned","Cooled","Sold"],"'Kept for months' = armazenado por meses. O hidrogênio serve para armazenamento de longa duração."],
+ ["pron",2,"so they are efficient","they","Pumped hydro and hydrogen",["Engineers","Turbines","Longer periods","Cheaper options"],"'Both approaches' (hidrelétrica reversível e hidrogênio) perdem energia e por isso só são eficientes quando não há opções mais baratas. 'Cheaper options' vem logo depois, mas são o contraste."],
+ ["sent",1,"In several regions, giant battery farms now smooth out daily fluctuations by absorbing power at midday and releasing it in the evening.",null,"Large battery installations reduce daily variation by taking in electricity when it is abundant and delivering it later.",["Battery farms release power at midday and absorb it in the evening.","Giant farms in several regions produce power at midday.","Daily fluctuations occur because batteries absorb power in the evening.","Regions smooth batteries by releasing power at midday."],"'Smooth out fluctuations' = reduzir oscilações; 'absorbing' = absorver; 'releasing' = liberar. A ordem (meio-dia absorve, noite libera) importa."],
+ ["pron",0,"blows, which rarely matches","which","The fact that solar and wind produce power only at certain times",["Solar panels","Electricity","The wind","The sun"],"'Which' retoma a situação inteira: só se produz energia quando há sol ou vento, e isso raramente coincide com a demanda."],
+ ["para",2,null,null,"Pumped hydro and hydrogen can store energy for long periods but lose part of it in conversion.",["Hydrogen is cheaper than batteries for storing energy.","Pumped hydro stations push water downhill using surplus power.","Conversion into hydrogen is perfectly efficient.","Engineers prefer these methods because they save energy."],"O parágrafo 3: água empurrada morro acima, hidrogênio guardado por meses, mas 'lose a considerable share' na conversão."],
+ ["main",null,null,null,"Storing renewable energy requires a combination of technologies, each suited to different time scales.",["Batteries alone will soon end the use of fossil fuels.","Hydrogen is the best option because it lasts for months.","Solar and wind energy are inefficient and should be abandoned.","Policymakers are the main obstacle to renewable energy."],"O texto apresenta o problema, baterias (curto prazo), hidro/hidrogênio (longo prazo) e conclui que nenhuma tecnologia resolve sozinha."]
+ ]},
+/* ---------- 7 ---------- */
+{title:"Teenagers and Social Media", topic:"Psicologia · Sociedade",
+ gloss:[["Wellbeing","health and happiness"],["Correlational","showing a relation, not a cause"],["Scrolling","moving through content on a screen"],["Self-esteem","confidence in oneself"]],
+ paras:[
+ "Few topics worry parents as much as the amount of time teenagers spend on social media. Surveys show that many adolescents check their phones dozens of times a day, and some admit that they find it hard to stop. Headlines often claim that these platforms are damaging a whole generation's mental health, but scientists are more cautious.",
+ "Large analyses of data from several countries have found only a small statistical link between screen time and low wellbeing. The association is roughly comparable to that between wellbeing and eating potatoes. Moreover, because most studies are correlational, they cannot show whether social media causes unhappiness or whether unhappy teenagers simply spend more time online.",
+ "Nevertheless, how teenagers use these platforms appears to matter more than how long they use them. Passive scrolling, especially when it involves comparing oneself with idealized images, is associated with lower self-esteem. By contrast, using social media to keep in touch with close friends seems harmless and may even offer support during difficult periods.",
+ "Experts therefore advise parents to focus on quality rather than quantity. Talking openly about online experiences is more effective than imposing strict bans, which often push teenagers to hide their activity. Platforms, for their part, are being urged to redesign features that encourage endless scrolling."],
+ q:[
+ ["info",null,null,null,"The relationship between screen time and low wellbeing found in large analyses is small.",["Studies have proved that social media causes unhappiness.","Using social media to talk with friends harms self-esteem.","Strict bans are the most effective strategy according to experts.","Scientists agree that platforms are damaging a whole generation."],"O parágrafo 2 diz 'only a small statistical link'. Estudos correlacionais não provam causa; conversar com amigos parece inofensivo; proibições rígidas são menos eficazes."],
+ ["vocab",0,"some admit that","admit","Acknowledge",["Allow into","Deny","Refuse","Invite"],"'Admit that' = reconhecer/confessar que. Não é 'admitir' alguém em um lugar."],
+ ["para",1,null,null,"The statistical link between screen time and low wellbeing is weak, and cause cannot be established.",["Eating potatoes strongly affects wellbeing.","Studies show unhappy teenagers cause social media use.","The data came from a single country.","Correlational studies prove that social media causes unhappiness."],"O parágrafo 2 traz a ligação 'small', compara com batatas (ou seja, irrelevante) e explica que estudos correlacionais não mostram causa."],
+ ["sent",2,"By contrast, using social media to keep in touch with close friends seems harmless and may even offer support during difficult periods.",null,"Staying connected with close friends online does not seem harmful and might be helpful in hard times.",["Social media harms close friends in difficult periods.","Teenagers who touch close friends use social media to be harmless.","Close friends offer support only outside social media.","Difficult periods are caused by keeping in touch with friends."],"'Keep in touch' = manter contato; 'harmless' = inofensivo; 'offer support' = oferecer apoio. 'By contrast' marca o contraste com a rolagem passiva."],
+ ["vocab",3,"than imposing strict bans","imposing","Enforcing",["Impressing","Proposing","Avoiding","Imagining"],"'Impose' = impor, não 'impressionar' nem 'propor'. Falso cognato clássico."],
+ ["pron",1,"correlational, they cannot show","they","Most studies",["Large analyses","Several countries","Teenagers","The statistical link"],"'Because most studies are correlational, they cannot show...': o sujeito da oração principal retoma 'most studies'."],
+ ["sent",3,"Talking openly about online experiences is more effective than imposing strict bans, which often push teenagers to hide their activity.",null,"Open conversation works better than severe prohibitions, which frequently lead teenagers to conceal what they do online.",["Strict bans are effective because teenagers talk openly.","Talking about experiences often pushes teenagers to ban activity.","Teenagers hide their activity when parents talk openly.","Imposing bans is more effective than talking, though it hides activity."],"'Which' retoma 'strict bans'; 'push teenagers to hide' = levam os jovens a esconder. A comparação 'more effective than' favorece a conversa."],
+ ["pron",2,"when it involves comparing","it","Passive scrolling",["Teenagers","Self-esteem","Social media","How teenagers use platforms"],"'Passive scrolling, especially when it involves comparing oneself...' — o 'it' retoma a rolagem passiva."],
+ ["para",0,null,null,"Teenagers use phones intensely, and while headlines are alarming, scientists are more careful.",["Scientists have confirmed headlines about a damaged generation.","Teenagers rarely check phones and find it easy to stop.","Parents rarely worry about social media.","Surveys show phones are used only dozens of times a month."],"O parágrafo 1 mostra o uso frequente do celular, a dificuldade de parar e o contraste entre manchetes e a cautela dos cientistas."],
+ ["main",null,null,null,"How teenagers use social media may matter more than time spent, so parents should prioritize quality and dialogue.",["Social media is harmless and should not worry parents.","Teenagers should be forbidden from using platforms.","Passive scrolling is the only cause of unhappiness.","Platforms are solely responsible for teenagers' mental health."],"O texto relativiza o tempo de tela, destaca o tipo de uso e recomenda qualidade e diálogo. As outras são absolutas ('only', 'solely', 'harmless')."]
+ ]},
+/* ---------- 8 ---------- */
+{title:"Pollinators in Decline", topic:"Ecologia · Agricultura",
+ gloss:[["Pollen","fine powder produced by flowers"],["Culprits","causes of a problem"],["Tillage","plowing of the soil"],["Nectar","sweet liquid in flowers"]],
+ paras:[
+ "Roughly three out of every four major food crops depend, at least partly, on animals to carry pollen from flower to flower. Bees are the best known of these pollinators, but butterflies, beetles, flies and even bats also play a part. When pollinators disappear, yields of fruits, nuts and vegetables can fall sharply, threatening both farmers' incomes and human nutrition.",
+ "Evidence of decline is mounting. A study in Germany found that the total weight of flying insects in protected areas had dropped by more than seventy percent in less than three decades. Wild bee species are retreating in many parts of Europe and North America. Scientists identify several culprits, including habitat loss, climate change, parasites and the intensive use of pesticides.",
+ "Pesticides known as neonicotinoids have attracted particular attention. They are absorbed by the whole plant, so traces appear in the pollen and nectar that bees collect. Even doses too low to kill an insect can impair its ability to navigate and reproduce. Several countries have restricted these chemicals, but manufacturers insist that the harm has been overstated.",
+ "Farmers can help without sacrificing profit. Planting strips of wildflowers along field edges provides food and shelter, and reducing tillage protects ground-nesting bees. Cities, too, can contribute by replacing sterile lawns with flowering plants. Such measures are inexpensive, yet they could make a real difference to the survival of pollinators."],
+ q:[
+ ["info",null,null,null,"Pesticides can damage bees even in doses that do not kill them.",["Bees are the only animals that pollinate food crops.","Manufacturers agree that neonicotinoids are very harmful.","Flying insects have declined only in cities.","Wildflower strips reduce farmers' profit significantly."],"O parágrafo 3 diz que doses baixas demais para matar ainda prejudicam a navegação e a reprodução. Há outros polinizadores além de abelhas; fabricantes dizem que o dano foi exagerado; o declínio foi medido em áreas protegidas."],
+ ["vocab",1,"Evidence of decline is mounting","mounting","Increasing",["Assembling","Hiding","Disappearing","Repeating"],"'Mounting evidence' = evidências crescentes/que se acumulam."],
+ ["para",0,null,null,"Most important crops need animals to pollinate them, and a loss of pollinators threatens food and income.",["Bees are the only pollinators and they carry pollen by wind.","Only nuts depend on pollinators.","Pollinators eat the crops, reducing yields.","Bats protect crops from falling."],"O parágrafo 1: cerca de três em cada quatro culturas dependem, ao menos em parte, de animais; sem polinizadores caem a produção e a renda."],
+ ["sent",2,"Even doses too low to kill an insect can impair its ability to navigate and reproduce.",null,"Small amounts of poison that do not kill an insect can still harm its capacity to find its way and breed.",["Insects must be killed with high doses to stop reproducing.","Doses that kill insects improve their ability to navigate.","Insects navigate better when doses are low.","Low doses kill insects that cannot reproduce."],"'Too low to kill' = baixas demais para matar; 'impair' = prejudicar; 'navigate' = orientar-se; 'reproduce' = reproduzir-se."],
+ ["vocab",2,"the harm has been overstated","overstated","Exaggerated",["Underestimated","Stated twice","Proved","Removed"],"'Overstate' = exagerar. Os fabricantes dizem que o dano foi exagerado."],
+ ["pron",2,"They are absorbed by","They","Pesticides known as neonicotinoids",["Bees","Pollen","Nectar","Particular attention"],"O sujeito da frase anterior são os neonicotinoides, que são absorvidos pela planta inteira, deixando resíduos no pólen e no néctar."],
+ ["sent",3,"Such measures are inexpensive, yet they could make a real difference to the survival of pollinators.",null,"These actions cost little but might significantly help pollinators survive.",["Measures are expensive but difference the survival.","Pollinators survive only because measures are inexpensive.","Inexpensive measures make a difference to farmers but not pollinators.","Such measures survive despite being real."],"'Yet' = porém; 'inexpensive' = barato; 'make a difference' = fazer diferença."],
+ ["pron",2,"nectar that bees collect","that","Pollen and nectar",["Traces","Bees","The whole plant","Pesticides"],"'That bees collect' descreve o que as abelhas coletam: pólen e néctar."],
+ ["para",1,null,null,"Flying insect numbers have fallen sharply, and scientists link the fall to several causes.",["Insect weight rose in protected areas.","Only climate change causes the decline.","Wild bees are increasing in Europe.","Scientists identified one culprit: parasites."],"O parágrafo 2 traz a queda de mais de 70% na Alemanha, o recuo das abelhas e vários culpados (habitat, clima, parasitas, pesticidas)."],
+ ["main",null,null,null,"Pollinators are declining because of several human-related pressures, but simple measures can help protect them.",["Neonicotinoids should be banned worldwide immediately.","Farmers are the only ones responsible for the decline of bees.","Food production does not depend on animals.","Cities must replace all farms with wildflowers."],"O texto vai da importância dos polinizadores, ao declínio, às causas e às soluções acessíveis. As demais são detalhes ou afirmações extremas."]
+ ]},
+/* ---------- 9 ---------- */
+{title:"Artificial Intelligence in Medicine", topic:"Tecnologia · Saúde",
+ gloss:[["To overlook","to fail to notice"],["Proxy","substitute measure"],["To scrutinize","to examine carefully"],["To weigh","to evaluate"]],
+ paras:[
+ "Artificial intelligence is steadily entering hospitals. Algorithms can now scan thousands of medical images in minutes, flagging suspicious spots that a tired radiologist might overlook. In some trials, such systems have detected early-stage cancers with accuracy comparable to that of experienced specialists. Supporters argue that the technology will free doctors from routine tasks and give them more time with patients.",
+ "Yet the enthusiasm is tempered by serious concerns. An algorithm learns from the data it is given, and if that data mostly comes from one population, its predictions may be less reliable for others. One widely used tool, for instance, systematically underestimated the health needs of Black patients because it relied on past spending as a proxy for illness.",
+ "Transparency is another issue. Many powerful models operate as black boxes: they produce an answer but cannot explain how they reached it. Clinicians are understandably uneasy about acting on advice they cannot scrutinize, particularly when a wrong decision could cost a life. Regulators in several countries are therefore demanding evidence that such tools are safe and fair before approving them.",
+ "Most experts envision AI as an assistant, not a replacement. Doctors bring judgment, empathy and the ability to weigh a patient's personal circumstances, qualities no algorithm currently possesses. The most promising future, they suggest, lies in partnerships in which machines handle pattern recognition while humans take responsibility for decisions."],
+ q:[
+ ["info",null,null,null,"An AI tool underestimated the needs of some patients because of the data it used.",["Algorithms have replaced radiologists in most hospitals.","Regulators have approved black-box tools without evidence.","AI systems can explain every decision they make.","Doctors believe that AI can show empathy to patients."],"O parágrafo 2 cita uma ferramenta que subestimou as necessidades de pacientes negros por usar gastos passados como 'proxy'. Reguladores exigem evidências; modelos 'caixa-preta' não explicam; empatia é qualidade humana."],
+ ["vocab",0,"minutes, flagging suspicious spots","flagging","Marking",["Waving","Hiding","Deleting","Delaying"],"'Flag' como verbo = sinalizar/marcar algo para atenção. Os algoritmos marcam pontos suspeitos."],
+ ["para",1,null,null,"Algorithms can be biased when trained on unrepresentative data, as shown by a tool that relied on spending.",["Algorithms predict well for all populations.","Spending data showed Black patients needed less care, which was correct.","Algorithms learn from doctors, not from data.","Concerns about AI have disappeared."],"O parágrafo 2 diz que o algoritmo aprende com os dados; se vêm de uma população, as previsões falham para outras. O exemplo foi usar gastos como substituto da doença."],
+ ["sent",2,"Clinicians are understandably uneasy about acting on advice they cannot scrutinize, particularly when a wrong decision could cost a life.",null,"It is natural for doctors to be uncomfortable following recommendations they cannot examine, especially if mistakes might be fatal.",["Doctors act on advice they scrutinize, so wrong decisions cost less.","Clinicians cost lives when they cannot act on advice.","A wrong life is understandably costly for clinicians.","Clinicians scrutinize advice only when decisions are uneasy."],"'Understandably uneasy' = compreensivelmente desconfortáveis; 'scrutinize' = examinar a fundo; 'could cost a life' = poderia custar uma vida."],
+ ["vocab",1,"enthusiasm is tempered by","tempered","Moderated",["Heated","Strengthened","Measured","Increased"],"'Tempered by' = moderado por. O entusiasmo é atenuado por preocupações sérias."],
+ ["pron",1,"population, its predictions","its","The algorithm",["That data","One population","Serious concerns","The enthusiasm"],"'An algorithm learns... its predictions': as previsões são do algoritmo. 'One population' é o vizinho, mas populações não fazem previsões."],
+ ["sent",3,"Doctors bring judgment, empathy and the ability to weigh a patient's personal circumstances, qualities no algorithm currently possesses.",null,"Human doctors contribute abilities that today's algorithms lack, such as empathy and weighing personal situations.",["No doctor possesses the ability to weigh qualities of algorithms.","Algorithms possess qualities that doctors currently bring to patients.","Patients bring circumstances that judge doctors.","Doctors weigh algorithms when patients have empathy."],"'Qualities no algorithm currently possesses' = qualidades que nenhum algoritmo possui hoje. 'Weigh circumstances' = considerar as circunstâncias do paciente."],
+ ["pron",3,"future, they suggest","they","Most experts",["Doctors","Machines","Humans","Partnerships"],"A frase anterior começa com 'Most experts envision AI as an assistant'. 'They suggest' retoma os especialistas. 'Doctors' aparece antes, mas o sujeito da opinião são os 'experts'."],
+ ["para",0,null,null,"AI can analyze many images quickly and find early cancers, and supporters think doctors will gain time.",["AI is used in hospitals to replace tired radiologists entirely.","Algorithms detect cancers less accurately than experienced specialists.","Supporters believe doctors will spend more time on routine tasks.","Algorithms take hours to scan a single image."],"O parágrafo 1 diz que algoritmos escaneiam milhares de imagens em minutos, detectam cânceres com precisão comparável e que isso liberaria os médicos de tarefas rotineiras."],
+ ["main",null,null,null,"AI offers benefits in healthcare but has risks, so it is best seen as a tool that works with doctors.",["AI will soon replace doctors in diagnosing diseases.","Algorithms are too biased to be used in medicine.","Regulators prevent hospitals from using new technologies.","Patients prefer machines to doctors."],"O texto equilibra benefícios, vieses, falta de transparência e conclui por uma parceria humano-máquina. As alternativas extremas contradizem essa visão."]
+ ]},
+/* ---------- 10 ---------- */
+{title:"The Replication Crisis", topic:"Metodologia científica",
+ gloss:[["Fluke","a result by chance"],["Drawer","storage compartment in a desk"],["Momentum","force of progress"],["Raw","unprocessed"]],
+ paras:[
+ "In 2015, a team of psychologists attempted to repeat one hundred published experiments. Fewer than half of the original findings could be reproduced. The result sent a shock through the scientific community, and similar difficulties have since been reported in medicine, economics and biology. Many researchers now speak of a 'replication crisis'.",
+ "Several factors contribute to the problem. Journals prefer to publish striking, positive results, so studies that find nothing tend to remain in a drawer. Researchers, who need publications to secure jobs and funding, may be tempted to analyze their data in many ways until something significant emerges. Small samples further increase the odds that a result is a fluke.",
+ "In response, a movement known as open science has gained momentum. Scientists are encouraged to register their hypotheses before collecting data, so that they cannot adjust them afterwards to fit the outcome. Others share raw data and computer code, allowing colleagues to check every step of an analysis. Some journals now accept papers on the strength of their methods, regardless of what the results show.",
+ "These reforms are not free of cost. Preregistration takes time, and sharing data raises privacy concerns when participants are involved. Nonetheless, many researchers believe that a slower, more transparent science is preferable to a fast one that cannot be trusted. Public confidence in research, they argue, depends on it."],
+ q:[
+ ["info",null,null,null,"Fewer than half of the original experiments could be reproduced in the 2015 attempt.",["The replication crisis affects only psychology.","Open science increases the speed of research without cost.","Journals prefer to publish studies that find nothing.","Data sharing never raises privacy concerns."],"O parágrafo 1 informa 'fewer than half'. A crise atingiu medicina, economia e biologia; as reformas têm custos; periódicos preferem resultados positivos; o compartilhamento levanta preocupações de privacidade."],
+ ["vocab",0,"original findings could be","findings","Results",["Fines","Searches","Funds","Opinions"],"'Findings' = resultados/descobertas de uma pesquisa. Não confundir com 'fines' (multas)."],
+ ["para",1,null,null,"Publication preferences and career pressures may lead to unreliable results being published.",["Journals publish negative results more often than positive ones.","Small samples decrease the chance of flukes.","Researchers avoid analyzing data in many ways.","Studies that find nothing always receive funding."],"O parágrafo 2 cita a preferência por resultados marcantes, a pressão por publicar e as amostras pequenas, que aumentam a chance de resultados casuais."],
+ ["sent",2,"Scientists are encouraged to register their hypotheses before collecting data, so that they cannot adjust them afterwards to fit the outcome.",null,"Researchers are urged to record their predictions in advance so they cannot alter them later to match the results.",["Scientists adjust their hypotheses after data to encourage the outcome.","Registering hypotheses afterwards helps scientists fit outcomes.","Data is collected to prevent scientists from registering.","Scientists cannot collect data before encouraging the outcome."],"'Register' = registrar; 'before collecting data' = antes de coletar; 'so that they cannot adjust' = para que não possam ajustar depois ao resultado."],
+ ["vocab",1,"until something significant emerges","emerges","Appears",["Disappears","Merges","Emphasizes","Ends"],"'Emerge' = surgir, aparecer. 'Merges' soa parecido, mas significa 'fundir-se'."],
+ ["pron",2,"adjust them afterwards","them","Hypotheses",["Scientists","Data","Outcome","Colleagues"],"'Register their hypotheses... so that they cannot adjust them': 'they' = scientists; 'them' = as hipóteses que não podem ser ajustadas depois."],
+ ["sent",3,"Nonetheless, many researchers believe that a slower, more transparent science is preferable to a fast one that cannot be trusted.",null,"Many scientists think it is better to have careful, open research than quick research that is unreliable.",["A fast science is more transparent than a slow one that is trusted.","Researchers believe that science cannot be trusted when it is transparent.","Slower science cannot be trusted according to researchers.","A fast one is preferable because transparent science is slow."],"'Preferable to' = preferível a; 'a fast one that cannot be trusted' = uma ciência rápida em que não se pode confiar."],
+ ["pron",3,"depends on it","it","A slower, more transparent science",["Public confidence","Research","Privacy","Cost"],"A confiança pública na pesquisa, argumentam, depende dessa ciência mais lenta e transparente. 'Research' vem antes, mas a confiança depende da transparência."],
+ ["para",2,null,null,"Open science tries to make research more transparent through registration, data sharing and method-based publication.",["Open science forbids researchers from sharing code.","Journals accept papers only with positive results.","Scientists register hypotheses after seeing results.","Colleagues cannot check analyses in open science."],"O parágrafo 3 lista três práticas: registrar hipóteses antes, compartilhar dados e código e aceitar artigos pelo método, independentemente do resultado."],
+ ["main",null,null,null,"A crisis of reproducibility led to reforms that aim to make science more transparent and trustworthy.",["Psychology experiments are unreliable and should be discontinued.","Journals are solely responsible for the failure of science.","Open science is more expensive than traditional science, so it should be rejected.","Small samples are the main cause of scientific misconduct."],"O texto: problema (crise), causas, reformas e custos, com a defesa de uma ciência mais transparente. As outras focam em detalhes ou extrapolam."]
+ ]}
+];
+
+const TESTS = RAW.map((t,i)=>({
+  id:i+1, title:t.title, topic:t.topic, gloss:t.gloss, paras:t.paras,
+  q:t.q.map((r,k)=>({t:r[0],p:r[1],m:r[2],w:r[3],correct:r[4],wrong:r[5],e:r[6],pts:TYPES[r[0]].pts,n:k+1}))
+}));
+const MAX = ORDER.reduce((s,t)=>s+TYPES[t].pts,0); // 50
+
+/* ============ UTIL ============ */
+const app = document.getElementById("app");
+const tbRight = document.getElementById("tbRight");
+function lsGet(k){try{return localStorage.getItem("teap_"+k)}catch(e){return null}}
+function lsSet(k,v){try{localStorage.setItem("teap_"+k,v)}catch(e){}}
+let lang = lsGet("lang")||"pt";
+let S = null, timer = null;
+const L = i=>"ABCDE"[i];
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function fmt(sec){const m=Math.floor(sec/60),s=sec%60;return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")}
+function best(id){const v=lsGet("best_"+id);return v===null?null:+v}
+
+const STEM={
+  info:{pt:"Qual afirmação é verdadeira, de acordo com o texto?",en:"Which statement is true, according to the text?"},
+  para:{pt:"Qual afirmação é verdadeira, de acordo com este trecho do texto?",en:"Which statement is true, according to this part of the text?"},
+  sent:{pt:"Escolha a alternativa com sentido mais próximo da sentença destacada.",en:"Choose the alternative that is closest in meaning to the highlighted sentence."},
+  main:{pt:"Qual é a ideia central do texto?",en:"What is the main idea of the text?"},
+  vocab:{pt:w=>`A palavra “${w}”, destacada no texto, tem sentido mais próximo de qual alternativa?`,en:w=>`The word “${w}”, highlighted in the text, is closest in meaning to which of the alternatives?`},
+  pron:{pt:w=>`O pronome “${w}”, destacado no texto, refere-se a qual alternativa?`,en:w=>`The pronoun “${w}”, highlighted in the text, refers to which of the alternatives?`}
+};
+function stem(q){const s=STEM[q.t][lang];return typeof s==="function"?s(q.w):s}
+
+function excerpt(q,test){
+  if(q.p==null) return "";
+  const txt=test.paras[q.p];
+  if(q.t==="para") return `<blockquote class="ex"><span class="pn">${q.p+1}</span><span>${txt}</span></blockquote>`;
+  const i=txt.indexOf(q.m);
+  if(i<0) return "";
+  const mid = q.t==="sent" ? `<mark>${q.m}</mark>` : q.m.replace(q.w,`<mark>${q.w}</mark>`);
+  return `<blockquote class="ex"><span class="pn">${q.p+1}</span><span>${txt.slice(0,i)}${mid}${txt.slice(i+q.m.length)}</span></blockquote>`;
+}
+
+/* ============ TELAS ============ */
+function setTop(extra){tbRight.innerHTML=extra||""}
+
+function langSeg(){
+  return `<div class="seg" role="group" aria-label="Idioma dos enunciados">
+    <button data-lang="pt" class="${lang==="pt"?"on":""}">Enunciados em PT</button>
+    <button data-lang="en" class="${lang==="en"?"on":""}">Statements in EN</button></div>`;
+}
+
+function renderHome(){
+  clearInterval(timer); S=null; setTop("");
+  const rows=ORDER.reduce((a,t)=>{a[t]=(a[t]||0)+1;return a},{});
+  const tbl=Object.keys(TYPES).map(k=>`<tr><td>${TYPES[k].name}</td><td>${rows[k]} ${rows[k]>1?"questões":"questão"} × ${TYPES[k].pts}</td><td>${rows[k]*TYPES[k].pts} pts</td></tr>`).join("");
+  const cards=TESTS.map(t=>{
+    const b=best(t.id);
+    return `<button class="tcard" data-open="${t.id}">
+      <span class="n">Simulado ${String(t.id).padStart(2,"0")}</span>
+      <span class="t">${t.title}</span>
+      <span class="d">${t.topic}</span>
+      <span class="badge ${b!==null?"done":""}">${b!==null?`Melhor nota: ${b}/${MAX}`:`10 questões · ${MAX} pontos`}</span>
+    </button>`}).join("");
+  app.innerHTML=`
+  <section class="hero">
+    <h1>Simulados TEAP</h1>
+    <p>${TESTS.length} simulados de leitura acadêmica em inglês, cada um com 10 questões e 50 pontos. Treine referência pronominal, vocabulário e interpretação no estilo da prova, com gabarito comentado.</p>
+  </section>
+
+  <section class="card tips" aria-labelledby="tipsH">
+    <h2 id="tipsH">⚠️ Dicas Estratégicas para o TEAP</h2>
+    <ul>
+      <li><b>Atenção aos pronomes</b> (<code>it</code>, <code>they</code>, <code>their</code>, <code>which</code>): não escolha só a palavra vizinha. Pergunte <i>quem pratica a ação</i> ou <i>quem é o dono do objeto/ideia</i>, e confira se singular/plural combinam. Às vezes o <code>which</code> retoma a frase inteira.</li>
+      <li><b>Falsos cognatos e vocabulário</b>: <code>impose</code> não é "impor" no sentido de impressionar, <code>preserve</code> não é "prevenir", <code>admit</code> nem sempre é "admitir". Fique de olho em verbos frasais como <code>outperform</code> (superar) e <code>stem from</code> (derivar de). Sempre releia a frase com a palavra substituída.</li>
+      <li><b>Ideia central</b> (vale 7 pontos, o maior peso): ela abrange o texto inteiro. Desconfie de alternativas absolutas (<code>always</code>, <code>only</code>, <code>all</code>, <code>never</code>) e das que falam só de um parágrafo ou detalhe.</li>
+      <li><b>Sentenças e parágrafos</b>: a alternativa certa é uma paráfrase. Mantenha a lógica de conectivos como <code>rather than</code>, <code>unless</code>, <code>whereas</code>, <code>nevertheless</code>.</li>
+      <li><b>Gestão de tempo</b>: sem dicionário, procure o sentido pelo contexto e não trave em palavras desconhecidas.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Pontuação de cada simulado</h2>
+    <table class="pts"><thead><tr><th>Tipo de questão</th><th>Quantidade</th><th>Pontos</th></tr></thead>
+    <tbody>${tbl}</tbody>
+    <tfoot><tr><td>Total</td><td>10 questões</td><td>${MAX} pts</td></tr></tfoot></table>
+  </section>
+
+  <div class="row" style="margin-bottom:14px"><h2 style="margin:0">Escolha um simulado</h2>${langSeg()}</div>
+  <section class="grid">${cards}</section>`;
+}
+
+function startTest(id){
+  const test=TESTS.find(t=>t.id===id); if(!test){location.hash="#/";return}
+  S={test, answers:Array(10).fill(null), submitted:false, t0:Date.now(),
+     opts:test.q.map(q=>shuffle([{txt:q.correct,ok:true},...q.wrong.map(w=>({txt:w,ok:false}))]))};
+  renderTest();
+  window.scrollTo(0,0);
+  clearInterval(timer);
+  timer=setInterval(()=>{const el=document.getElementById("timer");if(el&&!S.submitted)el.textContent=fmt(Math.floor((Date.now()-S.t0)/1000))},1000);
+}
+
+function renderTest(){
+  const t=S.test;
+  const gl=t.gloss.map(g=>`<li><b>${g[0]}:</b> ${g[1]}</li>`).join("");
+  const paras=t.paras.map((p,i)=>`<p><span class="pn">${i+1}</span><span>${p}</span></p>`).join("");
+  setTop(`<span class="pill hide-m">Simulado ${String(t.id).padStart(2,"0")}</span><span class="pill" id="cnt"></span><span class="pill" id="timer">00:00</span>`);
+  app.innerHTML=`
+  <button class="back" data-home>← Todos os simulados</button>
+  <div class="row" style="margin-bottom:12px"><h1 style="margin:0;font-size:1.5rem">Simulado ${String(t.id).padStart(2,"0")} · ${t.title}</h1>${langSeg()}</div>
+  <div id="result"></div>
+  <section class="card textcard">
+    <h2>TEXT</h2>
+    <div class="reading">${paras}</div>
+    <div class="gloss"><b>Glossary</b><ul>${gl}</ul></div>
+  </section>
+  <section id="qs"></section>
+  <div class="sticky-submit" id="submitBar"><button class="btn big" id="submit">Enviar / Corrigir Prova</button></div>`;
+  drawQuestions(); updateCount();
+}
+
+function drawQuestions(){
+  const t=S.test, rv=S.submitted;
+  document.getElementById("qs").innerHTML=t.q.map((q,i)=>{
+    const opts=S.opts[i].map((o,j)=>{
+      const chosen=S.answers[i]===j;
+      let cls="opt";
+      if(rv){ if(o.ok)cls+=" ok"; else if(chosen)cls+=" bad"; }
+      else if(chosen) cls+=" sel";
+      const tag = rv ? (o.ok?`<span class="tag">✔ Gabarito${chosen?" · sua resposta":""}</span>`:(chosen?`<span class="tag">✘ Sua resposta</span>`:"")) : "";
+      return `<label class="${cls}"><input type="radio" name="q${i}" value="${j}" ${chosen?"checked":""} ${rv?"disabled":""}><span class="lt">${L(j)}</span><span>${o.txt}</span>${tag}</label>`;
+    }).join("");
+    let expl="";
+    if(rv){
+      const okAns = S.answers[i]!==null && S.opts[i][S.answers[i]].ok;
+      const li=S.opts[i].findIndex(o=>o.ok);
+      expl=`<div class="expl ${okAns?"good":"miss"}"><b>${okAns?"✔ Correto!":(S.answers[i]===null?"Em branco.":"✘ Não foi dessa vez.")} Resposta: ${L(li)}</b>${q.e}</div>`;
+    }
+    return `<article class="q ${rv?"rv":""}" id="q${i}">
+      <div class="q-head"><span class="q-num">Questão ${i+1}</span><span class="q-meta">${TYPES[q.t].name} · ${q.pts} pts</span></div>
+      <div class="stem">${stem(q)}</div>
+      ${excerpt(q,t)}
+      <div class="opts">${opts}</div>${expl}</article>`;
+  }).join("");
+}
+
+function updateCount(){
+  const n=S.answers.filter(a=>a!==null).length;
+  const el=document.getElementById("cnt"); if(el) el.textContent=`${n}/10 respondidas`;
+}
+
+function submit(){
+  const blank=S.answers.filter(a=>a===null).length;
+  if(blank && !confirm(`Você deixou ${blank} questão(ões) em branco. Corrigir mesmo assim?`)) return;
+  S.submitted=true; clearInterval(timer);
+  const secs=Math.floor((Date.now()-S.t0)/1000);
+  const per={}; let score=0, hits=0;
+  S.test.q.forEach((q,i)=>{
+    const ok=S.answers[i]!==null && S.opts[i][S.answers[i]].ok;
+    per[q.t]=per[q.t]||{got:0,max:0,n:0,hit:0};
+    per[q.t].max+=q.pts; per[q.t].n++;
+    if(ok){score+=q.pts;hits++;per[q.t].got+=q.pts;per[q.t].hit++}
+  });
+  const pct=Math.round(score/MAX*100);
+  const prev=best(S.test.id);
+  if(prev===null||score>prev) lsSet("best_"+S.test.id,String(score));
+  const msg = pct>=80?"Excelente! Você domina bem o estilo da prova."
+            : pct>=60?"Bom desempenho. Revise os tipos em que perdeu pontos."
+            : pct>=40?"Você está no caminho. Estude os comentários e refaça."
+            : "Releia as dicas no topo e estude o gabarito comentado com calma.";
+  const keys=Object.keys(TYPES);
+  const bars=keys.map(k=>{
+    const p=per[k]; const r=p.got/p.max;
+    return `<div class="bar ${r<.5?"low":r<.8?"mid":""}"><div class="lbl"><span>${TYPES[k].name}</span><span>${p.got}/${p.max} pts · ${p.hit}/${p.n} ${p.n>1?"acertos":"acerto"}</span></div><div class="tr"><div class="fl" style="width:${Math.round(r*100)}%"></div></div></div>`;
+  }).join("");
+  const weak=keys.map(k=>({k,r:per[k].got/per[k].max})).sort((a,b)=>a.r-b.r)[0];
+  const advice = weak.r<1 ? `<p><b>Ponto de atenção: ${TYPES[weak.k].name}.</b> ${TYPES[weak.k].tip}</p>` : `<p><b>Gabarito perfeito!</b> Tente outro simulado para manter o ritmo.</p>`;
+  const next=S.test.id<TESTS.length?S.test.id+1:null;
+  document.getElementById("result").innerHTML=`
+  <section class="card result" id="resCard">
+    <h2>Resultado</h2>
+    <div class="score">
+      <div class="ring" style="--p:${pct}"><div><b>${score}</b><span>de ${MAX} pts</span></div></div>
+      <div><div style="font-size:1.6rem;font-weight:700;color:var(--blue-900)">${pct}% de acerto</div>
+      <div>${hits} de 10 questões corretas · tempo: ${fmt(secs)}</div>
+      <p style="margin:.4em 0 0">${msg}</p>
+      <p class="note" style="margin:.3em 0 0">${prev!==null&&score<=prev?`Sua melhor nota neste simulado: ${prev}/${MAX}.`:"Nova melhor nota neste simulado!"} A nota mínima real depende do edital do seu programa.</p></div>
+    </div>
+    <div class="bars">${bars}</div>
+    <div style="margin-top:14px">${advice}</div>
+    <div class="row" style="margin-top:12px;justify-content:flex-start">
+      <button class="btn" data-open="${S.test.id}">Refazer este simulado</button>
+      ${next?`<button class="btn ghost" data-open="${next}">Próximo simulado →</button>`:""}
+      <button class="btn ghost" data-home>Todos os simulados</button>
+    </div>
+    <p class="note" style="margin-bottom:0">Role a página para ver o gabarito comentado de cada questão.</p>
+  </section>`;
+  document.getElementById("submitBar").style.display="none";
+  drawQuestions(); updateCount();
+  document.getElementById("cnt").textContent=`${score}/${MAX} pts`;
+  document.getElementById("resCard").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+/* ============ EVENTOS ============ */
+document.addEventListener("click",e=>{
+  const open=e.target.closest("[data-open]");
+  if(open){ const id=+open.dataset.open; if(location.hash==="#/t"+id) startTest(id); else location.hash="#/t"+id; return; }
+  if(e.target.closest("[data-home]")||e.target.closest("#brand")){
+    if(S&&!S.submitted&&S.answers.some(a=>a!==null)&&!confirm("Sair do simulado? Suas respostas serão perdidas.")) return;
+    location.hash="#/"; if(!S) renderHome(); return;
+  }
+  const lg=e.target.closest("[data-lang]");
+  if(lg){ lang=lg.dataset.lang; lsSet("lang",lang); if(S){ const y=window.scrollY; renderTestKeepState(); window.scrollTo(0,y);} else renderHome(); return; }
+  if(e.target.id==="submit") submit();
+});
+document.getElementById("brand").addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();e.target.click()}});
+function renderTestKeepState(){
+  const resHTML=document.getElementById("result")?document.getElementById("result").innerHTML:"";
+  const sub=S.submitted;
+  renderTest();
+  document.getElementById("result").innerHTML=resHTML;
+  if(sub){document.getElementById("submitBar").style.display="none"}
+}
+document.addEventListener("change",e=>{
+  if(e.target.matches('.opt input[type=radio]') && S && !S.submitted){
+    const i=+e.target.name.slice(1), j=+e.target.value;
+    S.answers[i]=j;
+    document.querySelectorAll(`#q${i} .opt`).forEach((l,k)=>l.classList.toggle("sel",k===j));
+    updateCount();
+  }
+});
+
+function route(){
+  const m=location.hash.match(/^#\/t(\d+)$/);
+  if(m) startTest(+m[1]); else renderHome();
+}
+window.addEventListener("hashchange",route);
+route();
+</script>
+</body>
+</html>

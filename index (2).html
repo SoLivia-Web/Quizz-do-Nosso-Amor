@@ -1,0 +1,2013 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulado TEAP 2026 · 10 testes de proficiência em inglês acadêmico</title>
+<style>
+  :root{
+    --azul:#0f3d73; --azul-2:#1b5fa8; --azul-3:#3b82f6;
+    --azul-claro:#e9f1fc; --tinta:#10202f; --cinza:#5b6b7d;
+    --fundo:#f3f6fb; --card:#ffffff; --linha:#dde5f0;
+    --verde:#0f7a4a; --verde-bg:#e8f7ef; --verde-linha:#9fd9b9;
+    --vermelho:#b3261e; --vermelho-bg:#fdecea; --vermelho-linha:#f3b8b2;
+    --ambar:#8a5a00; --ambar-bg:#fff8e6; --ambar-linha:#f0d18c;
+    --sombra:0 1px 2px rgba(16,32,47,.06), 0 8px 24px rgba(16,32,47,.06);
+    --raio:16px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--fundo); color:var(--tinta);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    line-height:1.6; font-size:16px;
+  }
+  .wrap{max-width:980px;margin:0 auto;padding:0 18px 80px}
+
+  /* ---------- topo / barra fixa ---------- */
+  .topbar{
+    background:linear-gradient(135deg,#0f3d73 0%,#1b5fa8 60%,#2f7fd1 100%);
+    color:#fff; padding:26px 18px 24px; position:relative; overflow:hidden;
+  }
+  .topbar::after{
+    content:""; position:absolute; right:-60px; top:-60px; width:260px; height:260px;
+    border-radius:50%; background:rgba(255,255,255,.07);
+  }
+  .topbar-in{max-width:980px;margin:0 auto;position:relative;z-index:1}
+  .kicker{
+    display:inline-block; font-size:11.5px; letter-spacing:.14em; text-transform:uppercase;
+    background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.28);
+    padding:5px 11px; border-radius:999px; font-weight:700; margin-bottom:14px;
+  }
+  .topbar h1{margin:0 0 8px; font-size:clamp(1.45rem,4.4vw,2.05rem); line-height:1.2; letter-spacing:-.02em}
+  .topbar p{margin:0; color:#dceafb; font-size:.94rem; max-width:70ch}
+
+  /* ---------- barra de seleção de teste ---------- */
+  .stickybar{
+    position:sticky; top:0; z-index:40; background:rgba(255,255,255,.94);
+    backdrop-filter:blur(8px); border-bottom:1px solid var(--linha);
+  }
+  .stickybar-in{
+    max-width:980px;margin:0 auto;padding:10px 18px;
+    display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  }
+  .stickybar .label{font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--cinza)}
+  .pills{display:flex;gap:6px;flex-wrap:wrap;flex:1;min-width:240px}
+  .pill{
+    border:1px solid var(--linha); background:#fff; color:var(--azul);
+    font:inherit; font-size:.82rem; font-weight:700; padding:6px 10px; border-radius:9px;
+    cursor:pointer; line-height:1; transition:.15s;
+  }
+  .pill:hover{border-color:var(--azul-3); background:var(--azul-claro)}
+  .pill[aria-current="true"]{background:var(--azul); border-color:var(--azul); color:#fff}
+  .progress-mini{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--cinza);font-weight:600}
+  .progress-mini b{color:var(--azul);font-variant-numeric:tabular-nums}
+
+  /* ---------- cartões ---------- */
+  .card{background:var(--card); border:1px solid var(--linha); border-radius:var(--raio); box-shadow:var(--sombra)}
+  section{margin-top:26px}
+
+  .intro{padding:22px 24px}
+  .intro h2{margin:0 0 6px; font-size:1.12rem; letter-spacing:-.01em; color:var(--azul)}
+  .intro p{margin:0; color:var(--cinza); font-size:.95rem}
+
+  /* ---------- dicas ---------- */
+  .tips{padding:20px 22px 22px; border-color:var(--ambar-linha); background:linear-gradient(180deg,#fffdf6,#fff)}
+  .tips-head{display:flex;gap:12px;align-items:center;margin-bottom:4px}
+  .badge-alert{
+    width:34px;height:34px;border-radius:10px;background:var(--ambar-bg);border:1px solid var(--ambar-linha);
+    display:grid;place-items:center;font-size:1.05rem;flex:none
+  }
+  .tips h2{margin:0;font-size:1.08rem;color:#7a4f00;letter-spacing:-.01em}
+  .tips .sub{margin:2px 0 16px 46px;font-size:.86rem;color:#9a7326}
+  .tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+  .tip{background:#fff;border:1px solid var(--ambar-linha);border-radius:12px;padding:13px 14px}
+  .tip h3{margin:0 0 5px;font-size:.86rem;text-transform:uppercase;letter-spacing:.06em;color:#7a4f00}
+  .tip p{margin:0;font-size:.88rem;color:#4a4432}
+  .tip code{background:#f6f1e3;padding:1px 5px;border-radius:5px;font-size:.86em;color:#7a4f00}
+
+  /* ---------- tabela de pesos ---------- */
+  .weights{padding:20px 22px}
+  .weights h2{margin:0 0 4px;font-size:1.05rem;color:var(--azul)}
+  .weights .sub{margin:0 0 14px;font-size:.88rem;color:var(--cinza)}
+  .wtable{width:100%;border-collapse:collapse;font-size:.88rem}
+  .wtable th,.wtable td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--linha)}
+  .wtable th{font-size:.74rem;text-transform:uppercase;letter-spacing:.07em;color:var(--cinza);font-weight:800}
+  .wtable td:last-child,.wtable th:last-child{text-align:right;font-variant-numeric:tabular-nums}
+  .wtable tfoot td{font-weight:800;color:var(--azul);border-bottom:none;padding-top:12px}
+  .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:8px;vertical-align:1px}
+
+  /* ---------- questões ---------- */
+  .testhead{padding:18px 22px;display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
+  .testhead h2{margin:0 0 3px;font-size:1.18rem;letter-spacing:-.01em}
+  .testhead p{margin:0;font-size:.86rem;color:var(--cinza)}
+  .pillcount{
+    background:var(--azul-claro);color:var(--azul);border:1px solid #c9dcf5;
+    font-size:.78rem;font-weight:800;padding:6px 11px;border-radius:999px;white-space:nowrap
+  }
+
+  .q{padding:22px;border-top:1px solid var(--linha)}
+  .q:first-of-type{border-top:none}
+  .q-head{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+  .q-num{
+    background:var(--azul);color:#fff;font-weight:800;font-size:.8rem;
+    padding:4px 10px;border-radius:8px;letter-spacing:.02em
+  }
+  .q-type{
+    font-size:.74rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;
+    padding:4px 9px;border-radius:999px;border:1px solid
+  }
+  .q-pts{font-size:.78rem;color:var(--cinza);font-weight:700;margin-left:auto}
+
+  .passage{
+    background:#fbfcfe;border:1px solid var(--linha);border-left:4px solid var(--azul-3);
+    border-radius:0 10px 10px 0;padding:14px 16px;margin:0 0 16px;
+    font-family:Georgia,"Times New Roman",serif;font-size:1rem;line-height:1.72;color:#1c2b3a;
+  }
+  .q-stem{margin:0 0 14px;font-weight:600;font-size:.98rem;color:#16324f}
+
+  .opts{display:grid;gap:9px;margin:0;padding:0;list-style:none}
+  .opt{
+    display:flex;gap:11px;align-items:flex-start;padding:11px 13px;border:1px solid var(--linha);
+    border-radius:11px;background:#fff;cursor:pointer;transition:.14s;font-size:.94rem
+  }
+  .opt:hover{border-color:var(--azul-3);background:#f8fbff}
+  .opt input{position:absolute;opacity:0;width:0;height:0}
+  .opt .letter{
+    flex:none;width:24px;height:24px;border-radius:50%;border:1.6px solid #b9c8db;
+    display:grid;place-items:center;font-size:.76rem;font-weight:800;color:var(--azul);
+    background:#fff;transition:.14s
+  }
+  .opt .txt{padding-top:1px}
+  .opt.sel{border-color:var(--azul);background:var(--azul-claro);box-shadow:0 0 0 1px var(--azul) inset}
+  .opt.sel .letter{background:var(--azul);border-color:var(--azul);color:#fff}
+
+  .locked .opt{cursor:default}
+  .locked .opt:hover{border-color:var(--linha);background:#fff}
+  .opt.correct{border-color:var(--verde-linha);background:var(--verde-bg)}
+  .opt.correct .letter{background:var(--verde);border-color:var(--verde);color:#fff}
+  .opt.wrong{border-color:var(--vermelho-linha);background:var(--vermelho-bg)}
+  .opt.wrong .letter{background:var(--vermelho);border-color:var(--vermelho);color:#fff}
+  .opt.muted{opacity:.62}
+
+  .explain{
+    margin-top:14px;padding:13px 15px;border-radius:11px;font-size:.9rem;
+    background:#f5f9ff;border:1px dashed #bcd4ef;color:#20374f
+  }
+  .explain strong{color:var(--azul)}
+  .explain .tag{font-weight:800;display:block;margin-bottom:3px;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+  .q-ok{color:var(--verde);font-weight:800}
+  .q-no{color:var(--vermelho);font-weight:800}
+
+  /* ---------- botão ---------- */
+  .actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:22px}
+  .btn{
+    font:inherit;font-weight:800;font-size:.95rem;border-radius:12px;padding:13px 22px;
+    border:1px solid transparent;cursor:pointer;transition:.15s
+  }
+  .btn-primary{background:var(--azul);color:#fff;box-shadow:0 6px 16px rgba(15,61,115,.24)}
+  .btn-primary:hover{background:#0c325f;transform:translateY(-1px)}
+  .btn-ghost{background:#fff;color:var(--azul);border-color:#c9dcf5}
+  .btn-ghost:hover{background:var(--azul-claro)}
+  .btn[disabled]{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+  .hint-inline{font-size:.84rem;color:var(--cinza)}
+
+  /* ---------- resultado ---------- */
+  .result{padding:0;overflow:hidden;border:1px solid #c9dcf5}
+  .score-top{
+    background:linear-gradient(135deg,#0f3d73,#1b5fa8);color:#fff;padding:24px
+  }
+  .score-top .eyebrow{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:#bcd7f7}
+  .score-big{display:flex;align-items:baseline;gap:8px;margin:6px 0 2px;flex-wrap:wrap}
+  .score-big .num{font-size:clamp(2.2rem,9vw,3rem);font-weight:800;letter-spacing:-.03em;line-height:1}
+  .score-big .den{font-size:1.05rem;color:#cfe2f8;font-weight:700}
+  .score-big .pct{
+    margin-left:6px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);
+    padding:3px 10px;border-radius:999px;font-size:.85rem;font-weight:800
+  }
+  .bar{height:9px;border-radius:99px;background:rgba(255,255,255,.22);overflow:hidden;margin:14px 0 10px}
+  .bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#7ee2a8,#25c281);transition:width .8s ease}
+  .score-msg{margin:0;font-size:.94rem;color:#e2eefb}
+
+  .breakdown{padding:20px 22px}
+  .breakdown h3{margin:0 0 12px;font-size:.95rem;color:var(--azul);text-transform:uppercase;letter-spacing:.06em}
+  .bd-row{display:grid;grid-template-columns:1fr auto;gap:10px;padding:9px 0;border-bottom:1px solid var(--linha);font-size:.9rem;align-items:center}
+  .bd-row:last-of-type{border-bottom:none}
+  .bd-name{display:flex;align-items:center;gap:8px;font-weight:600}
+  .bd-val{font-variant-numeric:tabular-nums;font-weight:800;color:var(--azul)}
+  .bd-sub{display:block;font-size:.78rem;color:var(--cinza);font-weight:600}
+  .bd-bar{height:5px;border-radius:99px;background:#eef3fa;overflow:hidden;margin-top:5px}
+  .bd-bar i{display:block;height:100%;background:var(--azul-3);border-radius:99px}
+
+  .coach{margin:6px 22px 22px;padding:14px 16px;border-radius:12px;background:var(--ambar-bg);border:1px solid var(--ambar-linha);font-size:.9rem;color:#5c4708}
+  .coach b{color:#7a4f00}
+
+  footer{max-width:980px;margin:0 auto;padding:26px 18px 50px;color:#8494a6;font-size:.8rem;text-align:center}
+
+  @media (max-width:620px){
+    .q{padding:18px 16px}
+    .intro,.tips,.weights,.breakdown,.testhead{padding-left:16px;padding-right:16px}
+    .actions{padding:16px}
+    .btn{width:100%;text-align:center}
+    .score-top{padding:20px 16px}
+    .passage{font-size:.96rem}
+    .tips .sub{margin-left:0}
+    .pills{gap:5px}
+    .pill{font-size:.78rem;padding:6px 8px}
+  }
+  @media print{
+    .stickybar,.actions,footer{display:none}
+    body{background:#fff}
+    .card{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <span class="kicker">Simulado TEAP · Edição 2026</span>
+    <h1>10 testes de proficiência em inglês acadêmico</h1>
+    <p>Seis tipos de questão, pesos oficiais e gabarito comentado. Cada teste tem exatamente 10 questões e vale 55 pontos — do mesmo jeito que a banca cobra: localizar informação, entender pronomes, vocabulário, sentença, parágrafo e ideia central.</p>
+  </div>
+</header>
+
+<div class="stickybar">
+  <div class="stickybar-in">
+    <span class="label">Teste</span>
+    <div class="pills" id="pills" role="tablist" aria-label="Escolha o teste"></div>
+    <span class="progress-mini">Respondidas: <b id="prog">0</b>/10</span>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <section class="card intro">
+    <h2>Como usar este simulado</h2>
+    <p>Cada teste é independente e cobre os seis formatos da prova real. Responda sem consultar dicionário, marque uma alternativa por questão e clique em <strong>Enviar / Corrigir teste</strong>. Você recebe a nota, o desempenho por tipo de questão e a explicação de cada item — inclusive quando acerta, para confirmar o raciocínio.</p>
+  </section>
+
+  <section class="card tips">
+    <div class="tips-head">
+      <div class="badge-alert">⚠️</div>
+      <h2>Dicas estratégicas para o TEAP</h2>
+    </div>
+    <p class="sub">Os três pontos em que a banca mais derruba candidato — leia antes de começar.</p>
+    <div class="tips-grid">
+      <div class="tip">
+        <h3>1. Pronomes (it, their, they)</h3>
+        <p>Não olhe apenas a palavra vizinha. Pergunte: <strong>quem executa a ação</strong> e <strong>quem é o dono</strong> do objeto ou da ideia. Em <code>which</code>, <code>whose</code>, <code>their</code> e <code>them</code>, volte ao último substantivo que realmente faz sentido no contexto.</p>
+      </div>
+      <div class="tip">
+        <h3>2. Falsos cognatos e vocabulário</h3>
+        <p>Palavras como <code>outperform</code>, <code>stems from</code>, <code>ultimately</code>, <code>comprehensive</code> não têm o sentido que o português sugere. Aprenda pelo par: <strong>palavra → sinônimo em inglês</strong>, e não pela tradução solta.</p>
+      </div>
+      <div class="tip">
+        <h3>3. Ideia central (maior peso)</h3>
+        <p>Desconfie de alternativas absolutas: <em>always, never, only, all, impossible</em>. A resposta certa cobre o texto inteiro; a errada costuma repetir palavras do texto e dizer algo que ele não afirma.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="card weights">
+    <h2>Pesos deste simulado</h2>
+    <p class="sub">A mesma lógica da prova: nem toda questão vale o mesmo. Os 10 itens de cada teste somam <strong>55 pontos</strong>.</p>
+    <table class="wtable" id="wtable">
+      <thead>
+        <tr><th>Tipo de questão</th><th>Itens</th><th>Pontos</th></tr>
+      </thead>
+      <tbody id="wbody"></tbody>
+      <tfoot><tr><td>Total por teste</td><td>10</td><td>55</td></tr></tfoot>
+    </table>
+  </section>
+
+  <div id="result"></div>
+
+  <section class="card" id="sheet">
+    <div class="testhead" id="testhead"></div>
+    <div id="quiz"></div>
+    <div class="actions" id="actions">
+      <button class="btn btn-primary" id="submitBtn">Enviar / Corrigir teste</button>
+      <span class="hint-inline" id="hint">Faltam responder 10 questões.</span>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Simulado didático elaborado a partir do formato TEAP (Test of English for Academic Purposes). Textos autorais, inspirados em temas acadêmicos recorrentes na prova. As provas oficiais mudam de edital para edital — confira sempre o edital vigente do seu programa.
+</footer>
+
+<script>
+/* ============================================================
+   CONFIGURAÇÃO DOS TIPOS DE QUESTÃO (pesos oficiais do modelo)
+   ============================================================ */
+const TYPES = {
+  LOC: { label: "Localização de informação", pts: 7, color: "#1d4ed8",
+         help: "Encontrar no texto o dado que responde à pergunta." },
+  PRO: { label: "Referência pronominal",      pts: 4, color: "#7c3aed",
+         help: "Identificar a que termo o pronome se refere." },
+  VOC: { label: "Compreensão de vocabulário", pts: 3, color: "#0891b2",
+         help: "Reconhecer o significado da palavra no contexto." },
+  SEN: { label: "Detalhe de sentença",        pts: 5, color: "#c2410c",
+         help: "Reescrever a frase sem alterar o sentido." },
+  PAR: { label: "Detalhe de parágrafo",       pts: 6, color: "#166534",
+         help: "Interpretar o que o parágrafo afirma como um todo." },
+  CEN: { label: "Ideia central",              pts: 7, color: "#be123c",
+         help: "Sintetizar a tese do texto ou a função de um trecho." }
+};
+
+/* Distribuição fixa por teste: 2 LOC + 2 PRO + 1 VOC + 2 SEN + 1 PAR + 2 CEN = 10 itens / 55 pts */
+const TESTS = [];
+
+TESTS.push({
+ "topic": "Água doce e poluição na Europa",
+ "sub": "Texto 1 · política ambiental, agricultura e escassez hídrica",
+ "qs": [
+  {
+   "t": "LOC",
+   "p": "Water is critical for life and is integral to virtually all economic activities, including food production and industry. Not only is clean water a prerequisite for human health and well-being, it provides aquatic habitats that support healthy freshwater ecosystems. European policymakers have introduced a comprehensive range of legislation to protect our freshwater resources. Most notable is the Water Framework Directive (WFD), and the general objective of the WFD is to achieve 'good status' (both ecological and chemical status) for all surface waters in the future.",
+   "q": "Segundo o primeiro parágrafo, qual é o objetivo geral da Water Framework Directive?",
+   "o": [
+    "To reduce the amount of water used by European industry.",
+    "To forbid the use of fertilizers near rivers and lakes.",
+    "To achieve good ecological and chemical status for all surface waters.",
+    "To measure the economic value of freshwater ecosystems.",
+    "To create aquatic habitats for species that are disappearing."
+   ],
+   "a": 2,
+   "e": "O texto afirma que o objetivo geral da WFD é alcançar o status 'good' (ecológico e químico) para todas as águas superficiais. As demais alternativas trazem ações plausíveis, mas que não estão atribuídas à diretiva. Cuidado com a alternativa E: habitats aquáticos são citados como função da água limpa, não como objetivo da WFD."
+  },
+  {
+   "t": "LOC",
+   "p": "Pollution from agriculture remains a major cause of poor water quality in many parts of Europe. Nutrients (nitrogen and phosphorus) from fertilizers, pesticides, pathogenic micro-organisms excreted by livestock, and organic pollutants from manure are washed to waterways, primarily via diffuse pathways. The urban environment is another key contributor to the freshwater pollution observed across Europe.",
+   "q": "De acordo com o segundo parágrafo, o que permanece como uma das principais causas da má qualidade da água na Europa?",
+   "o": [
+    "The construction of dams and canals in mountain areas.",
+    "Pollution coming from agriculture.",
+    "The drying-up of wetlands during dry periods.",
+    "The discharge of industrial chemicals into the sea.",
+    "The treatment of sewage in large coastal cities."
+   ],
+   "a": 1,
+   "e": "A primeira frase é explícita: a poluição agrícola continua sendo uma causa importante da má qualidade da água. A alternativa D confunde o leitor porque o texto cita produtos químicos industriais, mas dentro da poluição urbana, sem dizer que essa é a principal causa. Em questões de localização, a resposta costuma estar na primeira ou na última frase do parágrafo."
+  },
+  {
+   "t": "PRO",
+   "p": "Water is critical for life and is integral to virtually all economic activities, including food production and industry. Not only is clean water a prerequisite for human health and well-being, it provides aquatic habitats that support healthy freshwater ecosystems.",
+   "q": "No trecho 'it provides aquatic habitats', o pronome 'it' retoma qual termo?",
+   "o": [
+    "Food production.",
+    "The ecosystem as a whole.",
+    "Water used by industry.",
+    "Human health and well-being.",
+    "Clean water."
+   ],
+   "a": 4,
+   "e": "A estrutura é 'Not only is clean water a prerequisite..., it provides...': o sujeito é clean water, e o 'it' apenas o retoma. A armadilha é escolher 'human health', que é a palavra vizinha, mas aparece como objeto de 'prerequisite for', não como sujeito de 'provides'. Regra prática: refaça a frase trocando o pronome pelo candidato e veja se o verbo continua fazendo sentido."
+  },
+  {
+   "t": "PRO",
+   "p": "Moreover, chemicals with endocrine-disrupting properties have been shown to trigger feminizing effects in male river fishes, potentially affecting their fertility.",
+   "q": "No trecho ', potentially affecting their fertility', o possessivo 'their' refere-se a:",
+   "o": [
+    "The chemicals with endocrine-disrupting properties.",
+    "The properties of the chemicals.",
+    "Male river fishes.",
+    "Aquatic organisms in general.",
+    "The rivers where the fishes live."
+   ],
+   "a": 2,
+   "e": "'Their fertility' pertence a quem sofre o efeito: os peixes machos dos rios. O possessivo retoma o núcleo do sintagma imediatamente anterior que é dono do atributo — fertilidade é dos peixes, não dos produtos químicos. Em questões de possessivo (their, its, whose), procure o substantivo que pode ser dono da coisa possuída."
+  },
+  {
+   "t": "VOC",
+   "p": "European policymakers have introduced a comprehensive range of legislation to protect our freshwater resources.",
+   "q": "A palavra 'range', destacada no texto, tem o sentido mais próximo de:",
+   "o": [
+    "Distraction",
+    "Doubt",
+    "Speciality",
+    "Reduction",
+    "Amount"
+   ],
+   "a": 4,
+   "e": "'A comprehensive range of legislation' significa um conjunto amplo e variado de leis; 'range' aqui funciona como quantidade/variedade — equivalente a 'amount' no sentido de conjunto. 'Reduction' e 'doubt' não têm relação. Note que 'range' também pode significar 'alcance' ou 'variação', mas o contexto de leis exige a leitura de quantidade."
+  },
+  {
+   "t": "SEN",
+   "p": "Over-abstraction and dry periods frequently result in reduced river flows, lower lake and groundwater levels and the drying-up of wetlands, with detrimental impacts on freshwater ecosystems.",
+   "q": "Escolha a alternativa com o sentido mais próximo da frase destacada.",
+   "o": [
+    "Rivers often dry up because lakes and wetlands are destroyed by industry.",
+    "Dry periods reduce the flow of rivers but do not affect groundwater.",
+    "Groundwater levels rise when rivers are modified by engineers.",
+    "Taking too much water and the occurrence of droughts often lower the level of rivers, lakes and wetlands.",
+    "Wetlands are the main cause of water scarcity in southern Europe."
+   ],
+   "a": 3,
+   "e": "'Over-abstraction' é retirada excessiva de água; 'dry periods' são períodos de seca; 'result in reduced river flows, lower levels' significa baixar os níveis. A paráfrase correta mantém os três elementos (retirada excessiva + seca + queda de níveis). A alternativa A inverte a causa: no texto, a modificação dos rios é consequência da ação humana, não causa da seca."
+  },
+  {
+   "t": "SEN",
+   "p": "Moreover, chemicals with endocrine-disrupting properties have been shown to trigger feminizing effects in male river fishes.",
+   "q": "Qual alternativa reescreve a frase sem alterar o sentido?",
+   "o": [
+    "Male fishes produce chemicals that disrupt their own hormones.",
+    "Certain chemicals can change the sexual development of male fish in rivers.",
+    "Feminizing effects protect male fishes from chemical pollution.",
+    "Chemicals found in rivers have no effect on the reproduction of fishes.",
+    "Only female fishes are affected by endocrine-disrupting chemicals."
+   ],
+   "a": 1,
+   "e": "'Trigger feminizing effects in male river fishes' = provocar efeitos feminizantes nos machos, ou seja, alterar o desenvolvimento sexual. A alternativa A inverte a relação (o peixe não produz o produto químico); a E contradiz o texto, que fala explicitamente de peixes machos."
+  },
+  {
+   "t": "PAR",
+   "p": "Water scarcity occurs in many areas of Europe, particularly in the south where limited water resources combine with high demand. Over-abstraction and dry periods frequently result in reduced river flows, lower lake and groundwater levels and the drying-up of wetlands, with detrimental impacts on freshwater ecosystems. Excessive abstraction from any one of these types of water body can impact one or more of the others. For example, rivers, lakes and wetlands: they may all be strongly dependent on groundwater, especially in the summer.",
+   "q": "Qual afirmação é verdadeira de acordo com esse parágrafo?",
+   "o": [
+    "Dams are the main solution proposed by the author.",
+    "Rivers, lakes and wetlands may depend on the same groundwater reserves.",
+    "Water scarcity affects only the south of Europe.",
+    "Southern Europe has abundant water but very low demand.",
+    "Wetlands are independent of groundwater during the summer."
+   ],
+   "a": 1,
+   "e": "O parágrafo diz que a retirada excessiva de um tipo de corpo d'água afeta os outros e que rios, lagos e pântanos podem depender fortemente das mesmas águas subterrâneas. A alternativa E contraria exatamente essa frase. Em questões de detalhe de parágrafo, verifique cada alternativa contra uma frase específica do texto."
+  },
+  {
+   "t": "CEN",
+   "p": "Water is critical for life and is integral to virtually all economic activities. European policymakers have introduced a comprehensive range of legislation to protect our freshwater resources. Worryingly, poor water quality, water scarcity and physical modifications might prevent a substantial proportion of European water bodies from achieving 'good status' in the next few years. Pollution from agriculture remains a major cause of poor water quality. The urban environment is another key contributor. Excessive nutrient levels cause proliferation of algae and widespread loss of aquatic life. Water scarcity occurs in many areas of Europe. Dams and canals have reduced connectivity, rivers have been modified and canalized.",
+   "q": "Qual é a ideia central do texto?",
+   "o": [
+    "European legislation has completely solved the problem of water pollution.",
+    "Multiple human pressures still threaten European freshwaters despite existing legislation.",
+    "Water scarcity is caused exclusively by climate change.",
+    "Agriculture is the only source of water pollution in Europe.",
+    "Dams and canals are the best way to guarantee water supply in the south."
+   ],
+   "a": 1,
+   "e": "O texto reúne três pressões (qualidade, escassez e modificações físicas) e usa 'Worryingly' para indicar que a legislação, embora existente, não garante o resultado desejado. A alternativa D é absoluta ('only'), típica de distrator; a A contradiz o advérbio de preocupação do autor."
+  },
+  {
+   "t": "CEN",
+   "p": "European policymakers have introduced a comprehensive range of legislation to protect our freshwater resources. Most notable is the Water Framework Directive (WFD), and the general objective of the WFD is to achieve 'good status' for all surface waters in the future. Worryingly, poor water quality, water scarcity and physical modifications might prevent a substantial proportion of European water bodies from achieving 'good status' in the next few years.",
+   "q": "O uso de 'Worryingly' no início da terceira frase revela que o autor:",
+   "o": [
+    "Critica os países do sul da Europa por consumirem pouca água.",
+    "Descreve um fato neutro, sem emitir julgamento.",
+    "Está preocupado com a possibilidade de a meta não ser cumprida no prazo previsto.",
+    "Considera a legislação europeia desnecessária.",
+    "Acredita que a qualidade da água já melhorou definitivamente."
+   ],
+   "a": 2,
+   "e": "O advérbio 'worryingly' é uma marca explícita de avaliação do autor: ele sinaliza preocupação com o risco de uma parte substancial dos corpos d'água não atingir o 'good status'. Alternativas como 'neutro' ignoram o advérbio; a A extrapola, pois o autor valoriza a legislação ao citá-la como resposta."
+  }
+ ]
+});
+
+TESTS.push({
+ "topic": "Ilhas de calor urbano",
+ "sub": "Texto 2 · clima urbano, sombra como infraestrutura e desigualdade ambiental",
+ "qs": [
+  {
+   "t": "LOC",
+   "p": "Cities are typically several degrees warmer than the surrounding countryside, a phenomenon known as the urban heat island effect. Concrete and asphalt absorb solar radiation during the day and release it slowly at night, while the relative lack of vegetation limits evaporative cooling.",
+   "q": "Segundo o texto, qual é o papel do concreto e do asfalto no efeito de ilha de calor?",
+   "o": [
+    "They reflect solar radiation back into the atmosphere.",
+    "They absorb solar radiation by day and release it slowly at night.",
+    "They increase the amount of vegetation in dense districts.",
+    "They cool the streets during the hottest hours.",
+    "They prevent rain from reaching the soil."
+   ],
+   "a": 1,
+   "e": "O texto atribui o aquecimento à absorção da radiação solar durante o dia e à liberação lenta à noite. A alternativa A contradiz 'absorb'; a C introduz informação sobre chuva, que não aparece no trecho."
+  },
+  {
+   "t": "LOC",
+   "p": "Planners have therefore begun to treat shade as a form of public infrastructure. Trees, green roofs and permeable pavements are now evaluated not as amenities but as instruments capable of lowering surface temperatures by two to four degrees in the streets where they are installed.",
+   "q": "O que os planejadores urbanos começaram a fazer, de acordo com o texto?",
+   "o": [
+    "To evaluate trees and green roofs as instruments that reduce surface temperature.",
+    "To ban the construction of new buildings in dense districts.",
+    "To measure the temperature of rural areas every summer.",
+    "To replace pavements with concrete to reduce humidity.",
+    "To move low-income residents to greener neighbourhoods."
+   ],
+   "a": 0,
+   "e": "A frase-chave é 'are now evaluated not as amenities but as instruments capable of lowering surface temperatures'. O texto fala de reavaliação de elementos já existentes, não de proibição de construções (A) nem de remoção de moradores (E)."
+  },
+  {
+   "t": "PRO",
+   "p": "As a consequence, night-time temperatures in dense districts can remain up to seven degrees higher than in nearby rural areas. This difference matters because prolonged exposure to elevated night-time temperatures has been linked to sleep disturbance and cardiovascular stress among elderly residents.",
+   "q": "O termo 'This difference', no início da segunda frase, refere-se a:",
+   "o": [
+    "The difference between the health of elderly and young residents.",
+    "The variation in temperature caused by green roofs.",
+    "The difference between day-time and night-time temperatures.",
+    "The difference between measured and predicted temperatures.",
+    "The gap between temperatures in dense urban districts and in rural areas."
+   ],
+   "a": 4,
+   "e": "'This difference' resume o dado da frase anterior: até sete graus a mais nos bairros densos em comparação com áreas rurais. Para resolver esse tipo de item, identifique qual número/fato a frase anterior acaba de apresentar — expressões como 'this difference', 'this gap', 'this increase' apontam para a comparação imediatamente anterior."
+  },
+  {
+   "t": "PRO",
+   "p": "Critics point out, however, that such measures are distributed unevenly: wealthier neighbourhoods tend to concentrate vegetation, while low-income districts, which often lack the resources to maintain green spaces, remain the hottest. For these authors, the technical solution exists; the obstacle is political.",
+   "q": "Em 'For these authors, the technical solution exists', a expressão 'these authors' refere-se a:",
+   "o": [
+    "The researchers who measured surface temperature.",
+    "The elderly residents affected by high temperatures.",
+    "The critics who point out the uneven distribution of green measures.",
+    "The planners mentioned at the beginning of the paragraph.",
+    "The politicians responsible for urban policy."
+   ],
+   "a": 2,
+   "e": "'These authors' retoma os críticos citados na frase anterior ('Critics point out...'), os mesmos que sustentam que o obstáculo é político. A pista é o verbo no plural e a continuidade argumentativa: quem afirma que a solução técnica existe é o grupo crítico, não os planejadores."
+  },
+  {
+   "t": "VOC",
+   "p": "Trees, green roofs and permeable pavements are now evaluated not as amenities but as instruments capable of lowering surface temperatures.",
+   "q": "No contexto, 'amenities' tem o sentido mais próximo de:",
+   "o": [
+    "Industrial zones located outside the city.",
+    "Temporary shelters for homeless people.",
+    "Legal obligations imposed on builders.",
+    "Measurements used by urban scientists.",
+    "Facilities that make a place more comfortable or pleasant."
+   ],
+   "a": 4,
+   "e": "'Amenity' é uma comodidade, algo que torna o lugar mais agradável — e o texto contrapõe esse valor 'de conforto' ao valor 'de infraestrutura'. O contraste 'not as X but as Y' é a pista: Y é 'instrumentos que baixam a temperatura', logo X é algo de conforto/decoração."
+  },
+  {
+   "t": "SEN",
+   "p": "Concrete and asphalt absorb solar radiation during the day and release it slowly at night, while the relative lack of vegetation limits evaporative cooling.",
+   "q": "Qual alternativa expressa o mesmo sentido da frase?",
+   "o": [
+    "Cities are warmer because they have more vegetation than rural areas.",
+    "Vegetation absorbs radiation during the day, so cities become colder at night.",
+    "Evaporative cooling increases when concrete covers the soil.",
+    "Because cities have few plants, they cool down less by evaporation, and building materials keep the heat.",
+    "Concrete releases heat quickly at night, which reduces the temperature of cities."
+   ],
+   "a": 3,
+   "e": "A frase tem duas causas: materiais que absorvem e liberam calor lentamente + pouca vegetação que limita o resfriamento por evaporação. A alternativa D preserva as duas. A C inverte ('quickly'); a E inverte a relação entre concreto e evaporação."
+  },
+  {
+   "t": "SEN",
+   "p": "Critics point out, however, that such measures are distributed unevenly: wealthier neighbourhoods tend to concentrate vegetation, while low-income districts remain the hottest.",
+   "q": "O que a frase 'such measures are distributed unevenly' significa?",
+   "o": [
+    "The city council refuses to measure temperatures in poor areas.",
+    "The benefits of these interventions are not shared equally among neighbourhoods.",
+    "The measures are too expensive to be implemented anywhere.",
+    "The measures were tested in a small number of streets.",
+    "The measures are distributed by lot among residents."
+   ],
+   "a": 1,
+   "e": "'Distributed unevenly' = distribuídos de forma desigual, e os dois-pontos explicam exatamente isso: bairros ricos concentram vegetação, bairros pobres continuam mais quentes. 'Evenly' se opõe a 'unevenly'; nada se diz sobre custo (A) ou sorteio (E)."
+  },
+  {
+   "t": "PAR",
+   "p": "Critics point out, however, that such measures are distributed unevenly: wealthier neighbourhoods tend to concentrate vegetation, while low-income districts, which often lack the resources to maintain green spaces, remain the hottest. For these authors, the technical solution exists; the obstacle is political.",
+   "q": "Qual afirmação é verdadeira de acordo com esse trecho?",
+   "o": [
+    "Green infrastructure is available mainly in poorer districts.",
+    "The critics believe the technology needed does not exist yet.",
+    "The author concludes that climate is impossible to manage in cities.",
+    "Low-income districts cannot maintain green spaces and stay the hottest.",
+    "Wealthier neighbourhoods refuse to plant trees for aesthetic reasons."
+   ],
+   "a": 3,
+   "e": "O texto diz que distritos de baixa renda 'often lack the resources to maintain green spaces' e 'remain the hottest'. A alternativa B inverte o argumento dos críticos, que afirmam justamente que a solução técnica já existe."
+  },
+  {
+   "t": "CEN",
+   "p": "Cities are typically several degrees warmer than the surrounding countryside. Concrete and asphalt absorb solar radiation during the day and release it slowly at night, while the relative lack of vegetation limits evaporative cooling. As a consequence, night-time temperatures in dense districts can remain up to seven degrees higher than in nearby rural areas. Planners have therefore begun to treat shade as a form of public infrastructure. Trees, green roofs and permeable pavements are now evaluated as instruments capable of lowering surface temperatures. Critics point out, however, that such measures are distributed unevenly. For these authors, the technical solution exists; the obstacle is political.",
+   "q": "Qual é a ideia central do texto?",
+   "o": [
+    "Engineers have not yet found a way to cool cities.",
+    "Concrete is the only material responsible for urban warming.",
+    "Rural areas are becoming hotter because of urban pollution.",
+    "Urban heat is a measurable physical problem whose solution depends on political distribution.",
+    "Green roofs are too expensive and should be abandoned."
+   ],
+   "a": 3,
+   "e": "O texto vai do diagnóstico físico (materiais + falta de vegetação) à conclusão de que a barreira é política. A alternativa A é contrariada diretamente por 'the technical solution exists'; a D usa 'only', marcador de alternativa absoluta."
+  },
+  {
+   "t": "CEN",
+   "p": "Planners have therefore begun to treat shade as a form of public infrastructure. Trees, green roofs and permeable pavements are now evaluated not as amenities but as instruments capable of lowering surface temperatures by two to four degrees in the streets where they are installed. Critics point out, however, that such measures are distributed unevenly.",
+   "q": "A função do conectivo 'however' na última frase é:",
+   "o": [
+    "Indicar a conclusão final do texto.",
+    "Introduzir uma objeção que limita o alcance da solução apresentada.",
+    "Explicar a causa física do efeito de ilha de calor.",
+    "Comparar a temperatura das cidades com a do campo.",
+    "Acrescentar um argumento que confirma a eficácia das árvores."
+   ],
+   "a": 1,
+   "e": "'However' marca contraste: depois de elogiar a solução técnica, o autor apresenta a ressalva da distribuição desigual. Reconhecer a função de conectivos (however, moreover, therefore, whereas) é decisivo em questões de ideia central e de parágrafo."
+  }
+ ]
+});
+
+TESTS.push({
+ "topic": "Sono e consolidação da memória",
+ "sub": "Texto 3 · neurociência, aprendizagem e hábitos de estudo",
+ "qs": [
+  {
+   "t": "LOC",
+   "p": "During slow-wave sleep, the hippocampus replays patterns of activity that were first recorded while the individual was learning a task; these sequences are then gradually transferred to the neocortex, where they become integrated with existing knowledge.",
+   "q": "Para onde as sequências de atividade são transferidas durante o sono de ondas lentas?",
+   "o": [
+    "To the muscles used in the task.",
+    "To the neocortex.",
+    "To the digestive system.",
+    "To the memory of the researcher.",
+    "To the hippocampus."
+   ],
+   "a": 1,
+   "e": "O texto é literal: as sequências são 'transferred to the neocortex'. O hipocampo é a origem da repetição, não o destino — erro clássico de quem lê apenas a primeira parte da frase."
+  },
+  {
+   "t": "LOC",
+   "p": "Declarative memories, such as facts and word lists, appear to depend strongly on slow-wave sleep, whereas procedural skills, such as playing a musical instrument, seem to profit more from rapid-eye-movement sleep.",
+   "q": "Segundo o texto, qual tipo de memória parece se beneficiar mais do sono REM (rapid-eye-movement)?",
+   "o": [
+    "Procedural skills, such as playing an instrument.",
+    "Declarative memories, such as facts.",
+    "Memories formed during childhood.",
+    "Lists of unrelated words.",
+    "Memories of academic examinations."
+   ],
+   "a": 0,
+   "e": "A estrutura 'A depende de X, whereas B se beneficia mais de Y' distribui as informações: declarativas → sono de ondas lentas; procedurais → REM. A palavra 'whereas' é a chave do contraste."
+  },
+  {
+   "t": "PRO",
+   "p": "During slow-wave sleep, the hippocampus replays patterns of activity that were first recorded while the individual was learning a task; these sequences are then gradually transferred to the neocortex.",
+   "q": "No trecho 'these sequences are then gradually transferred', a expressão 'these sequences' retoma:",
+   "o": [
+    "The tasks performed by the individual during the day.",
+    "The cells of the neocortex.",
+    "The phases of slow-wave sleep.",
+    "The patterns of activity replayed by the hippocampus.",
+    "The words used in the experiment."
+   ],
+   "a": 3,
+   "e": "'These sequences' é uma retomada lexical do que acabou de ser descrito: as sequências/padrões de atividade que o hipocampo repete. Note que não é um pronome, mas um sintagma anafórico — a prova cobra os dois casos."
+  },
+  {
+   "t": "PRO",
+   "p": "These sequences are then gradually transferred to the neocortex, where they become integrated with existing knowledge.",
+   "q": "Na oração 'where they become integrated with existing knowledge', o pronome 'they' refere-se a:",
+   "o": [
+    "The sequences transferred to the neocortex.",
+    "The lists of words used in the test.",
+    "Existing knowledge already stored in the brain.",
+    "The researchers who study sleep.",
+    "The participants of the experiments."
+   ],
+   "a": 0,
+   "e": "O sujeito de 'become integrated' são as sequências transferidas — é o que se integra ao conhecimento prévio. A alternativa C é a armadilha do vizinho: 'existing knowledge' aparece depois do pronome, mas é o complemento ('with'), não o sujeito."
+  },
+  {
+   "t": "VOC",
+   "p": "Participants who are deprived of sleep after studying a list of words typically recall fewer items two days later than those who sleep normally.",
+   "q": "A expressão 'are deprived of sleep' tem o sentido de:",
+   "o": [
+    "Dream about the words they studied.",
+    "Sleep more than eight hours a night.",
+    "Are allowed to sleep as much as they want.",
+    "Sleep in an unfamiliar laboratory.",
+    "Are prevented from sleeping."
+   ],
+   "a": 4,
+   "e": "'Deprive someone of something' = privar alguém de algo; no passivo, 'are deprived of sleep' = são privados de sono, ou seja, impedidos de dormir. Não confunda com 'depraved' (depravado) nem com 'derived' (derivado)."
+  },
+  {
+   "t": "SEN",
+   "p": "Participants who are deprived of sleep after studying a list of words typically recall fewer items two days later than those who sleep normally, even when the total study time is identical.",
+   "q": "O trecho 'even when the total study time is identical' significa que:",
+   "o": [
+    "The words used in both groups were different.",
+    "The two groups were tested at exactly the same moment.",
+    "The two groups studied for the same amount of time.",
+    "Only one group was allowed to study at all.",
+    "The experiment was repeated twice with the same people."
+   ],
+   "a": 2,
+   "e": "'Total study time is identical' = o tempo total de estudo foi igual, o que elimina a explicação alternativa (estudar menos). 'Even when' introduz uma concessão: mesmo com tempo igual, quem dorme recorda mais."
+  },
+  {
+   "t": "SEN",
+   "p": "Researchers now suspect that the traditional advice to 'study all night before the exam' may be counterproductive: the hours sacrificed may be precisely those in which the material would have been stabilized.",
+   "q": "Qual alternativa reescreve o trecho sem alterar o sentido?",
+   "o": [
+    "Researchers believe that studying all night is the most efficient strategy for exams.",
+    "Sleeping before the exam is harmful because it erases the material studied.",
+    "Researchers are certain that the traditional advice is correct.",
+    "Students who study all night usually get better results in the exam.",
+    "The time given up by not sleeping may be exactly the period that would have consolidated the content."
+   ],
+   "a": 4,
+   "e": "'The hours sacrificed' são as horas de sono sacrificadas; 'would have been stabilized' equivale a consolidado. 'Suspect ... may be' indica hipótese, não certeza — por isso E está errada, e B mantém o tom cauteloso."
+  },
+  {
+   "t": "PAR",
+   "p": "Although the function of sleep remains incompletely understood, a large body of evidence indicates that it plays an active role in memory consolidation. During slow-wave sleep, the hippocampus replays patterns of activity that were first recorded while the individual was learning a task; these sequences are then gradually transferred to the neocortex, where they become integrated with existing knowledge.",
+   "q": "Qual afirmação é verdadeira de acordo com esse trecho?",
+   "o": [
+    "Memory consolidation happens only during rapid-eye-movement sleep.",
+    "The function of sleep has been fully explained by recent research.",
+    "Sleep has no measurable effect on learning.",
+    "The neocortex stores memories without any participation of the hippocampus.",
+    "The hippocampus and the neocortex cooperate in stabilizing memories."
+   ],
+   "a": 4,
+   "e": "O parágrafo descreve uma cooperação: o hipocampo repete as sequências e o neocórtex as integra. A alternativa B exagera ('fully explained') quando o texto diz 'incompletely understood' — contraste típico de prova."
+  },
+  {
+   "t": "CEN",
+   "p": "Although the function of sleep remains incompletely understood, a large body of evidence indicates that it plays an active role in memory consolidation. During slow-wave sleep, the hippocampus replays patterns of activity that were first recorded while the individual was learning a task. Participants who are deprived of sleep after studying a list of words typically recall fewer items two days later. Not all memories benefit equally, however. Declarative memories appear to depend strongly on slow-wave sleep, whereas procedural skills seem to profit more from rapid-eye-movement sleep. Researchers now suspect that the traditional advice to study all night may be counterproductive.",
+   "q": "Qual é a ideia central do texto?",
+   "o": [
+    "Memory depends exclusively on the amount of time spent studying.",
+    "Declarative and procedural memories are stored in the same way.",
+    "Sleep actively consolidates memories, and losing it harms learning.",
+    "Sleep is a passive state in which the brain stops working.",
+    "Students should study only during the night."
+   ],
+   "a": 2,
+   "e": "O texto sustenta duas teses complementares: o sono tem papel ativo na consolidação e a privação prejudica a recordação. A E é exatamente o que o experimento descarta (tempo igual, resultados diferentes)."
+  },
+  {
+   "t": "CEN",
+   "p": "Researchers now suspect that the traditional advice to 'study all night before the exam' may be counterproductive: the hours sacrificed may be precisely those in which the material would have been stabilized.",
+   "q": "A menção ao conselho tradicional de 'estudar a noite toda' serve, no texto, para:",
+   "o": [
+    "Recomendar essa estratégia aos candidatos.",
+    "Descrever um experimento realizado com estudantes de medicina.",
+    "Contrapor um hábito de estudo comum às evidências sobre consolidação.",
+    "Demonstrar que a memória procedural não depende do sono.",
+    "Explicar como o hipocampo registra sequências de atividade."
+   ],
+   "a": 2,
+   "e": "O conselho surge como alvo de crítica à luz das evidências: se o sono estabiliza o material, virar a noite retira justamente as horas úteis. A função retórica é contrastar crença popular e evidência científica."
+  }
+ ]
+});
+
+TESTS.push({
+ "topic": "Inteligência artificial na revisão por pares",
+ "sub": "Texto 4 · publicação científica, automação e responsabilidade editorial",
+ "qs": [
+  {
+   "t": "LOC",
+   "p": "Peer review is the mechanism through which academic journals decide what to publish. It is slow, unpaid and increasingly difficult to staff: the number of submitted manuscripts has grown considerably faster than the pool of qualified reviewers.",
+   "q": "O que o texto afirma sobre o volume de submissões?",
+   "o": [
+    "It has grown much faster than the number of qualified reviewers.",
+    "It has fallen because reviewers are better paid.",
+    "It has remained stable for the last decade.",
+    "It is now controlled by language models.",
+    "It is higher in journals that pay their reviewers."
+   ],
+   "a": 0,
+   "e": "O trecho usa dois-pontos para explicar por que a revisão é difícil de equipe: 'the number of submitted manuscripts has grown considerably faster than the pool of qualified reviewers'. Fique atento a dois-pontos e a 'because/thus' — a prova costuma colocar a informação pedida logo depois desses sinais."
+  },
+  {
+   "t": "PRO",
+   "p": "Peer review is the mechanism through which academic journals decide what to publish. It is slow, unpaid and increasingly difficult to staff.",
+   "q": "No trecho 'It is slow, unpaid and increasingly difficult to staff', o pronome 'it' refere-se a:",
+   "o": [
+    "The pool of qualified reviewers.",
+    "Peer review.",
+    "The academic journal.",
+    "The decision to publish.",
+    "The manuscript under evaluation."
+   ],
+   "a": 1,
+   "e": "'It' retoma o sujeito da frase anterior, 'peer review', que é justamente o processo descrito como lento e não remunerado. Revise é um processo, não uma pessoa — se o candidato escolhesse 'reviewers', a concordância com 'difficult to staff' deixaria de fazer sentido, pois 'staff' significa compor a equipe de revisores."
+  },
+  {
+   "t": "VOC",
+   "p": "The systems do not judge the merit of a study; they flag missing statistical details, inconsistent citations and passages that appear to have been generated automatically.",
+   "q": "No contexto, o verbo 'flag' tem o sentido mais próximo de:",
+   "o": [
+    "Delete from the file.",
+    "Ignore completely.",
+    "Point out as a problem.",
+    "Translate into another language.",
+    "Reward for its quality."
+   ],
+   "a": 2,
+   "e": "'Flag' aqui significa sinalizar, apontar algo como problemático — coerente com a lista de defeitos que vem depois (dados ausentes, citações inconsistentes). O contraste com 'do not judge the merit' mostra que a máquina aponta falhas técnicas, mas não avalia qualidade científica."
+  },
+  {
+   "t": "SEN",
+   "p": "The systems do not judge the merit of a study; they flag missing statistical details, inconsistent citations and passages that appear to have been generated automatically.",
+   "q": "Qual alternativa reescreve o trecho sem alterar o sentido?",
+   "o": [
+    "The systems evaluate the scientific quality of a study before publication.",
+    "The systems rewrite passages that were generated automatically.",
+    "The systems decide which manuscripts should be rejected.",
+    "The systems are unable to find inconsistent citations.",
+    "The systems detect technical problems in a manuscript without assessing its quality."
+   ],
+   "a": 4,
+   "e": "A frase faz duas coisas: nega o julgamento de mérito e afirma a sinalização de problemas técnicos. A alternativa E preserva exatamente essa dupla informação. Alternativas que atribuem julgamento ou decisão final contrariam a primeira oração."
+  },
+  {
+   "t": "PAR",
+   "p": "Several publishers have therefore begun to test language models as a first filter. Editors who have used these tools report a modest gain in efficiency, but they insist that responsibility cannot be delegated: a model cannot be accountable for a retraction.",
+   "q": "Qual afirmação é verdadeira de acordo com esse trecho?",
+   "o": [
+    "Editors consider the gains in efficiency decisive.",
+    "Editors see limited gains and keep the final responsibility with humans.",
+    "Publishers have abandoned the use of language models.",
+    "The tools were tested only by journals specialised in computing.",
+    "Language models are now responsible for retractions."
+   ],
+   "a": 1,
+   "e": "O parágrafo combina 'a modest gain in efficiency' com 'responsibility cannot be delegated'. A palavra 'but' marca o ponto principal: o ganho existe, mas é modesto e não transfere responsabilidade. Alternativas que tratam ganho como decisivo exageram o texto."
+  },
+  {
+   "t": "CEN",
+   "p": "Peer review is slow, unpaid and increasingly difficult to staff. Several publishers have therefore begun to test language models as a first filter. The systems do not judge the merit of a study; they flag missing statistical details, inconsistent citations and passages that appear to have been generated automatically. Editors report a modest gain in efficiency, but they insist that responsibility cannot be delegated. Critics warn that automation may amplify existing biases, since a model trained on published papers learns which topics and methods were historically considered publishable.",
+   "q": "Qual é a ideia central do texto?",
+   "o": [
+    "Language models will replace human editors within a decade.",
+    "Language models are more objective than human reviewers.",
+    "Publishers should pay reviewers to solve the problem.",
+    "Peer review should be abolished because it is unpaid.",
+    "Automation can help triage manuscripts, but judgment and accountability remain human."
+   ],
+   "a": 4,
+   "e": "O texto apresenta a automação como apoio ao trabalho de triagem e, ao mesmo tempo, reafirma os limites (mérito, responsabilidade e viés histórico). Alternativas absolutas como 'will replace' e 'more objective' contradizem a ressalva sobre vieses."
+  },
+  {
+   "t": "LOC",
+   "p": "Critics warn that automation may amplify existing biases. If a model is trained on decades of published papers, it learns which topics, methods and institutions were historically considered publishable, and it may penalise work that departs from those patterns.",
+   "q": "Segundo os críticos, que tipo de trabalho o modelo pode penalizar?",
+   "o": [
+    "Work that departs from historical publication patterns.",
+    "Studies that use language models as a tool.",
+    "Papers that include too many statistical details.",
+    "Research produced in institutions with large budgets.",
+    "Papers written by editors of the same journal."
+   ],
+   "a": 0,
+   "e": "A frase final é explícita: pode penalizar 'work that departs from those patterns', isto é, trabalhos que se afastam dos padrões históricos de publicação. Perceba que 'those patterns' aponta para 'which topics, methods and institutions' — a referência precisa ser resolvida para acertar."
+  },
+  {
+   "t": "PRO",
+   "p": "If a model is trained on decades of published papers, it learns which topics, methods and institutions were historically considered publishable.",
+   "q": "No trecho ', it learns which topics, methods and institutions were...', o pronome 'it' refere-se a:",
+   "o": [
+    "The method used in the study.",
+    "A decade of published papers.",
+    "The institution that funds research.",
+    "The model.",
+    "The group of critics."
+   ],
+   "a": 3,
+   "e": "'If a model is trained..., it learns...' — o 'it' retoma 'a model', sujeito da condicional. Em estruturas com if, procure o sujeito da oração condicional antes de decidir a que o pronome da principal se refere."
+  },
+  {
+   "t": "SEN",
+   "p": "The debate is thus less about technical capacity than about governance: who audits the algorithms, and who answers for their mistakes.",
+   "q": "Qual alternativa expressa o mesmo sentido da frase?",
+   "o": [
+    "The central issue is who supervises these systems and who is held responsible for errors.",
+    "The debate has ended because the algorithms are now audited.",
+    "The debate is mainly about whether the technology is advanced enough.",
+    "Mistakes made by algorithms have no legal consequences.",
+    "Auditors are technically unable to evaluate algorithms."
+   ],
+   "a": 0,
+   "e": "A construção 'less about X than about Y' desloca o foco de X (capacidade técnica) para Y (governança), e os dois-pontos detalham Y: auditoria e responsabilização. Alternativas que discutem apenas capacidade técnica ignoram a estrutura comparativa."
+  },
+  {
+   "t": "CEN",
+   "p": "Critics warn that automation may amplify existing biases. If a model is trained on decades of published papers, it learns which topics, methods and institutions were historically considered publishable, and it may penalise work that departs from those patterns. The debate is thus less about technical capacity than about governance: who audits the algorithms, and who answers for their mistakes.",
+   "q": "A posição do autor no trecho é a de que:",
+   "o": [
+    "a revisão por pares deixou de ser confiável",
+    "a auditoria de algoritmos já é obrigatória",
+    "os modelos devem ser proibidos em revistas científicas",
+    "os críticos exageram ao falar de viés",
+    "o problema central é institucional, não tecnológico"
+   ],
+   "a": 4,
+   "e": "O autor não pede proibição: ele reenquadra a discussão ('less about technical capacity than about governance'), o que corresponde a dizer que o problema é de governança/instituição. Essa é a típica alternativa de ideia central em que a resposta correta reformula a tese, sem repetir palavras do texto."
+  }
+ ]
+});
+
+TESTS.push({
+ "topic": "Microplásticos",
+ "sub": "Texto 5 · poluição difusa e limites da evidência experimental",
+ "qs": [
+  {
+   "t": "LOC",
+   "p": "Microplastics, fragments smaller than five millimetres, have been found in Arctic ice, in deep-sea sediments and in human blood. Their ubiquity is no longer in doubt; what remains unclear is the extent of the harm they cause.",
+   "q": "Segundo o texto, o que ainda não está esclarecido sobre os microplásticos?",
+   "o": [
+    "Whether they exist in the Arctic.",
+    "How large the damage they cause is.",
+    "Whether they can be found in human blood.",
+    "Whether they are smaller than five millimetres.",
+    "Where they were first produced."
+   ],
+   "a": 1,
+   "e": "A oposição é explícita: a onipresença não está mais em dúvida ('no longer in doubt'), mas 'what remains unclear is the extent of the harm' — a extensão do dano. As outras alternativas são fatos já afirmados como certos no texto."
+  },
+  {
+   "t": "PRO",
+   "p": "Microplastics, fragments smaller than five millimetres, have been found in Arctic ice, in deep-sea sediments and in human blood. Their ubiquity is no longer in doubt.",
+   "q": "O possessivo 'Their' em 'Their ubiquity' refere-se a:",
+   "o": [
+    "The sediments of the deep sea.",
+    "The blood samples of the researchers.",
+    "Microplastics.",
+    "The doubt expressed by scientists.",
+    "The fragments of ice in the Arctic."
+   ],
+   "a": 2,
+   "e": "'Their ubiquity' = a onipresença deles, e 'deles' são os microplásticos, tema do parágrafo. Quando o possessivo abre uma frase, volte ao sujeito/tema do período anterior — aqui, os microplásticos, e não os lugares onde foram encontrados."
+  },
+  {
+   "t": "VOC",
+   "p": "Most particles originate not from cosmetics but from the fragmentation of larger items: tyres, synthetic clothing and single-use packaging break down over years and are carried by wind and water.",
+   "q": "A palavra 'fragmentation' tem o sentido de:",
+   "o": [
+    "Exporting waste to other countries.",
+    "Manufacturing new products.",
+    "Breaking into small pieces.",
+    "Burning at high temperatures.",
+    "Chemical recycling."
+   ],
+   "a": 2,
+   "e": "'Fragmentation' vem de 'fragment' (fragmento): quebra em pedaços pequenos. O próprio texto explica o processo a seguir — 'break down over years'. Note também a estrutura 'not from X but from Y', que desloca a origem do problema dos cosméticos para a quebra de objetos maiores."
+  },
+  {
+   "t": "SEN",
+   "p": "Most particles originate not from cosmetics but from the fragmentation of larger items: tyres, synthetic clothing and single-use packaging break down over years and are carried by wind and water.",
+   "q": "Qual alternativa reescreve o trecho sem alterar o sentido?",
+   "o": [
+    "Most particles come from the gradual breakdown of tyres, synthetic clothes and packaging.",
+    "Most particles come from cosmetics used in large cities.",
+    "Particles are formed only when plastic is burned.",
+    "Tyres and clothes are produced with cosmetic ingredients.",
+    "Wind and water remove particles from the environment."
+   ],
+   "a": 0,
+   "e": "A frase nega a origem cosmética e afirma a origem pela quebra ('fragmentation', 'break down over years') de pneus, roupas sintéticas e embalagens. A alternativa B ignora o 'not from cosmetics'; a E inverte a ação de vento e água, que transportam os fragmentos."
+  },
+  {
+   "t": "PAR",
+   "p": "Laboratory studies show that high concentrations can inflame the tissues of marine organisms. Extrapolating these results to the environment, however, is far from straightforward, because concentrations used in laboratories are often thousands of times higher than those measured at sea.",
+   "q": "Qual afirmação é verdadeira de acordo com esse trecho?",
+   "o": [
+    "The concentration of plastics at sea is increasing every year.",
+    "Laboratory concentrations are similar to those found in the ocean.",
+    "Extrapolating results is simple because the methods are standard.",
+    "Laboratory findings cannot be directly transferred to real conditions.",
+    "Marine organisms are not affected by microplastics in laboratories."
+   ],
+   "a": 3,
+   "e": "O texto diz que a extrapolação 'is far from straightforward' e justifica: as concentrações de laboratório são milhares de vezes maiores que as do mar. Portanto, os resultados não se transferem diretamente. 'Far from' funciona como negação forte em inglês acadêmico."
+  },
+  {
+   "t": "CEN",
+   "p": "Microplastics have been found in Arctic ice, in deep-sea sediments and in human blood. Their ubiquity is no longer in doubt; what remains unclear is the extent of the harm they cause. Most particles originate from the fragmentation of larger items. Laboratory studies show that high concentrations can inflame the tissues of marine organisms, although concentrations used in laboratories are often thousands of times higher than those measured at sea.",
+   "q": "Qual é a ideia central desse trecho?",
+   "o": [
+    "Laboratory experiments are useless in environmental science.",
+    "Microplastics no longer represent a risk to marine organisms.",
+    "Microplastics are everywhere, but their real impact is still uncertain.",
+    "Microplastics have been eliminated from Arctic ice.",
+    "Cosmetics are the main source of microplastics in the ocean."
+   ],
+   "a": 2,
+   "e": "O trecho junta duas informações: a presença generalizada e a incerteza sobre o dano, além de explicar por que os dados de laboratório são limitados. A alternativa E contradiz 'not from cosmetics'; a D radicaliza a ressalva metodológica."
+  },
+  {
+   "t": "LOC",
+   "p": "Regulation has focused on banning microbeads in rinse-off products, a measure that addresses a small share of the total. Because tyres and textiles shed continuously during normal use, controlling them requires redesigning products rather than filtering waste at the end of the pipe.",
+   "q": "Por que a proibição de microesferas em produtos de enxágue é considerada insuficiente?",
+   "o": [
+    "Because consumers refuse to stop using such products.",
+    "Because microbeads are produced outside Europe.",
+    "Because the measure was never approved by regulators.",
+    "Because microbeads are not made of plastic.",
+    "Because it covers only a small part of the problem."
+   ],
+   "a": 4,
+   "e": "O texto afirma que a medida 'addresses a small share of the total' — atinge apenas uma fração pequena do total. Em seguida explica que pneus e tecidos liberam partículas continuamente, o que exige outro tipo de intervenção."
+  },
+  {
+   "t": "PRO",
+   "p": "Because tyres and textiles shed continuously during normal use, controlling them requires redesigning products rather than filtering waste at the end of the pipe.",
+   "q": "Em 'controlling them requires redesigning products', o pronome 'them' refere-se a:",
+   "o": [
+    "The microbeads in rinse-off products.",
+    "Tyres and textiles.",
+    "The regulations approved by governments.",
+    "The products designed by engineers.",
+    "The waste filters used in treatment plants."
+   ],
+   "a": 1,
+   "e": "'Them' retoma o sujeito da oração causal: tyres and textiles. A pista é a coerência: o que 'sheds continuously' e precisa ser controlado? Pneus e tecidos. Nomear o antecedente do pronome é o que separa o acerto do erro nesse tipo de item."
+  },
+  {
+   "t": "SEN",
+   "p": "The most effective interventions, researchers argue, are therefore those that act before the particle exists.",
+   "q": "O que essa frase defende?",
+   "o": [
+    "That researchers should stop measuring microplastics.",
+    "That consumers should filter their own waste water.",
+    "That filters installed at treatment plants should be improved.",
+    "That the existence of particles cannot be verified.",
+    "That action should focus on preventing particles from being created."
+   ],
+   "a": 4,
+   "e": "'Act before the particle exists' significa agir antes de a partícula existir, ou seja, prevenir na origem (design do produto) em vez de filtrar no fim do processo. É a conclusão lógica do parágrafo anterior, que critica a filtragem 'at the end of the pipe'."
+  },
+  {
+   "t": "CEN",
+   "p": "Regulation has focused on banning microbeads in rinse-off products, a measure that addresses a small share of the total. Because tyres and textiles shed continuously during normal use, controlling them requires redesigning products rather than filtering waste at the end of the pipe. The most effective interventions, researchers argue, are therefore those that act before the particle exists.",
+   "q": "A tese defendida no trecho é a de que o controle dos microplásticos deve:",
+   "o": [
+    "deslocar-se para a etapa de projeto dos produtos",
+    "concentrar-se na filtragem de efluentes",
+    "aguardar novas evidências científicas",
+    "limitar-se à proibição de cosméticos",
+    "ser transferido para os consumidores"
+   ],
+   "a": 0,
+   "e": "O encadeamento 'rather than filtering waste at the end of the pipe' + 'act before the particle exists' aponta para a prevenção no design. Alternativas que reforçam a filtragem ou se limitam a cosméticos repetem justamente o que o autor considera insuficiente."
+  }
+ ]
+});
+
+TESTS.push({
+ "topic": "Leitura em papel e em tela",
+ "sub": "Texto 6 · compreensão, metacognição e pistas espaciais",
+ "qs": [
+  {
+   "t": "LOC",
+   "p": "Studies comparing reading on paper and on screens have produced a consistent, if modest, pattern: when the text is long and the reader is expected to remember it, paper tends to yield better comprehension.",
+   "q": "Em que condição o papel tende a produzir melhor compreensão?",
+   "o": [
+    "When the text is read only once.",
+    "When the text is long and the reader must remember it.",
+    "When the material is read aloud.",
+    "When the reader is a young child.",
+    "When the text is short and illustrated."
+   ],
+   "a": 1,
+   "e": "A frase condiciona o efeito: 'when the text is long and the reader is expected to remember it'. Perceba a expressão 'consistent, if modest' — efeito confiável, mas pequeno, o que impede conclusões catastróficas sobre telas."
+  },
+  {
+   "t": "PRO",
+   "p": "Studies comparing reading on paper and on screens have produced a consistent, if modest, pattern: when the text is long and the reader is expected to remember it, paper tends to yield better comprehension.",
+   "q": "No trecho 'the reader is expected to remember it', o pronome 'it' refere-se a:",
+   "o": [
+    "The text being read.",
+    "The comprehension of the reader.",
+    "The screen used for reading.",
+    "The study carried out by researchers.",
+    "The pattern observed in the studies."
+   ],
+   "a": 0,
+   "e": "'Remember it' — lembrar o quê? O texto ('the text is long and the reader is expected to remember it'). O candidato mais próximo na frase é 'the text', sujeito da oração condicional, o que confirma a leitura."
+  },
+  {
+   "t": "VOC",
+   "p": "One explanation concerns metacognition. Readers scrolling a screen tend to overestimate how much they have absorbed; because the text feels familiar, they assume it has been understood.",
+   "q": "O termo 'metacognition' refere-se, no texto, à capacidade de:",
+   "o": [
+    "Reconhecer palavras desconhecidas.",
+    "Monitorar e avaliar o próprio entendimento.",
+    "Traduzir textos acadêmicos.",
+    "Ler em alta velocidade.",
+    "Memorizar listas de palavras."
+   ],
+   "a": 1,
+   "e": "O parágrafo explica o conceito pelo exemplo: o leitor superestima o quanto absorveu. Meta- indica 'sobre si mesmo', portanto metacognição é pensar sobre o próprio pensamento — aqui, avaliar o próprio nível de compreensão."
+  },
+  {
+   "t": "SEN",
+   "p": "Readers scrolling a screen tend to overestimate how much they have absorbed; because the text feels familiar, they assume it has been understood.",
+   "q": "Qual alternativa reescreve o trecho sem alterar o sentido?",
+   "o": [
+    "Readers on screens are unable to recognise familiar texts.",
+    "Readers on paper also overestimate their comprehension.",
+    "Familiarity with a text guarantees that it has been understood.",
+    "The sensation of familiarity leads readers on screens to believe they understood more than they did.",
+    "Readers on screens usually remember more than they think they do."
+   ],
+   "a": 3,
+   "e": "'Overestimate how much they have absorbed' = achar que absorveram mais do que realmente absorveram, e o motivo é a sensação de familiaridade. A alternativa E inverte o sentido (acreditam saber menos); a D trata familiaridade como garantia, exatamente o erro que o texto descreve."
+  },
+  {
+   "t": "PAR",
+   "p": "A second explanation is spatial. Paper offers stable landmarks: the position of a paragraph on a page becomes a cue for retrieval. Scrolling removes those cues, and the reader must rely on the words alone.",
+   "q": "Qual afirmação é verdadeira de acordo com esse trecho?",
+   "o": [
+    "Paper helps memory because its layout provides stable spatial cues.",
+    "Scrolling improves recall because the text moves continuously.",
+    "Spatial cues interfere with the comprehension of long texts.",
+    "The position of a paragraph is irrelevant in printed books.",
+    "Readers on paper rely only on the meaning of the words."
+   ],
+   "a": 0,
+   "e": "O parágrafo é claro: no papel, a posição do parágrafo na página vira 'a cue for retrieval'; ao rolar a tela, essas pistas desaparecem. A alternativa E descreve justamente a situação da tela, não do papel."
+  },
+  {
+   "t": "CEN",
+   "p": "Studies comparing reading on paper and on screens have produced a consistent, if modest, pattern: when the text is long and the reader is expected to remember it, paper tends to yield better comprehension. One explanation concerns metacognition: readers scrolling a screen tend to overestimate how much they have absorbed. A second explanation is spatial: paper offers stable landmarks, and the position of a paragraph on a page becomes a cue for retrieval.",
+   "q": "Qual é a ideia central desse trecho?",
+   "o": [
+    "There is a small but real advantage of paper for long texts, explained by self-monitoring and spatial cues.",
+    "The difference between paper and screens has never been demonstrated.",
+    "Metacognition is irrelevant to reading comprehension.",
+    "Reading on paper is always superior to reading on screens.",
+    "Screens should be banned in academic contexts."
+   ],
+   "a": 0,
+   "e": "O trecho apresenta um efeito de tamanho modesto ('consistent, if modest') e duas explicações. A alternativa D exagera com 'always', e a C nega o efeito que o texto afirma existir."
+  },
+  {
+   "t": "LOC",
+   "p": "These findings should not be read as a verdict against digital reading. Skimming, searching and cross-checking are often faster on a screen, and students who annotate systematically perform equally well on either medium.",
+   "q": "Segundo o texto, quais atividades são geralmente mais rápidas na tela?",
+   "o": [
+    "Memorising long passages and quoting them.",
+    "Skimming, searching and cross-checking.",
+    "Taking notes on paper.",
+    "Reading poetry aloud.",
+    "Writing by hand and underlining."
+   ],
+   "a": 1,
+   "e": "A enumeração é direta: 'Skimming, searching and cross-checking are often faster on a screen'. Atenção ao marcador 'should not be read as a verdict', que prepara o leitor para uma ressalva em favor do digital."
+  },
+  {
+   "t": "PRO",
+   "p": "Students who annotate systematically perform equally well on either medium.",
+   "q": "A expressão 'either medium' refere-se a:",
+   "o": [
+    "Short texts and long texts.",
+    "Reading printed texts and reading on screens.",
+    "Skimming and cross-checking.",
+    "Students with and without annotation habits.",
+    "Paper books and handwritten notes."
+   ],
+   "a": 1,
+   "e": "'Either medium' retoma os dois meios comparados ao longo de todo o texto: papel e tela. 'Medium' (plural 'media') aqui é suporte de leitura; o contexto de comparação entre papel e tela fixa o significado."
+  },
+  {
+   "t": "SEN",
+   "p": "The practical conclusion is not to choose a side, but to match the medium to the task.",
+   "q": "Qual alternativa expressa o mesmo sentido da frase?",
+   "o": [
+    "The choice of the medium has no practical consequences.",
+    "Readers should abandon digital devices for academic study.",
+    "The medium should be chosen according to the purpose of the reading.",
+    "It is impossible to decide which medium is better.",
+    "All tasks should be performed on paper."
+   ],
+   "a": 2,
+   "e": "'Match the medium to the task' = adequar o suporte à tarefa. A construção 'not X but Y' rejeita a ideia de escolher um lado (A/D) e propõe critério funcional. Alternativa E ignora 'practical conclusion'."
+  },
+  {
+   "t": "CEN",
+   "p": "These findings should not be read as a verdict against digital reading. Skimming, searching and cross-checking are often faster on a screen, and students who annotate systematically perform equally well on either medium. The practical conclusion is not to choose a side, but to match the medium to the task.",
+   "q": "A posição final do autor é a de que:",
+   "o": [
+    "as pesquisas sobre o tema são inconclusivas",
+    "a leitura digital prejudica todos os estudantes",
+    "a anotação sistemática é dispensável",
+    "a escolha do suporte depende do objetivo da leitura",
+    "o papel deve ser preferido em qualquer situação"
+   ],
+   "a": 3,
+   "e": "A conclusão é funcional: adequar meio e tarefa. O autor equilibra os dois lados — reconhece vantagens do digital e mantém a superioridade do papel em textos longos —, o que descarta tanto a defesa absoluta do papel quanto a tese de que nada se sabe."
+  }
+ ]
+});
+
+TESTS.push({
+ "topic": "Acidificação dos oceanos",
+ "sub": "Texto 7 · química da água do mar, recifes e limites da adaptação",
+ "qs": [
+  {
+   "t": "LOC",
+   "p": "The ocean absorbs roughly a quarter of the carbon dioxide released by human activities. When this gas dissolves in seawater, it forms carbonic acid, lowering the pH of the water — a process known as ocean acidification.",
+   "q": "Segundo o texto, o que acontece quando o CO₂ se dissolve na água do mar?",
+   "o": [
+    "It forms carbonic acid and lowers the pH of the water.",
+    "It increases the amount of oxygen available to fish.",
+    "It prevents the formation of coral reefs.",
+    "It removes salt from the surface layers.",
+    "It raises the temperature of the deep ocean."
+   ],
+   "a": 0,
+   "e": "O trecho é explícito: o gás forma ácido carbônico ('carbonic acid') e reduz o pH. A relação de causa está marcada por 'When ... it forms'. Note que a acidificação não é o mesmo que aquecimento — confundir os dois é o erro mais comum nesse tema."
+  },
+  {
+   "t": "PRO",
+   "p": "The ocean absorbs roughly a quarter of the carbon dioxide released by human activities. When this gas dissolves in seawater, it forms carbonic acid.",
+   "q": "A expressão 'this gas' refere-se a:",
+   "o": [
+    "Carbonic acid formed in the ocean.",
+    "Carbon dioxide released by human activities.",
+    "The gas produced by marine organisms.",
+    "Water vapour from the atmosphere.",
+    "Oxygen dissolved in seawater."
+   ],
+   "a": 1,
+   "e": "'This gas' retoma o único gás citado antes: o dióxido de carbono liberado por atividades humanas. Em referências anafóricas com 'this + substantivo', o substantivo funciona como rótulo resumidor do antecedente."
+  },
+  {
+   "t": "VOC",
+   "p": "Corals and molluscs build their skeletons from calcium carbonate, a mineral that becomes scarcer as the water grows more acidic.",
+   "q": "No contexto, 'scarcer' significa:",
+   "o": [
+    "More expensive to export.",
+    "Easier to detect.",
+    "More abundant.",
+    "Chemically unstable.",
+    "Less available."
+   ],
+   "a": 4,
+   "e": "'Scarce' = escasso; 'scarcer' é o comparativo, 'mais escasso/menos disponível'. A pista é 'as the water grows more acidic': quanto mais ácida a água, menor a disponibilidade do mineral — exatamente o que dificulta a formação de esqueletos."
+  },
+  {
+   "t": "SEN",
+   "p": "Corals and molluscs build their skeletons from calcium carbonate, a mineral that becomes scarcer as the water grows more acidic, so the effort required to construct a shell increases.",
+   "q": "Qual alternativa reescreve o trecho sem alterar o sentido?",
+   "o": [
+    "Calcium carbonate becomes more abundant in acidic conditions.",
+    "Acidic water dissolves the shells of corals but not those of molluscs.",
+    "Corals build shells more quickly when the water becomes acidic.",
+    "Molluscs do not depend on calcium carbonate to survive.",
+    "More acidic water makes it harder for animals to build their shells."
+   ],
+   "a": 4,
+   "e": "'The effort required to construct a shell increases' = fica mais difícil construir a concha. A alternativa A inverte a relação ('more abundant'); a B introduz uma distinção entre corais e moluscos que o texto não faz."
+  },
+  {
+   "t": "PAR",
+   "p": "Not all species respond in the same way. Some algae appear to benefit from higher CO₂ concentrations, and a few fish populations have shown signs of acclimation. These exceptions, however, concern individual species and short periods; they do not indicate that ecosystems as a whole can adjust at the speed of the change.",
+   "q": "Qual afirmação é verdadeira de acordo com esse parágrafo?",
+   "o": [
+    "Some species benefit or acclimatise, but ecosystems cannot adjust so quickly.",
+    "Acclimation has been observed over several centuries.",
+    "Algae are the only organisms harmed by higher CO₂.",
+    "Ecosystems adjust faster than individual species.",
+    "All marine species are equally affected by acidification."
+   ],
+   "a": 0,
+   "e": "O parágrafo concede exceções ('some algae appear to benefit', 'signs of acclimation') e depois as limita com 'however': são espécies isoladas e períodos curtos; ecossistemas não acompanham a velocidade da mudança. Alternativas absolutas como 'all' e 'the only' contrariam o texto."
+  },
+  {
+   "t": "CEN",
+   "p": "The ocean absorbs roughly a quarter of the carbon dioxide released by human activities. When this gas dissolves in seawater, it forms carbonic acid, lowering the pH of the water. Corals and molluscs build their skeletons from calcium carbonate, a mineral that becomes scarcer as the water grows more acidic. Not all species respond in the same way: some algae appear to benefit from higher CO₂ concentrations. These exceptions, however, concern individual species and short periods; they do not indicate that ecosystems as a whole can adjust at the speed of the change.",
+   "q": "Qual é a ideia central do texto?",
+   "o": [
+    "Coral reefs are destroyed only by rising temperatures.",
+    "Acidification benefits most marine species in the long run.",
+    "The chemistry of seawater has remained stable for centuries.",
+    "The ocean has stopped absorbing carbon dioxide from the atmosphere.",
+    "Ocean acidification is a chemical process with biological consequences that ecosystems cannot absorb quickly."
+   ],
+   "a": 4,
+   "e": "O texto encadeia química (CO₂ → ácido carbônico → pH) e biologia (esqueletos, espécies), fechando com a ressalva de que o conjunto não se adapta na mesma velocidade. A alternativa B generaliza exceções pontuais, erro clássico em questões de ideia central."
+  },
+  {
+   "t": "LOC",
+   "p": "Because the change is chemical rather than thermal, it is measurable even in places where the water is not warming. Monitoring stations in the Pacific have recorded a decline of about 0.02 pH units per decade.",
+   "q": "Por que a acidificação pode ser medida mesmo onde a água não está aquecendo?",
+   "o": [
+    "Because pH does not depend on temperature at all.",
+    "Because corals produce acid when they build skeletons.",
+    "Because monitoring stations are installed only in cold water.",
+    "Because the ocean absorbs heat more slowly than gas.",
+    "Because the change is chemical rather than thermal."
+   ],
+   "a": 4,
+   "e": "A explicação está no próprio conectivo 'Because': a mudança é química, não térmica, portanto independe do aquecimento local. A alternativa A radicaliza o argumento: o texto não afirma independência absoluta de temperatura, apenas que a natureza química permite medir o efeito separadamente."
+  },
+  {
+   "t": "PRO",
+   "p": "These exceptions, however, concern individual species and short periods; they do not indicate that ecosystems as a whole can adjust at the speed of the change.",
+   "q": "Na segunda oração, o pronome 'they' refere-se a:",
+   "o": [
+    "Individual species of fish.",
+    "The exceptions just mentioned.",
+    "Ecosystems as a whole.",
+    "Short periods of observation.",
+    "The chemical changes in seawater."
+   ],
+   "a": 1,
+   "e": "'They' retoma 'these exceptions', sujeito da primeira oração. O teste decisivo é a coerência: são as exceções que não indicam capacidade de ajuste — não os ecossistemas, que aparecem como objeto da oração seguinte."
+  },
+  {
+   "t": "SEN",
+   "p": "Because the change is chemical rather than thermal, it is measurable even in places where the water is not warming.",
+   "q": "Qual alternativa expressa o mesmo sentido da frase?",
+   "o": [
+    "The change can be measured only in regions where temperatures are rising.",
+    "Warming prevents researchers from measuring pH.",
+    "The change can be detected in cold waters as well, since it does not depend on warming.",
+    "The temperature of the water is more important than its chemistry.",
+    "Chemical changes are always caused by thermal changes."
+   ],
+   "a": 2,
+   "e": "'Rather than thermal' = e não térmico; 'measurable even in places where the water is not warming' = detectável também onde não há aquecimento. A alternativa A inverte a concessão 'even'; a C anula o contraste proposto pelo autor."
+  },
+  {
+   "t": "CEN",
+   "p": "Some algae appear to benefit from higher CO₂ concentrations, and a few fish populations have shown signs of acclimation. These exceptions, however, concern individual species and short periods; they do not indicate that ecosystems as a whole can adjust at the speed of the change. The scientific disagreement is therefore not about whether acidification is happening, but about how much biological adaptation can offset it.",
+   "q": "Segundo o último período, o desacordo entre cientistas gira em torno de:",
+   "o": [
+    "quantas espécies de algas existem no Pacífico",
+    "se o pH da água pode ser medido",
+    "se a acidificação está realmente ocorrendo",
+    "qual país é responsável pelas emissões",
+    "quanto a adaptação biológica pode compensar o efeito"
+   ],
+   "a": 4,
+   "e": "A estrutura 'not about X, but about Y' distribui o consenso e a controvérsia: ninguém duvida de que a acidificação ocorre (X); o debate é sobre o alcance compensatório da adaptação (Y). Reconhecer esse par é suficiente para eliminar quatro alternativas."
+  }
+ ]
+});
+
+TESTS.push({
+ "topic": "Trabalho remoto e produtividade",
+ "sub": "Texto 8 · evidências, efeitos heterogêneos e desenho de políticas",
+ "qs": [
+  {
+   "t": "LOC",
+   "p": "Early studies of remote work reported substantial gains in productivity, largely because employees saved commuting time. Later research, based on longer periods, has produced a more nuanced picture.",
+   "q": "Por que os primeiros estudos apontavam ganhos de produtividade?",
+   "o": [
+    "Because managers monitored workers more closely.",
+    "Because employees worked more hours per week.",
+    "Because employees saved time commuting.",
+    "Because salaries were reduced.",
+    "Because offices were closed during the period."
+   ],
+   "a": 2,
+   "e": "O texto atribui os ganhos principalmente à economia de tempo de deslocamento ('largely because employees saved commuting time'). 'Largely' equivale a 'mainly' — expressão frequente em questões de localização de informação."
+  },
+  {
+   "t": "PRO",
+   "p": "Early studies of remote work reported substantial gains in productivity, largely because employees saved commuting time. Later research, based on longer periods, has produced a more nuanced picture.",
+   "q": "O pronome 'has produced' tem como sujeito:",
+   "o": [
+    "A more nuanced picture.",
+    "The commuting time saved.",
+    "Later research.",
+    "Employees who work from home.",
+    "Early studies of remote work."
+   ],
+   "a": 2,
+   "e": "O sujeito de 'has produced' é 'Later research' (pesquisa posterior, no singular). A armadilha é escolher 'Early studies', que é sujeito da frase anterior e está no plural — se fosse ele, o verbo seria 'have produced'."
+  },
+  {
+   "t": "VOC",
+   "p": "Later research, based on longer periods, has produced a more nuanced picture.",
+   "q": "A palavra 'nuanced' tem o sentido mais próximo de:",
+   "o": [
+    "Financially sponsored.",
+    "Statistically insignificant.",
+    "Based on a single case.",
+    "More detailed and less absolute.",
+    "Completely contradictory."
+   ],
+   "a": 3,
+   "e": "'Nuanced' indica algo com matizes, isto é, mais detalhado e menos categórico. O contraste com 'substantial gains' dos estudos iniciais mostra que a nova leitura é mais matizada — nem tudo é ganho, nem tudo é perda."
+  },
+  {
+   "t": "PAR",
+   "p": "The effects are strongly heterogeneous. Tasks that require concentration — writing, coding, analysing data — are often performed as well or better at home. Tasks that depend on rapid, informal exchange — onboarding new employees, negotiating conflicts, training juniors — deteriorate when mediated by screens.",
+   "q": "Qual afirmação é verdadeira de acordo com esse parágrafo?",
+   "o": [
+    "The effect of remote work depends on the nature of the task.",
+    "All tasks are performed better at home.",
+    "Concentration tasks deteriorate at home.",
+    "Informal exchange is irrelevant in modern organisations.",
+    "Training new employees improves when mediated by screens."
+   ],
+   "a": 0,
+   "e": "'Heterogeneous' significa que os efeitos variam; o parágrafo divide as tarefas em dois grupos com resultados opostos. A alternativa E contradiz 'deteriorate'; a D contradiz 'as well or better'."
+  },
+  {
+   "t": "SEN",
+   "p": "Tasks that depend on rapid, informal exchange — onboarding new employees, negotiating conflicts, training juniors — deteriorate when mediated by screens.",
+   "q": "Qual alternativa reescreve o trecho sem alterar o sentido?",
+   "o": [
+    "When interaction is indirect, tasks that need quick and informal exchange get worse.",
+    "New employees learn faster when training is mediated by screens.",
+    "Rapid exchange is possible only in face-to-face meetings.",
+    "Screens improve tasks that require quick and informal interaction.",
+    "Conflict negotiation is easier in remote settings."
+   ],
+   "a": 0,
+   "e": "'Deteriorate when mediated by screens' = pioram quando passam pela mediação de telas. 'Mediated by screens' equivale a 'interação indireta'. A alternativa C exagera: o texto não diz que a troca rápida é impossível, apenas que piora."
+  },
+  {
+   "t": "CEN",
+   "p": "Early studies of remote work reported substantial gains in productivity, largely because employees saved commuting time. Later research has produced a more nuanced picture. The effects are strongly heterogeneous: concentration tasks are often performed as well or better at home, while tasks that depend on rapid, informal exchange deteriorate when mediated by screens. Firms that treat remote work as a binary choice, therefore, tend to misallocate it.",
+   "q": "Qual é a ideia central do texto?",
+   "o": [
+    "Remote work increases productivity in every kind of organisation.",
+    "Productivity cannot be measured in knowledge-intensive firms.",
+    "Commuting time is the only variable that matters.",
+    "Remote work should be assessed task by task rather than as an all-or-nothing decision.",
+    "Employees should return to the office permanently."
+   ],
+   "a": 3,
+   "e": "O texto sustenta que os efeitos variam por tipo de tarefa e conclui que tratá-lo como 'binary choice' leva a alocação equivocada. Alternativas absolutas ('every', 'only') ignoram a heterogeneidade apresentada."
+  },
+  {
+   "t": "LOC",
+   "p": "Firms that treat remote work as a binary choice, therefore, tend to misallocate it. The evidence points instead to hybrid arrangements designed around specific activities and evaluated with explicit metrics.",
+   "q": "O que as evidências indicam como alternativa à escolha binária?",
+   "o": [
+    "Hybrid arrangements designed around specific activities.",
+    "A return to the model of the 1990s.",
+    "The complete abolition of offices.",
+    "Longer working days for remote employees.",
+    "The elimination of productivity metrics."
+   ],
+   "a": 0,
+   "e": "'The evidence points instead to hybrid arrangements designed around specific activities' — a resposta está marcada por 'instead', que sinaliza a alternativa ao erro anterior. Em questões de localização, conectivos como 'instead', 'rather' e 'therefore' apontam para onde olhar."
+  },
+  {
+   "t": "PRO",
+   "p": "Firms that treat remote work as a binary choice, therefore, tend to misallocate it.",
+   "q": "No trecho, o pronome relativo 'that' em 'Firms that treat remote work' refere-se a:",
+   "o": [
+    "The evidence mentioned before.",
+    "Productivity metrics.",
+    "Remote work.",
+    "Firms.",
+    "The binary choice."
+   ],
+   "a": 3,
+   "e": "O pronome relativo 'that' retoma o substantivo imediatamente anterior ao qual a oração adjetiva se liga: 'Firms'. Uma boa checagem é substituir: 'firms treat remote work as a binary choice' — a frase continua gramatical e coerente."
+  },
+  {
+   "t": "SEN",
+   "p": "The evidence points instead to hybrid arrangements designed around specific activities and evaluated with explicit metrics.",
+   "q": "O que se pode concluir dessa frase?",
+   "o": [
+    "Metrics are unnecessary because activities are self-evident.",
+    "Evidence supports the return to full-time office work.",
+    "Hybrid models are inferior to fully remote arrangements.",
+    "Hybrid models should be organised according to what each activity requires and measured objectively.",
+    "Companies should adopt hybrid models without any evaluation."
+   ],
+   "a": 3,
+   "e": "'Designed around specific activities' = organizado conforme a atividade; 'evaluated with explicit metrics' = avaliado com métricas objetivas. A alternativa E ignora o segundo particípio; a E converte ressalva em defesa do escritório integral."
+  },
+  {
+   "t": "CEN",
+   "p": "The effects are strongly heterogeneous. Tasks that require concentration are often performed as well or better at home. Tasks that depend on rapid, informal exchange deteriorate when mediated by screens. Firms that treat remote work as a binary choice, therefore, tend to misallocate it.",
+   "q": "A palavra 'therefore' na última frase introduz:",
+   "o": [
+    "uma concessão contrária ao argumento anterior",
+    "um exemplo que confirma o parágrafo anterior",
+    "uma conclusão deduzida dos dados apresentados",
+    "uma comparação entre dois tipos de empresa",
+    "uma definição técnica do termo 'remote work'"
+   ],
+   "a": 2,
+   "e": "'Therefore' é conclusivo: a partir da heterogeneidade descrita, deduz-se que a escolha binária leva a erro de alocação. Conectivos conclusivos (therefore, thus, hence) são cobrados tanto em vocabulário quanto em ideia central."
+  }
+ ]
+});
+
+TESTS.push({
+ "topic": "Resistência a antibióticos",
+ "sub": "Texto 9 · evolução bacteriana, uso veterinário e incentivos econômicos",
+ "qs": [
+  {
+   "t": "LOC",
+   "p": "Antibiotic resistance arises when bacteria survive exposure to a drug and reproduce, passing on the genes that allowed them to survive. The process is evolutionary, not a failure of individual patients to follow prescriptions.",
+   "q": "Segundo o texto, como surge a resistência a antibióticos?",
+   "o": [
+    "When doctors prescribe drugs that do not exist.",
+    "When bacteria are destroyed by the immune system.",
+    "When hospitals stop using antibiotics for a period.",
+    "When bacteria survive exposure to a drug, reproduce and pass on resistant genes.",
+    "When patients forget to take their medicine on time."
+   ],
+   "a": 3,
+   "e": "A definição é literal: sobrevivência à exposição, reprodução e transmissão dos genes. O texto ainda nega explicitamente a explicação comportamental do paciente ('not a failure of individual patients'), que aparece como distrator em várias provas."
+  },
+  {
+   "t": "PRO",
+   "p": "Antibiotic resistance arises when bacteria survive exposure to a drug and reproduce, passing on the genes that allowed them to survive.",
+   "q": "O pronome relativo 'that' em 'the genes that allowed them to survive' retoma:",
+   "o": [
+    "The drugs.",
+    "The genes.",
+    "The prescriptions.",
+    "The bacteria.",
+    "The patients."
+   ],
+   "a": 1,
+   "e": "'The genes that allowed...' — o 'that' é sujeito do verbo 'allowed' e refere-se aos genes. Já 'them' (objeto) retoma as bactérias. Em uma mesma oração pode haver dois referentes diferentes; separe cada um pelo papel sintático."
+  },
+  {
+   "t": "VOC",
+   "p": "In many countries, the bulk of antibiotic consumption occurs in animal production, where the drugs are used not only to treat infections but also to promote growth.",
+   "q": "A expressão 'the bulk of' tem o sentido de:",
+   "o": [
+    "The largest part of.",
+    "A small minority of.",
+    "An illegal form of.",
+    "The most expensive type of.",
+    "The least studied aspect of."
+   ],
+   "a": 0,
+   "e": "'The bulk of' = a maior parte de. O contexto ajuda: se a maior parte do consumo ocorre na produção animal, isso explica por que políticas restritas à medicina humana são insuficientes — argumento desenvolvido adiante no texto."
+  },
+  {
+   "t": "PAR",
+   "p": "In many countries, the bulk of antibiotic consumption occurs in animal production, where the drugs are used not only to treat infections but also to promote growth. Restricting prescriptions in human medicine alone therefore addresses only part of the problem.",
+   "q": "Qual afirmação é verdadeira de acordo com esse trecho?",
+   "o": [
+    "Growth promotion is forbidden in every country.",
+    "Animal production accounts for a minor share of antibiotic use.",
+    "Human medicine consumes more antibiotics than animal production.",
+    "Antibiotics are used in animals exclusively to treat disease.",
+    "Policies focused only on human medicine are insufficient."
+   ],
+   "a": 4,
+   "e": "Se a maior parte do consumo é animal, restringir só a prescrição humana 'addresses only part of the problem'. A alternativa D ignora o 'not only ... but also'; a E inverte o dado central."
+  },
+  {
+   "t": "SEN",
+   "p": "Restricting prescriptions in human medicine alone therefore addresses only part of the problem.",
+   "q": "Qual alternativa reescreve a frase sem alterar o sentido?",
+   "o": [
+    "Animal production is unaffected by antibiotic policies.",
+    "Human medicine is not responsible for any part of the problem.",
+    "Measures that target only human prescriptions deal with just one dimension of the issue.",
+    "Controls applied only to human prescriptions solve the problem completely.",
+    "Restricting prescriptions has no effect at all."
+   ],
+   "a": 2,
+   "e": "'Only part of the problem' = apenas uma parte, isto é, uma dimensão do problema. A alternativa D transforma 'part' em totalidade; a D transforma 'parte' em 'nenhum efeito' — dois exageros opostos."
+  },
+  {
+   "t": "CEN",
+   "p": "Antibiotic resistance arises when bacteria survive exposure to a drug and reproduce. In many countries, the bulk of antibiotic consumption occurs in animal production. Restricting prescriptions in human medicine alone therefore addresses only part of the problem. Yet the economics of the sector work against restraint: a new antibiotic is typically held in reserve, used as little as possible, and priced low — which makes investment unattractive.",
+   "q": "Qual é a ideia central do texto?",
+   "o": [
+    "New antibiotics are too expensive for hospitals.",
+    "Resistance is an evolutionary problem that requires action across human medicine, animal production and drug development.",
+    "Animal production should be eliminated worldwide.",
+    "Antibiotic resistance has a single cause and a simple solution.",
+    "Patients are to blame for the rise of resistance."
+   ],
+   "a": 1,
+   "e": "O texto reúne três frentes: origem evolutiva, consumo veterinário e desinteresse econômico por novos fármacos. Alternativas que reduzem o problema a uma causa única ('single cause', 'patients are to blame') contrariam essa arquitetura."
+  },
+  {
+   "t": "LOC",
+   "p": "Yet the economics of the sector work against restraint: a new antibiotic is typically held in reserve, used as little as possible, and priced low — which makes investment unattractive.",
+   "q": "Por que o investimento em novos antibióticos é pouco atrativo, segundo o texto?",
+   "o": [
+    "Because bacteria develop resistance before approval.",
+    "Because patents expire too quickly.",
+    "Because hospitals refuse to buy them.",
+    "Because they are kept in reserve and priced low.",
+    "Because new antibiotics are used as much as possible."
+   ],
+   "a": 3,
+   "e": "O parágrafo explica a contradição: o fármaco é guardado para uso restrito ('held in reserve') e vendido a preço baixo, o que reduz o retorno esperado. Note que 'used as little as possible' é o oposto da alternativa E."
+  },
+  {
+   "t": "PRO",
+   "p": "A new antibiotic is typically held in reserve, used as little as possible, and priced low — which makes investment unattractive.",
+   "q": "O pronome relativo 'which' em 'which makes investment unattractive' refere-se a:",
+   "o": [
+    "The whole situation described before the dash.",
+    "The investment made by governments.",
+    "The low price of a single antibiotic.",
+    "The reserve kept by hospitals.",
+    "The sector that produces antibiotics."
+   ],
+   "a": 0,
+   "e": "Em inglês, 'which' após vírgula pode retomar toda a oração anterior, e não apenas a última palavra. Aqui, o conjunto — guardar para reserva, usar pouco e cobrar barato — é o que torna o investimento desinteressante."
+  },
+  {
+   "t": "SEN",
+   "p": "Proposals currently under discussion include paying manufacturers for access rather than for volume, and rewarding hospitals that use new drugs prudently.",
+   "q": "O que essas propostas tentam fazer?",
+   "o": [
+    "Transfer the cost of drugs to patients.",
+    "Reduce the price of antibiotics to zero.",
+    "Forbid hospitals from using new drugs.",
+    "Increase the volume of antibiotics sold to hospitals.",
+    "Separate the manufacturer's revenue from the quantity of drugs consumed."
+   ],
+   "a": 4,
+   "e": "'Paying for access rather than for volume' significa remunerar o acesso ao fármaco, não o volume vendido — ou seja, desvincular receita e quantidade consumida. É uma paráfrase que exige entender a oposição 'rather than'."
+  },
+  {
+   "t": "CEN",
+   "p": "Yet the economics of the sector work against restraint: a new antibiotic is typically held in reserve, used as little as possible, and priced low. Proposals currently under discussion include paying manufacturers for access rather than for volume, and rewarding hospitals that use new drugs prudently.",
+   "q": "A função do conectivo 'Yet' no início do período é:",
+   "o": [
+    "indicar a causa evolutiva da resistência",
+    "concluir que o problema já foi resolvido",
+    "acrescentar um exemplo que confirma a restrição de prescrições",
+    "sinalizar um obstáculo que complica a solução apresentada antes",
+    "comparar dois tipos de bactéria"
+   ],
+   "a": 3,
+   "e": "'Yet' equivale a 'however': marca contraste. Aqui ele introduz um obstáculo econômico que limita a eficácia das restrições de prescrição discutidas na frase anterior. Conectivos de contraste costumam carregar a tese do parágrafo."
+  }
+ ]
+});
+
+TESTS.push({
+ "topic": "Bilinguismo e cognição",
+ "sub": "Texto 10 · funções executivas, evidência frágil e interpretação de resultados",
+ "qs": [
+  {
+   "t": "LOC",
+   "p": "Bilingual children must constantly select one language while suppressing the other. For this reason, researchers once expected that bilingualism would produce broad and permanent advantages in executive function.",
+   "q": "O que os pesquisadores esperavam inicialmente sobre o bilinguismo?",
+   "o": [
+    "That it would delay language acquisition.",
+    "That it would have no measurable cognitive effect.",
+    "That it would reduce vocabulary in both languages.",
+    "That it would produce broad and permanent advantages in executive function.",
+    "That it would affect only children raised in two countries."
+   ],
+   "a": 3,
+   "e": "A expectativa está explicitada: vantagens amplas e permanentes em funções executivas. A palavra 'once' sinaliza que essa expectativa pertence ao passado — detalhe importante para interpretar o resto do texto."
+  },
+  {
+   "t": "PRO",
+   "p": "Bilingual children must constantly select one language while suppressing the other. For this reason, researchers once expected that bilingualism would produce broad advantages in executive function.",
+   "q": "A expressão 'the other', no trecho 'while suppressing the other', refere-se a:",
+   "o": [
+    "The other half of the brain.",
+    "The other cognitive task.",
+    "The other language.",
+    "The other researcher involved in the study.",
+    "The other child in the experiment."
+   ],
+   "a": 2,
+   "e": "O contexto é a seleção entre duas línguas: seleciona-se uma ('one language') e suprime-se a outra ('the other' = the other language). O paralelismo 'one ... the other' é uma estrutura recorrente em textos acadêmicos."
+  },
+  {
+   "t": "VOC",
+   "p": "When larger and better-controlled samples were tested, the advantage largely disappeared; the earlier findings appear to have stemmed from publication bias and from small sample sizes.",
+   "q": "A expressão 'stemmed from' tem o sentido de:",
+   "o": [
+    "Depended on funding.",
+    "Were corrected by.",
+    "Were compared with.",
+    "Originated in.",
+    "Put an end to."
+   ],
+   "a": 3,
+   "e": "'Stem from' = derivar de, ter origem em. No texto, os achados anteriores tiveram origem no viés de publicação e em amostras pequenas. Não confunda com 'stem' (talo/caule) nem com 'stamp out' (eliminar)."
+  },
+  {
+   "t": "SEN",
+   "p": "When larger and better-controlled samples were tested, the advantage largely disappeared; the earlier findings appear to have stemmed from publication bias and from small sample sizes.",
+   "q": "Qual alternativa reescreve o trecho sem alterar o sentido?",
+   "o": [
+    "Publication bias increases the size of the advantage in new studies.",
+    "The advantage disappeared because children stopped being bilingual.",
+    "The advantage did not hold in better studies, probably because earlier results were distorted by bias and small samples.",
+    "Larger studies confirmed the advantage found in earlier research.",
+    "Small samples are more reliable than large ones in cognitive research."
+   ],
+   "a": 2,
+   "e": "'Largely disappeared' = deixou de se sustentar em boa medida; 'appear to have stemmed from' introduz explicação provável, não certeza. A alternativa D inverte o resultado; a B preserva tanto o achado quanto a cautela ('probably')."
+  },
+  {
+   "t": "PAR",
+   "p": "This does not mean that bilingualism is worthless. It means that the benefit is specific: bilinguals are faster at tasks that require switching between rules, and they show advantages in metalinguistic awareness — the ability to reflect on language as an object.",
+   "q": "Qual afirmação é verdadeira de acordo com esse parágrafo?",
+   "o": [
+    "Bilinguals are slower at tasks that require switching rules.",
+    "Metalinguistic awareness is unrelated to language learning.",
+    "The benefits are narrower and specific, such as rule switching and metalinguistic awareness.",
+    "The advantages described apply only to adults.",
+    "Bilingualism has no cognitive benefit whatsoever."
+   ],
+   "a": 2,
+   "e": "O parágrafo reconhece limites e especifica benefícios: troca de regras e consciência metalinguística. A alternativa E radicaliza a ressalva científica em negação total — erro típico de leitura apressada de textos com 'does not mean'."
+  },
+  {
+   "t": "CEN",
+   "p": "Bilingual children must constantly select one language while suppressing the other. For this reason, researchers once expected broad advantages in executive function. When larger and better-controlled samples were tested, the advantage largely disappeared. This does not mean that bilingualism is worthless: the benefit is specific, involving rule switching and metalinguistic awareness.",
+   "q": "Qual é a ideia central do texto?",
+   "o": [
+    "Early claims about broad cognitive advantages were overstated, but specific benefits remain.",
+    "Bilingual children are disadvantaged at school.",
+    "All studies on bilingualism were fraudulent.",
+    "Executive function cannot be measured scientifically.",
+    "Bilingualism guarantees superior intelligence."
+   ],
+   "a": 0,
+   "e": "O texto corrige uma expectativa ampla e preserva benefícios específicos. Alternativas extremas ('guarantees', 'all ... fraudulent') ignoram a estrutura de concessão que o autor constrói com 'does not mean'."
+  },
+  {
+   "t": "LOC",
+   "p": "The debate has methodological consequences. Studies that test bilinguals in the language in which they are less proficient may underestimate their performance, while studies that recruit volunteers from universities may overrepresent highly educated participants.",
+   "q": "Segundo o texto, qual problema pode afetar estudos que recrutam voluntários em universidades?",
+   "o": [
+    "Highly educated participants may be overrepresented.",
+    "The tests are always applied in the wrong language.",
+    "The samples are always too large.",
+    "Participants may speak only one language.",
+    "Volunteers are usually too young."
+   ],
+   "a": 0,
+   "e": "A frase final é direta: podem super-representar participantes com alta escolaridade. O texto apresenta dois riscos metodológicos distintos — língua de testagem e perfil da amostra — e a questão cobra o segundo."
+  },
+  {
+   "t": "PRO",
+   "p": "Studies that test bilinguals in the language in which they are less proficient may underestimate their performance, while studies that recruit volunteers from universities may overrepresent highly educated participants.",
+   "q": "No trecho, o pronome 'they' em 'the language in which they are less proficient' refere-se a:",
+   "o": [
+    "The universities involved.",
+    "The studies.",
+    "The researchers responsible.",
+    "The bilinguals tested.",
+    "The volunteers in general."
+   ],
+   "a": 3,
+   "e": "'In which they are less proficient' descreve o domínio linguístico de quem é testado: os bilíngues. A proximidade com 'studies' engana, mas o critério é o sentido: estudos não são mais ou menos proficientes em uma língua."
+  },
+  {
+   "t": "SEN",
+   "p": "Studies that recruit volunteers from universities may overrepresent highly educated participants, which limits how far the results can be generalised.",
+   "q": "O que a frase sugere sobre a generalização dos resultados?",
+   "o": [
+    "That results can be extended to any population.",
+    "That education is irrelevant to cognitive performance.",
+    "That volunteers are always representative.",
+    "That universities should stop doing research.",
+    "That results may not apply to the population at large."
+   ],
+   "a": 4,
+   "e": "'Limits how far the results can be generalised' = restringe o alcance da generalização, ou seja, os resultados podem não valer para a população em geral. 'Overrepresent' indica distorção da amostra — vocabulário recorrente em textos de metodologia."
+  },
+  {
+   "t": "CEN",
+   "p": "The debate has methodological consequences. Studies that test bilinguals in the language in which they are less proficient may underestimate their performance, while studies that recruit volunteers from universities may overrepresent highly educated participants. The conclusion is not that the question is unanswerable, but that the answer depends on how the sample is built.",
+   "q": "A posição final do autor é a de que:",
+   "o": [
+    "a educação dos participantes é irrelevante",
+    "todos os estudos sobre o tema devem ser descartados",
+    "a pergunta sobre bilinguismo é impossível de responder",
+    "a resposta depende de como a amostra é construída",
+    "o bilinguismo prejudica o desempenho escolar"
+   ],
+   "a": 3,
+   "e": "O fecho rejeita o ceticismo total ('not that the question is unanswerable') e desloca a questão para o desenho amostral. É o padrão de conclusão científica: nem negar o problema, nem ignorar os limites metodológicos."
+  }
+ ]
+});
+
+/* ============================================================
+   ESTADO E RENDERIZAÇÃO
+   ============================================================ */
+const state = { ti: 0, answers: Array(10).fill(null), done: false };
+const $ = (s) => document.querySelector(s);
+
+function maxPts(test){ return test.qs.reduce((s, q) => s + TYPES[q.t].pts, 0); }
+
+/* tabela de pesos */
+(function renderWeights(){
+  const body = document.getElementById("wbody");
+  const order = ["LOC","PRO","VOC","SEN","PAR","CEN"];
+  body.innerHTML = order.map(k => {
+    const T = TYPES[k];
+    const n = TESTS[0].qs.filter(q => q.t === k).length;
+    return `<tr>
+      <td><span class="dot" style="background:${T.color}"></span>${T.label}</td>
+      <td>${n}</td>
+      <td>${n} × ${T.pts} = <strong>${n * T.pts}</strong></td>
+    </tr>`;
+  }).join("");
+})();
+
+/* barra de testes */
+(function renderPills(){
+  const box = document.getElementById("pills");
+  box.innerHTML = TESTS.map((t, i) =>
+    `<button class="pill" role="tab" aria-current="${i === state.ti}" data-i="${i}">${i + 1}</button>`
+  ).join("");
+  box.addEventListener("click", (e) => {
+    const b = e.target.closest(".pill");
+    if (!b) return;
+    loadTest(Number(b.dataset.i));
+  });
+})();
+
+function updatePills(){
+  document.querySelectorAll(".pill").forEach((p, i) => {
+    p.setAttribute("aria-current", String(i === state.ti));
+  });
+}
+
+function updateProgress(){
+  const n = state.answers.filter(a => a !== null).length;
+  document.getElementById("prog").textContent = n;
+  const left = 10 - n;
+  const hint = document.getElementById("hint");
+  if (state.done) { hint.textContent = "Teste corrigido — veja o gabarito comentado acima."; }
+  else if (left === 0) { hint.textContent = "Tudo respondido. Clique para ver sua nota."; }
+  else { hint.textContent = left === 1 ? "Falta responder 1 questão." : `Faltam responder ${left} questões.`; }
+}
+
+/* ---------- questões ---------- */
+function loadTest(i){
+  state.ti = i;
+  state.answers = Array(10).fill(null);
+  state.done = false;
+  document.getElementById("result").innerHTML = "";
+  const t = TESTS[i];
+  document.getElementById("testhead").innerHTML = `
+    <div>
+      <h2>Teste ${i + 1} · ${t.topic}</h2>
+      <p>${t.sub}</p>
+    </div>
+    <span class="pillcount">10 questões · ${maxPts(t)} pontos</span>`;
+
+  document.getElementById("quiz").innerHTML = t.qs.map((q, qi) => {
+    const T = TYPES[q.t];
+    const opts = q.o.map((text, oi) => `
+      <li>
+        <label class="opt" data-q="${qi}" data-o="${oi}">
+          <input type="radio" name="q${qi}" value="${oi}">
+          <span class="letter">${"ABCDE"[oi]}</span>
+          <span class="txt">${text}</span>
+        </label>
+      </li>`).join("");
+    return `<article class="q" id="q${qi}">
+      <div class="q-head">
+        <span class="q-num">Questão ${qi + 1}</span>
+        <span class="q-type" style="color:${T.color};border-color:${T.color};background:${T.color}0f">${T.label}</span>
+        <span class="q-pts">${T.pts} pontos</span>
+      </div>
+      <blockquote class="passage">${q.p}</blockquote>
+      <p class="q-stem">${q.q}</p>
+      <ul class="opts">${opts}</ul>
+    </article>`;
+  }).join("");
+
+  document.getElementById("submitBtn").disabled = false;
+  document.getElementById("submitBtn").textContent = "Enviar / Corrigir teste";
+  document.getElementById("sheet").classList.remove("locked");
+  updatePills();
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+document.getElementById("quiz").addEventListener("change", (e) => {
+  const input = e.target;
+  if (!input.matches('input[type="radio"]')) return;
+  const qi = Number(input.closest(".opt").dataset.q);
+  state.answers[qi] = Number(input.value);
+  document.querySelectorAll(`.opt[data-q="${qi}"]`).forEach(l =>
+    l.classList.toggle("sel", l.dataset.o === input.value));
+  updateProgress();
+});
+
+/* ---------- correção ---------- */
+function submitTest(){
+  if (state.answers.every(a => a === null)) {
+    alert("Marque pelo menos uma alternativa antes de corrigir.");
+    return;
+  }
+  state.done = true;
+  const t = TESTS[state.ti];
+  const total = maxPts(t);
+  let score = 0;
+  const perType = {};
+  Object.keys(TYPES).forEach(k => perType[k] = { hit: 0, n: 0, pts: 0, max: 0 });
+
+  t.qs.forEach((q, qi) => {
+    const T = TYPES[q.t];
+    const chosen = state.answers[qi];
+    const ok = chosen === q.a;
+    perType[q.t].n++;
+    perType[q.t].max += T.pts;
+    if (ok) { score += T.pts; perType[q.t].hit++; perType[q.t].pts += T.pts; }
+
+    const card = document.getElementById("q" + qi);
+    card.classList.add("locked");
+    const labels = card.querySelectorAll(".opt");
+    labels.forEach(l => {
+      const oi = Number(l.dataset.o);
+      l.querySelector("input").disabled = true;
+      l.classList.remove("sel");
+      if (oi === q.a) l.classList.add("correct");
+      else if (oi === chosen) l.classList.add("wrong");
+      else l.classList.add("muted");
+    });
+
+    const status = chosen === null
+      ? '<span class="q-no">Em branco</span>'
+      : (ok ? '<span class="q-ok">✓ Acertou (+' + T.pts + ')</span>'
+            : '<span class="q-no">✕ Errou (0/' + T.pts + ')</span>');
+
+    const ex = document.createElement("div");
+    ex.className = "explain";
+    ex.innerHTML = `<strong class="tag">Gabarito comentado · ${"ABCDE"[q.a]} · ${status}</strong>${q.e}`;
+    card.appendChild(ex);
+  });
+
+  const pct = Math.round((score / total) * 100);
+  let msg;
+  if (pct >= 90) msg = "Excelente. Você leu com precisão e resistiu às alternativas que só repetem palavras do texto.";
+  else if (pct >= 75) msg = "Bom desempenho. A leitura está sob controle; o que falta é refinar os itens de maior peso.";
+  else if (pct >= 60) msg = "Razoável. Você acha a informação, mas ainda perde pontos na interpretação — é aí que a nota sobe rápido.";
+  else msg = "Ainda frágil. Antes de fazer o próximo teste, releia as dicas de pronomes e ideia central: são os itens de maior peso.";
+
+  const order = ["LOC","PRO","VOC","SEN","PAR","CEN"];
+  const rows = order.map(k => {
+    const T = TYPES[k], d = perType[k];
+    const p = Math.round((d.pts / d.max) * 100);
+    return `<div class="bd-row">
+      <div>
+        <div class="bd-name"><span class="dot" style="background:${T.color}"></span>${T.label}
+          <span class="bd-sub">${d.hit}/${d.n} corretas · ${d.pts}/${d.max} pts</span>
+        </div>
+        <div class="bd-bar"><i style="width:${p}%;background:${T.color}"></i></div>
+      </div>
+      <div class="bd-val">${p}%</div>
+    </div>`;
+  }).join("");
+
+  const weakest = order.slice().sort((a, b) => {
+    const ra = perType[a].pts / perType[a].max, rb = perType[b].pts / perType[b].max;
+    return ra - rb;
+  })[0];
+
+  const next = state.ti < TESTS.length - 1
+    ? `<button class="btn btn-ghost" id="nextBtn">Ir para o teste ${state.ti + 2} →</button>` : "";
+
+  document.getElementById("result").innerHTML = `
+    <section class="card result">
+      <div class="score-top">
+        <div class="eyebrow">Resultado · Teste ${state.ti + 1}</div>
+        <div class="score-big">
+          <span class="num">${score}</span><span class="den">/ ${total} pontos</span>
+          <span class="pct">${pct}%</span>
+        </div>
+        <div class="bar"><i style="width:${pct}%"></i></div>
+        <p class="score-msg">${msg}</p>
+      </div>
+      <div class="breakdown">
+        <h3>Desempenho por tipo de questão</h3>
+        ${rows}
+      </div>
+      <div class="coach"><b>Foco para o próximo teste:</b> ${TYPES[weakest].label.toLowerCase()} — ${TYPES[weakest].help}</div>
+      <div class="actions" style="padding-top:0">
+        <button class="btn btn-ghost" id="againBtn">Refazer este teste</button>
+        ${next}
+      </div>
+    </section>`;
+
+  document.getElementById("submitBtn").disabled = true;
+  document.getElementById("sheet").classList.add("locked");
+  updateProgress();
+
+  document.getElementById("againBtn").onclick = () => loadTest(state.ti);
+  const nb = document.getElementById("nextBtn");
+  if (nb) nb.onclick = () => loadTest(state.ti + 1);
+
+  document.getElementById("result").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+document.getElementById("submitBtn").addEventListener("click", submitTest);
+
+/* abertura */
+loadTest(0);
+</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>
