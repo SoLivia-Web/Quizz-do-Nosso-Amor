@@ -106,6 +106,19 @@ mark{background:#fde047;color:#111;padding:0 3px;border-radius:3px;font-weight:7
 .bar.mid .fl{background:#f59e0b}
 .note{font-size:.85rem;color:var(--muted)}
 footer{max-width:900px;margin:0 auto;padding:0 16px 40px;color:var(--muted);font-size:.82rem}
+/* ---- Início do simulado ---- */
+.startCard{background:linear-gradient(135deg,#eef4fe,#dbe7fb);border-color:#b8c9ec}
+.startCard h2{margin:0 0 .3em;color:var(--blue-900);font-size:1.3rem}
+.startCard p{margin:0 0 14px;color:var(--blue-900);opacity:.85}
+.run-banner{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.run-banner .lbl{font-weight:700;color:var(--green)}
+.big-timer{font-variant-numeric:tabular-nums;font-size:1.9rem;font-weight:800;color:var(--blue-900);letter-spacing:.03em}
+.run-dot{width:12px;height:12px;border-radius:50%;background:var(--green);animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(21,128,61,.6)}70%{box-shadow:0 0 0 10px rgba(21,128,61,0)}100%{box-shadow:0 0 0 0 rgba(21,128,61,0)}}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.opt.locked{cursor:not-allowed;opacity:.72}
+.opt.locked:hover{border-color:var(--line);background:#fff}
+.pre-note{background:var(--amber-bg);border:1px solid var(--amber-line);color:var(--amber);border-radius:10px;padding:10px 14px;font-size:.92rem;margin-bottom:12px}
 @media (max-width:600px){
   .hero h1{font-size:1.45rem} .reading{font-size:1.04rem} .card{padding:16px} .q{padding:14px}
   .tb-right .pill.hide-m{display:none}
@@ -426,43 +439,97 @@ function renderHome(){
 
 function startTest(id){
   const test=TESTS.find(t=>t.id===id); if(!test){location.hash="#/";return}
-  S={test, answers:Array(10).fill(null), submitted:false, t0:Date.now(),
+  clearInterval(timer);
+  S={test, answers:Array(10).fill(null),
+     submitted:false, started:false, t0:null,
      opts:test.q.map(q=>shuffle([{txt:q.correct,ok:true},...q.wrong.map(w=>({txt:w,ok:false}))]))};
   renderTest();
   window.scrollTo(0,0);
+}
+
+/* ---- helpers do início/relógio ---- */
+function elapsed(){ return S && S.t0 ? Math.floor((Date.now()-S.t0)/1000) : 0 }
+
+function startClock(){
   clearInterval(timer);
-  timer=setInterval(()=>{const el=document.getElementById("timer");if(el&&!S.submitted)el.textContent=fmt(Math.floor((Date.now()-S.t0)/1000))},1000);
+  if(!S || !S.started || S.submitted) return;
+  timer=setInterval(()=>{
+    const t=fmt(elapsed());
+    const a=document.getElementById("timer");    if(a) a.textContent=t;
+    const b=document.getElementById("bigTimer");  if(b) b.textContent=t;
+  },500);
+}
+
+function drawStartCard(){
+  const el=document.getElementById("startCard"); if(!el) return;
+  if(S.submitted){ el.style.display="none"; return; }
+  if(!S.started){
+    el.innerHTML=`
+      <h2>⏱ Pronto para começar?</h2>
+      <p>O cronômetro começa quando você clicar em <b>Iniciar</b>. Você pode ler o texto com calma antes — as questões ficam bloqueadas até começar. O tempo total aparecerá no resultado final.</p>
+      <button class="btn big" id="startBtn" type="button">▶ Iniciar simulado</button>`;
+  } else {
+    el.innerHTML=`
+      <div class="run-banner">
+        <span class="run-dot"></span>
+        <span class="lbl">Simulado em andamento</span>
+        <span class="big-timer" id="bigTimer">${fmt(elapsed())}</span>
+      </div>`;
+  }
+}
+
+function beginTest(){
+  if(!S || S.started || S.submitted) return;
+  const y=window.scrollY;
+  S.started=true; S.t0=Date.now();
+  drawStartCard(); drawQuestions(); updateSubmitBar(); startClock();
+  window.scrollTo(0,y);
+}
+
+function updateSubmitBar(){
+  const bar=document.getElementById("submitBar");
+  const btn=document.getElementById("submit");
+  if(!bar||!btn) return;
+  if(S.submitted){ bar.style.display="none"; return; }
+  bar.style.display="";
+  if(!S.started){ btn.disabled=true;  btn.textContent="Inicie o simulado para responder"; }
+  else          { btn.disabled=false; btn.textContent="Enviar / Corrigir Prova"; }
 }
 
 function renderTest(){
   const t=S.test;
   const gl=t.gloss.map(g=>`<li><b>${g[0]}:</b> ${g[1]}</li>`).join("");
   const paras=t.paras.map((p,i)=>`<p><span class="pn">${i+1}</span><span>${p}</span></p>`).join("");
-  setTop(`<span class="pill hide-m">Simulado ${String(t.id).padStart(2,"0")}</span><span class="pill" id="cnt"></span><span class="pill" id="timer">00:00</span>`);
+  const timerTxt = S.submitted ? fmt(elapsed()) : (S.started ? fmt(elapsed()) : "⏸");
+  setTop(`<span class="pill hide-m">Simulado ${String(t.id).padStart(2,"0")}</span><span class="pill" id="cnt"></span><span class="pill" id="timer">${timerTxt}</span>`);
   app.innerHTML=`
   <button class="back" data-home>← Todos os simulados</button>
   <div class="row" style="margin-bottom:12px"><h1 style="margin:0;font-size:1.5rem">Simulado ${String(t.id).padStart(2,"0")} · ${t.title}</h1>${langSeg()}</div>
   <div id="result"></div>
+  <section class="card startCard" id="startCard"></section>
   <section class="card textcard">
     <h2>TEXT</h2>
     <div class="reading">${paras}</div>
     <div class="gloss"><b>Glossary</b><ul>${gl}</ul></div>
   </section>
   <section id="qs"></section>
-  <div class="sticky-submit" id="submitBar"><button class="btn big" id="submit">Enviar / Corrigir Prova</button></div>`;
-  drawQuestions(); updateCount();
+  <div class="sticky-submit" id="submitBar"><button class="btn big" id="submit" type="button">Enviar / Corrigir Prova</button></div>`;
+  drawStartCard(); drawQuestions(); updateCount(); updateSubmitBar(); startClock();
 }
 
 function drawQuestions(){
-  const t=S.test, rv=S.submitted;
-  document.getElementById("qs").innerHTML=t.q.map((q,i)=>{
+  const t=S.test, rv=S.submitted, locked=!S.started;
+  const note = locked && !rv ? `<div class="pre-note">▶ Clique em <b>Iniciar simulado</b> acima para liberar as questões. Você já pode ler o texto.</div>` : "";
+  document.getElementById("qs").innerHTML = note + t.q.map((q,i)=>{
     const opts=S.opts[i].map((o,j)=>{
       const chosen=S.answers[i]===j;
       let cls="opt";
+      if(locked) cls+=" locked";
       if(rv){ if(o.ok)cls+=" ok"; else if(chosen)cls+=" bad"; }
       else if(chosen) cls+=" sel";
+      const dis = rv || locked;
       const tag = rv ? (o.ok?`<span class="tag">✔ Gabarito${chosen?" · sua resposta":""}</span>`:(chosen?`<span class="tag">✘ Sua resposta</span>`:"")) : "";
-      return `<label class="${cls}"><input type="radio" name="q${i}" value="${j}" ${chosen?"checked":""} ${rv?"disabled":""}><span class="lt">${L(j)}</span><span>${o.txt}</span>${tag}</label>`;
+      return `<label class="${cls}"><input type="radio" name="q${i}" value="${j}" ${chosen?"checked":""} ${dis?"disabled":""}><span class="lt">${L(j)}</span><span>${o.txt}</span>${tag}</label>`;
     }).join("");
     let expl="";
     if(rv){
@@ -484,9 +551,11 @@ function updateCount(){
 }
 
 function submit(){
+  if(!S || !S.started || S.submitted) return;
   const blank=S.answers.filter(a=>a===null).length;
   if(blank && !confirm(`Você deixou ${blank} questão(ões) em branco. Corrigir mesmo assim?`)) return;
   S.submitted=true; clearInterval(timer);
+  drawStartCard();
   const secs=Math.floor((Date.now()-S.t0)/1000);
   const per={}; let score=0, hits=0;
   S.test.q.forEach((q,i)=>{
@@ -539,6 +608,7 @@ function submit(){
 document.addEventListener("click",e=>{
   const open=e.target.closest("[data-open]");
   if(open){ const id=+open.dataset.open; if(location.hash==="#/t"+id) startTest(id); else location.hash="#/t"+id; return; }
+  if(e.target.id==="startBtn"){ beginTest(); return; }
   if(e.target.closest("[data-home]")||e.target.closest("#brand")){
     if(S&&!S.submitted&&S.answers.some(a=>a!==null)&&!confirm("Sair do simulado? Suas respostas serão perdidas.")) return;
     location.hash="#/"; if(!S) renderHome(); return;
@@ -551,12 +621,14 @@ document.getElementById("brand").addEventListener("keydown",e=>{if(e.key==="Ente
 function renderTestKeepState(){
   const resHTML=document.getElementById("result")?document.getElementById("result").innerHTML:"";
   const sub=S.submitted;
+  const scrollY=window.scrollY;
   renderTest();
   document.getElementById("result").innerHTML=resHTML;
   if(sub){document.getElementById("submitBar").style.display="none"}
+  window.scrollTo(0,scrollY);
 }
 document.addEventListener("change",e=>{
-  if(e.target.matches('.opt input[type=radio]') && S && !S.submitted){
+  if(e.target.matches('.opt input[type=radio]') && S && S.started && !S.submitted){
     const i=+e.target.name.slice(1), j=+e.target.value;
     S.answers[i]=j;
     document.querySelectorAll(`#q${i} .opt`).forEach((l,k)=>l.classList.toggle("sel",k===j));
